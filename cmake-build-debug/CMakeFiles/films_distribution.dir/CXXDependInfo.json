@@ -11,7 +11,10 @@
 	"dir-top-src" : "/home/leo/CLionProjects/films_distribution",
 	"exports" : [],
 	"forward-modules-from-target-dirs" : [],
-	"include-dirs" : [],
+	"include-dirs" : 
+	[
+		"/home/leo/CLionProjects/films_distribution/include"
+	],
 	"language" : "CXX",
 	"linked-target-dirs" : [],
 	"module-dir" : "/home/leo/CLionProjects/films_distribution/cmake-build-debug/CMakeFiles/films_distribution.dir"
