@@ -1,0 +1,18 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "/home/leo/CLionProjects/films_distribution/cmake-build-debug",
+	"dir-cur-src" : "/home/leo/CLionProjects/films_distribution",
+	"dir-top-bld" : "/home/leo/CLionProjects/films_distribution/cmake-build-debug",
+	"dir-top-src" : "/home/leo/CLionProjects/films_distribution",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/leo/CLionProjects/films_distribution/cmake-build-debug/CMakeFiles/films_distribution.dir"
+}
