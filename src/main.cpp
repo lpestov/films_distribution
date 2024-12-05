@@ -126,11 +126,10 @@ map<string, vector<Movie>> populateLocalGenreMap(const vector<Movie>& movies, si
 }
 
 int main() {
-    // Вывод текущей рабочей директории
-    cout << "Текущая рабочая директория: " << filesystem::current_path() << endl;
 
     string inputFile = "dataset/movies_cleaned.csv";
     cout << "Путь к входному файлу: " << inputFile << endl;
+
     // Чтение фильмов из файла
     vector<Movie> movies = readMovies(inputFile);
     if (movies.empty()) {
