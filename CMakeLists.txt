@@ -3,6 +3,11 @@ project(films_distribution)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(films_distribution src/main.cpp)
+include_directories(include)
+
+add_executable(films_distribution
+        src/main.cpp
+        src/MovieProcessor.cpp
+)
 
 target_include_directories(films_distribution PRIVATE include)
