@@ -1,3 +1,0 @@
-/home/leo/CLionProjects/films_distribution/cmake-build-debug/CMakeFiles/films_distribution.dir
-/home/leo/CLionProjects/films_distribution/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/leo/CLionProjects/films_distribution/cmake-build-debug/CMakeFiles/rebuild_cache.dir
