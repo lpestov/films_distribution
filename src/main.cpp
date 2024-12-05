@@ -54,7 +54,8 @@ void processGenre(const string& genre) {
     }
 
     // Запись JSON-файла с распределением по категориям
-    ofstream jsonFile(genre + "_rating_distribution.json");
+    string outputDir = "output/";
+    ofstream jsonFile(outputDir + genre + "_rating_distribution.json");
     if (!jsonFile.is_open()) {
         cerr << "Ошибка: Не удалось создать файл для жанра " << genre << endl;
         return;

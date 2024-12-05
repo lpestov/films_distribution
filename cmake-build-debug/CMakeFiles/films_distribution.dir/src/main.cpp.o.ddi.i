@@ -74082,8 +74082,5765 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 }
 # 10 "/home/leo/CLionProjects/films_distribution/src/main.cpp" 2
-# 1 "/home/leo/CLionProjects/films_distribution/include/json.hpp" 1
-# 21 "/home/leo/CLionProjects/films_distribution/include/json.hpp"
+# 1 "/usr/include/c++/14.2.1/filesystem" 1 3
+# 33 "/usr/include/c++/14.2.1/filesystem" 3
+       
+# 34 "/usr/include/c++/14.2.1/filesystem" 3
+
+
+
+
+# 1 "/usr/include/c++/14.2.1/bits/version.h" 1 3
+# 47 "/usr/include/c++/14.2.1/bits/version.h" 3
+       
+# 48 "/usr/include/c++/14.2.1/bits/version.h" 3
+# 39 "/usr/include/c++/14.2.1/filesystem" 2 3
+# 51 "/usr/include/c++/14.2.1/filesystem" 3
+# 1 "/usr/include/c++/14.2.1/bits/fs_fwd.h" 1 3
+# 39 "/usr/include/c++/14.2.1/bits/fs_fwd.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+namespace filesystem
+{
+
+
+inline namespace __cxx11 __attribute__((__abi_tag__ ("cxx11"))) { }
+
+
+
+
+
+
+
+  class file_status;
+namespace __cxx11 {
+  class path;
+  class filesystem_error;
+  class directory_entry;
+  class directory_iterator;
+  class recursive_directory_iterator;
+}
+
+
+  struct space_info
+  {
+    uintmax_t capacity;
+    uintmax_t free;
+    uintmax_t available;
+
+
+    friend bool operator==(const space_info&, const space_info&) = default;
+
+  };
+
+
+  enum class file_type : signed char {
+      none = 0, not_found = -1, regular = 1, directory = 2, symlink = 3,
+      block = 4, character = 5, fifo = 6, socket = 7, unknown = 8
+  };
+
+
+  enum class copy_options : unsigned short {
+      none = 0,
+      skip_existing = 1, overwrite_existing = 2, update_existing = 4,
+      recursive = 8,
+      copy_symlinks = 16, skip_symlinks = 32,
+      directories_only = 64, create_symlinks = 128, create_hard_links = 256
+  };
+
+
+
+  [[nodiscard]]
+  constexpr copy_options
+  operator&(copy_options __x, copy_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<copy_options>::type;
+    return static_cast<copy_options>(
+ static_cast<__utype>(__x) & static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr copy_options
+  operator|(copy_options __x, copy_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<copy_options>::type;
+    return static_cast<copy_options>(
+ static_cast<__utype>(__x) | static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr copy_options
+  operator^(copy_options __x, copy_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<copy_options>::type;
+    return static_cast<copy_options>(
+ static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr copy_options
+  operator~(copy_options __x) noexcept
+  {
+    using __utype = typename std::underlying_type<copy_options>::type;
+    return static_cast<copy_options>(~static_cast<__utype>(__x));
+  }
+
+  inline copy_options&
+  operator&=(copy_options& __x, copy_options __y) noexcept
+  { return __x = __x & __y; }
+
+  inline copy_options&
+  operator|=(copy_options& __x, copy_options __y) noexcept
+  { return __x = __x | __y; }
+
+  inline copy_options&
+  operator^=(copy_options& __x, copy_options __y) noexcept
+  { return __x = __x ^ __y; }
+
+
+
+
+  enum class perms : unsigned {
+      none = 0,
+      owner_read = 0400,
+      owner_write = 0200,
+      owner_exec = 0100,
+      owner_all = 0700,
+      group_read = 040,
+      group_write = 020,
+      group_exec = 010,
+      group_all = 070,
+      others_read = 04,
+      others_write = 02,
+      others_exec = 01,
+      others_all = 07,
+      all = 0777,
+      set_uid = 04000,
+      set_gid = 02000,
+      sticky_bit = 01000,
+      mask = 07777,
+      unknown = 0xFFFF,
+  };
+
+
+
+  [[nodiscard]]
+  constexpr perms
+  operator&(perms __x, perms __y) noexcept
+  {
+    using __utype = typename std::underlying_type<perms>::type;
+    return static_cast<perms>(
+ static_cast<__utype>(__x) & static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr perms
+  operator|(perms __x, perms __y) noexcept
+  {
+    using __utype = typename std::underlying_type<perms>::type;
+    return static_cast<perms>(
+ static_cast<__utype>(__x) | static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr perms
+  operator^(perms __x, perms __y) noexcept
+  {
+    using __utype = typename std::underlying_type<perms>::type;
+    return static_cast<perms>(
+ static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr perms
+  operator~(perms __x) noexcept
+  {
+    using __utype = typename std::underlying_type<perms>::type;
+    return static_cast<perms>(~static_cast<__utype>(__x));
+  }
+
+  inline perms&
+  operator&=(perms& __x, perms __y) noexcept
+  { return __x = __x & __y; }
+
+  inline perms&
+  operator|=(perms& __x, perms __y) noexcept
+  { return __x = __x | __y; }
+
+  inline perms&
+  operator^=(perms& __x, perms __y) noexcept
+  { return __x = __x ^ __y; }
+
+
+
+  enum class perm_options : unsigned {
+      replace = 0x1,
+      add = 0x2,
+      remove = 0x4,
+      nofollow = 0x8
+  };
+
+
+
+  [[nodiscard]]
+  constexpr perm_options
+  operator&(perm_options __x, perm_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<perm_options>::type;
+    return static_cast<perm_options>(
+ static_cast<__utype>(__x) & static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr perm_options
+  operator|(perm_options __x, perm_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<perm_options>::type;
+    return static_cast<perm_options>(
+ static_cast<__utype>(__x) | static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr perm_options
+  operator^(perm_options __x, perm_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<perm_options>::type;
+    return static_cast<perm_options>(
+ static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr perm_options
+  operator~(perm_options __x) noexcept
+  {
+    using __utype = typename std::underlying_type<perm_options>::type;
+    return static_cast<perm_options>(~static_cast<__utype>(__x));
+  }
+
+  inline perm_options&
+  operator&=(perm_options& __x, perm_options __y) noexcept
+  { return __x = __x & __y; }
+
+  inline perm_options&
+  operator|=(perm_options& __x, perm_options __y) noexcept
+  { return __x = __x | __y; }
+
+  inline perm_options&
+  operator^=(perm_options& __x, perm_options __y) noexcept
+  { return __x = __x ^ __y; }
+
+
+
+  enum class directory_options : unsigned char {
+      none = 0, follow_directory_symlink = 1, skip_permission_denied = 2
+  };
+
+
+
+  [[nodiscard]]
+  constexpr directory_options
+  operator&(directory_options __x, directory_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<directory_options>::type;
+    return static_cast<directory_options>(
+ static_cast<__utype>(__x) & static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr directory_options
+  operator|(directory_options __x, directory_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<directory_options>::type;
+    return static_cast<directory_options>(
+ static_cast<__utype>(__x) | static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr directory_options
+  operator^(directory_options __x, directory_options __y) noexcept
+  {
+    using __utype = typename std::underlying_type<directory_options>::type;
+    return static_cast<directory_options>(
+ static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
+  }
+
+  [[nodiscard]]
+  constexpr directory_options
+  operator~(directory_options __x) noexcept
+  {
+    using __utype = typename std::underlying_type<directory_options>::type;
+    return static_cast<directory_options>(~static_cast<__utype>(__x));
+  }
+
+  inline directory_options&
+  operator&=(directory_options& __x, directory_options __y) noexcept
+  { return __x = __x & __y; }
+
+  inline directory_options&
+  operator|=(directory_options& __x, directory_options __y) noexcept
+  { return __x = __x | __y; }
+
+  inline directory_options&
+  operator^=(directory_options& __x, directory_options __y) noexcept
+  { return __x = __x ^ __y; }
+
+
+
+  using file_time_type = __file_clock::time_point;
+
+
+
+  void copy(const path& __from, const path& __to, copy_options __options);
+  void copy(const path& __from, const path& __to, copy_options __options,
+     error_code&);
+
+  bool copy_file(const path& __from, const path& __to, copy_options __option);
+  bool copy_file(const path& __from, const path& __to, copy_options __option,
+   error_code&);
+
+  path current_path();
+
+  bool exists(file_status) noexcept;
+
+  bool is_other(file_status) noexcept;
+
+  uintmax_t file_size(const path&);
+  uintmax_t file_size(const path&, error_code&) noexcept;
+  uintmax_t hard_link_count(const path&);
+  uintmax_t hard_link_count(const path&, error_code&) noexcept;
+  file_time_type last_write_time(const path&);
+  file_time_type last_write_time(const path&, error_code&) noexcept;
+
+  void permissions(const path&, perms, perm_options, error_code&) noexcept;
+
+  path proximate(const path& __p, const path& __base, error_code& __ec);
+  path proximate(const path& __p, const path& __base, error_code& __ec);
+
+  path relative(const path& __p, const path& __base, error_code& __ec);
+
+  file_status status(const path&);
+  file_status status(const path&, error_code&) noexcept;
+
+  bool status_known(file_status) noexcept;
+
+  file_status symlink_status(const path&);
+  file_status symlink_status(const path&, error_code&) noexcept;
+
+  bool is_regular_file(file_status) noexcept;
+  bool is_symlink(file_status) noexcept;
+
+  bool remove(const path&, error_code&) noexcept;
+  uintmax_t remove_all(const path&);
+  uintmax_t remove_all(const path&, error_code&);
+
+
+}
+
+}
+# 52 "/usr/include/c++/14.2.1/filesystem" 2 3
+# 1 "/usr/include/c++/14.2.1/bits/fs_path.h" 1 3
+# 39 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+# 1 "/usr/include/c++/14.2.1/codecvt" 1 3
+# 34 "/usr/include/c++/14.2.1/codecvt" 3
+       
+# 35 "/usr/include/c++/14.2.1/codecvt" 3
+# 43 "/usr/include/c++/14.2.1/codecvt" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+  enum codecvt_mode
+  {
+    consume_header = 4,
+    generate_header = 2,
+    little_endian = 1
+  };
+
+  template<typename _Elem, unsigned long _Maxcode = 0x10ffff,
+    codecvt_mode _Mode = (codecvt_mode)0>
+    class codecvt_utf8 : public codecvt<_Elem, char, mbstate_t>
+    {
+    public:
+      explicit
+      codecvt_utf8(size_t __refs = 0);
+
+      ~codecvt_utf8();
+    };
+
+  template<typename _Elem, unsigned long _Maxcode = 0x10ffff,
+    codecvt_mode _Mode = (codecvt_mode)0>
+    class codecvt_utf16 : public codecvt<_Elem, char, mbstate_t>
+    {
+    public:
+      explicit
+      codecvt_utf16(size_t __refs = 0);
+
+      ~codecvt_utf16();
+    };
+
+  template<typename _Elem, unsigned long _Maxcode = 0x10ffff,
+    codecvt_mode _Mode = (codecvt_mode)0>
+    class codecvt_utf8_utf16 : public codecvt<_Elem, char, mbstate_t>
+    {
+    public:
+      explicit
+      codecvt_utf8_utf16(size_t __refs = 0);
+
+      ~codecvt_utf8_utf16();
+    };
+# 154 "/usr/include/c++/14.2.1/codecvt" 3
+  template<typename _Elem> class __codecvt_utf8_base;
+  template<typename _Elem> class __codecvt_utf16_base;
+  template<typename _Elem> class __codecvt_utf8_utf16_base;
+
+  template<> class __codecvt_utf8_base<char16_t> : public codecvt<char16_t, char, mbstate_t> { public: typedef char16_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8<char16_t, _Maxcode, _Mode> : public __codecvt_utf8_base<char16_t> { public: explicit codecvt_utf8(size_t __refs = 0) : __codecvt_utf8_base<char16_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+  template<> class __codecvt_utf16_base<char16_t> : public codecvt<char16_t, char, mbstate_t> { public: typedef char16_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf16<char16_t, _Maxcode, _Mode> : public __codecvt_utf16_base<char16_t> { public: explicit codecvt_utf16(size_t __refs = 0) : __codecvt_utf16_base<char16_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+  template<> class __codecvt_utf8_utf16_base<char16_t> : public codecvt<char16_t, char, mbstate_t> { public: typedef char16_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8_utf16<char16_t, _Maxcode, _Mode> : public __codecvt_utf8_utf16_base<char16_t> { public: explicit codecvt_utf8_utf16(size_t __refs = 0) : __codecvt_utf8_utf16_base<char16_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+
+  template<> class __codecvt_utf8_base<char32_t> : public codecvt<char32_t, char, mbstate_t> { public: typedef char32_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8<char32_t, _Maxcode, _Mode> : public __codecvt_utf8_base<char32_t> { public: explicit codecvt_utf8(size_t __refs = 0) : __codecvt_utf8_base<char32_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+  template<> class __codecvt_utf16_base<char32_t> : public codecvt<char32_t, char, mbstate_t> { public: typedef char32_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf16<char32_t, _Maxcode, _Mode> : public __codecvt_utf16_base<char32_t> { public: explicit codecvt_utf16(size_t __refs = 0) : __codecvt_utf16_base<char32_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+  template<> class __codecvt_utf8_utf16_base<char32_t> : public codecvt<char32_t, char, mbstate_t> { public: typedef char32_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8_utf16<char32_t, _Maxcode, _Mode> : public __codecvt_utf8_utf16_base<char32_t> { public: explicit codecvt_utf8_utf16(size_t __refs = 0) : __codecvt_utf8_utf16_base<char32_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+
+
+  template<> class __codecvt_utf8_base<wchar_t> : public codecvt<wchar_t, char, mbstate_t> { public: typedef wchar_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8<wchar_t, _Maxcode, _Mode> : public __codecvt_utf8_base<wchar_t> { public: explicit codecvt_utf8(size_t __refs = 0) : __codecvt_utf8_base<wchar_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+  template<> class __codecvt_utf16_base<wchar_t> : public codecvt<wchar_t, char, mbstate_t> { public: typedef wchar_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf16<wchar_t, _Maxcode, _Mode> : public __codecvt_utf16_base<wchar_t> { public: explicit codecvt_utf16(size_t __refs = 0) : __codecvt_utf16_base<wchar_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+  template<> class __codecvt_utf8_utf16_base<wchar_t> : public codecvt<wchar_t, char, mbstate_t> { public: typedef wchar_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8_utf16<wchar_t, _Maxcode, _Mode> : public __codecvt_utf8_utf16_base<wchar_t> { public: explicit codecvt_utf8_utf16(size_t __refs = 0) : __codecvt_utf8_utf16_base<wchar_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
+
+
+
+}
+# 40 "/usr/include/c++/14.2.1/bits/fs_path.h" 2 3
+
+
+
+
+
+# 1 "/usr/include/c++/14.2.1/ext/concurrence.h" 1 3
+# 32 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
+       
+# 33 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
+
+
+
+
+
+
+
+namespace __gnu_cxx __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+
+
+
+  enum _Lock_policy { _S_single, _S_mutex, _S_atomic };
+
+
+
+  inline const _Lock_policy __default_lock_policy =
+
+
+
+  _S_atomic;
+
+
+
+
+
+
+  class __concurrence_lock_error : public std::exception
+  {
+  public:
+    virtual char const*
+    what() const throw()
+    { return "__gnu_cxx::__concurrence_lock_error"; }
+  };
+
+  class __concurrence_unlock_error : public std::exception
+  {
+  public:
+    virtual char const*
+    what() const throw()
+    { return "__gnu_cxx::__concurrence_unlock_error"; }
+  };
+
+  class __concurrence_broadcast_error : public std::exception
+  {
+  public:
+    virtual char const*
+    what() const throw()
+    { return "__gnu_cxx::__concurrence_broadcast_error"; }
+  };
+
+  class __concurrence_wait_error : public std::exception
+  {
+  public:
+    virtual char const*
+    what() const throw()
+    { return "__gnu_cxx::__concurrence_wait_error"; }
+  };
+
+
+  inline void
+  __throw_concurrence_lock_error()
+  { (throw (__concurrence_lock_error())); }
+
+  inline void
+  __throw_concurrence_unlock_error()
+  { (throw (__concurrence_unlock_error())); }
+
+
+  inline void
+  __throw_concurrence_broadcast_error()
+  { (throw (__concurrence_broadcast_error())); }
+
+  inline void
+  __throw_concurrence_wait_error()
+  { (throw (__concurrence_wait_error())); }
+
+
+  class __mutex
+  {
+  private:
+
+    __gthread_mutex_t _M_mutex = { { 0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, 0, { 0, 0 } } };
+
+
+
+
+    __mutex(const __mutex&);
+    __mutex& operator=(const __mutex&);
+
+  public:
+    __mutex()
+    {
+
+
+
+
+    }
+# 144 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
+    void lock()
+    {
+
+      if (__gthread_active_p())
+ {
+   if (__gthread_mutex_lock(&_M_mutex) != 0)
+     __throw_concurrence_lock_error();
+ }
+
+    }
+
+    void unlock()
+    {
+
+      if (__gthread_active_p())
+ {
+   if (__gthread_mutex_unlock(&_M_mutex) != 0)
+     __throw_concurrence_unlock_error();
+ }
+
+    }
+
+    __gthread_mutex_t* gthread_mutex(void)
+      { return &_M_mutex; }
+  };
+
+  class __recursive_mutex
+  {
+  private:
+
+    __gthread_recursive_mutex_t _M_mutex = { { 0, 0, 0, 0, PTHREAD_MUTEX_RECURSIVE_NP, 0, 0, { 0, 0 } } };
+
+
+
+
+    __recursive_mutex(const __recursive_mutex&);
+    __recursive_mutex& operator=(const __recursive_mutex&);
+
+  public:
+    __recursive_mutex()
+    {
+
+
+
+
+    }
+# 199 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
+    void lock()
+    {
+
+      if (__gthread_active_p())
+ {
+   if (__gthread_recursive_mutex_lock(&_M_mutex) != 0)
+     __throw_concurrence_lock_error();
+ }
+
+    }
+
+    void unlock()
+    {
+
+      if (__gthread_active_p())
+ {
+   if (__gthread_recursive_mutex_unlock(&_M_mutex) != 0)
+     __throw_concurrence_unlock_error();
+ }
+
+    }
+
+    __gthread_recursive_mutex_t* gthread_recursive_mutex(void)
+    { return &_M_mutex; }
+  };
+
+
+
+
+  class __scoped_lock
+  {
+  public:
+    typedef __mutex __mutex_type;
+
+  private:
+    __mutex_type& _M_device;
+
+    __scoped_lock(const __scoped_lock&);
+    __scoped_lock& operator=(const __scoped_lock&);
+
+  public:
+    explicit __scoped_lock(__mutex_type& __name) : _M_device(__name)
+    { _M_device.lock(); }
+
+    ~__scoped_lock() throw()
+    { _M_device.unlock(); }
+  };
+
+
+  class __cond
+  {
+  private:
+
+    __gthread_cond_t _M_cond = { { {0}, {0}, {0, 0}, {0, 0}, 0, 0, {0, 0} } };
+
+
+
+
+    __cond(const __cond&);
+    __cond& operator=(const __cond&);
+
+  public:
+    __cond()
+    {
+
+
+
+
+    }
+# 277 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
+    void broadcast()
+    {
+
+      if (__gthread_active_p())
+ {
+   if (__gthread_cond_broadcast(&_M_cond) != 0)
+     __throw_concurrence_broadcast_error();
+ }
+
+    }
+
+    void wait(__mutex *mutex)
+    {
+
+      {
+   if (__gthread_cond_wait(&_M_cond, mutex->gthread_mutex()) != 0)
+     __throw_concurrence_wait_error();
+      }
+
+    }
+
+    void wait_recursive(__recursive_mutex *mutex)
+    {
+
+      {
+   if (__gthread_cond_wait_recursive(&_M_cond,
+         mutex->gthread_recursive_mutex())
+       != 0)
+     __throw_concurrence_wait_error();
+      }
+
+    }
+  };
+
+
+
+}
+# 46 "/usr/include/c++/14.2.1/bits/fs_path.h" 2 3
+# 1 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 1 3
+# 53 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+# 1 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 1 3
+# 53 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+# 1 "/usr/include/c++/14.2.1/bits/allocated_ptr.h" 1 3
+# 40 "/usr/include/c++/14.2.1/bits/allocated_ptr.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+
+  template<typename _Alloc>
+    struct __allocated_ptr
+    {
+      using pointer = typename allocator_traits<_Alloc>::pointer;
+      using value_type = typename allocator_traits<_Alloc>::value_type;
+
+
+      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
+      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
+      { }
+
+
+      template<typename _Ptr,
+        typename _Req = _Require<is_same<_Ptr, value_type*>>>
+      __allocated_ptr(_Alloc& __a, _Ptr __ptr)
+      : _M_alloc(std::__addressof(__a)),
+ _M_ptr(pointer_traits<pointer>::pointer_to(*__ptr))
+      { }
+
+
+      __allocated_ptr(__allocated_ptr&& __gd) noexcept
+      : _M_alloc(__gd._M_alloc), _M_ptr(__gd._M_ptr)
+      { __gd._M_ptr = nullptr; }
+
+
+      ~__allocated_ptr()
+      {
+ if (_M_ptr != nullptr)
+   std::allocator_traits<_Alloc>::deallocate(*_M_alloc, _M_ptr, 1);
+      }
+
+
+      __allocated_ptr&
+      operator=(std::nullptr_t) noexcept
+      {
+ _M_ptr = nullptr;
+ return *this;
+      }
+
+
+      value_type* get() { return std::__to_address(_M_ptr); }
+
+    private:
+      _Alloc* _M_alloc;
+      pointer _M_ptr;
+    };
+
+
+  template<typename _Alloc>
+    __allocated_ptr<_Alloc>
+    __allocate_guarded(_Alloc& __a)
+    {
+      return { __a, std::allocator_traits<_Alloc>::allocate(__a, 1) };
+    }
+
+
+
+}
+# 54 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 2 3
+# 66 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+# 1 "/usr/include/c++/14.2.1/bits/align.h" 1 3
+# 36 "/usr/include/c++/14.2.1/bits/align.h" 3
+# 1 "/usr/include/c++/14.2.1/bits/version.h" 1 3
+# 47 "/usr/include/c++/14.2.1/bits/version.h" 3
+       
+# 48 "/usr/include/c++/14.2.1/bits/version.h" 3
+# 37 "/usr/include/c++/14.2.1/bits/align.h" 2 3
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+# 60 "/usr/include/c++/14.2.1/bits/align.h" 3
+inline void*
+align(size_t __align, size_t __size, void*& __ptr, size_t& __space) noexcept
+{
+  if (__space < __size)
+    return nullptr;
+  const auto __intptr = reinterpret_cast<uintptr_t>(__ptr);
+  const auto __aligned = (__intptr - 1u + __align) & -__align;
+  const auto __diff = __aligned - __intptr;
+  if (__diff > (__space - __size))
+    return nullptr;
+  else
+    {
+      __space -= __diff;
+      return __ptr = reinterpret_cast<void*>(__aligned);
+    }
+}
+# 88 "/usr/include/c++/14.2.1/bits/align.h" 3
+  template<size_t _Align, class _Tp>
+    [[nodiscard,__gnu__::__always_inline__]]
+    constexpr _Tp*
+    assume_aligned(_Tp* __ptr) noexcept
+    {
+      static_assert(std::has_single_bit(_Align));
+      if (std::is_constant_evaluated())
+ return __ptr;
+      else
+ {
+
+
+   ;
+   return static_cast<_Tp*>(__builtin_assume_aligned(__ptr, _Align));
+ }
+    }
+
+
+
+}
+# 67 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 2 3
+
+
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+
+ 
+# 75 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+  template<typename> class auto_ptr;
+#pragma GCC diagnostic pop
+
+
+
+
+
+
+  class bad_weak_ptr : public std::exception
+  {
+  public:
+    virtual char const* what() const noexcept;
+
+    virtual ~bad_weak_ptr() noexcept;
+  };
+
+
+  inline void
+  __throw_bad_weak_ptr()
+  { (throw (bad_weak_ptr())); }
+
+  using __gnu_cxx::_Lock_policy;
+  using __gnu_cxx::__default_lock_policy;
+  using __gnu_cxx::_S_single;
+  using __gnu_cxx::_S_mutex;
+  using __gnu_cxx::_S_atomic;
+
+
+  template<_Lock_policy _Lp>
+    class _Mutex_base
+    {
+    protected:
+
+      enum { _S_need_barriers = 0 };
+    };
+
+  template<>
+    class _Mutex_base<_S_mutex>
+    : public __gnu_cxx::__mutex
+    {
+    protected:
+
+
+
+      enum { _S_need_barriers = 1 };
+    };
+
+  template<_Lock_policy _Lp = __default_lock_policy>
+    class _Sp_counted_base
+    : public _Mutex_base<_Lp>
+    {
+    public:
+      _Sp_counted_base() noexcept
+      : _M_use_count(1), _M_weak_count(1) { }
+
+      virtual
+      ~_Sp_counted_base() noexcept
+      { }
+
+
+
+      virtual void
+      _M_dispose() noexcept = 0;
+
+
+      virtual void
+      _M_destroy() noexcept
+      { delete this; }
+
+      virtual void*
+      _M_get_deleter(const std::type_info&) noexcept = 0;
+
+
+      void
+      _M_add_ref_copy()
+      { __gnu_cxx::__atomic_add_dispatch(&_M_use_count, 1); }
+
+
+      void
+      _M_add_ref_lock()
+      {
+ if (!_M_add_ref_lock_nothrow())
+   __throw_bad_weak_ptr();
+      }
+
+
+      bool
+      _M_add_ref_lock_nothrow() noexcept;
+
+
+      void
+      _M_release() noexcept;
+
+
+      void
+      _M_release_last_use() noexcept
+      {
+ ;
+ _M_dispose();
+
+
+
+
+ if (_Mutex_base<_Lp>::_S_need_barriers)
+   {
+     __atomic_thread_fence (4);
+   }
+
+
+ ;
+ if (__gnu_cxx::__exchange_and_add_dispatch(&_M_weak_count,
+         -1) == 1)
+   {
+     ;
+     _M_destroy();
+   }
+      }
+
+
+      __attribute__((__noinline__))
+      void
+      _M_release_last_use_cold() noexcept
+      { _M_release_last_use(); }
+
+
+      void
+      _M_weak_add_ref() noexcept
+      { __gnu_cxx::__atomic_add_dispatch(&_M_weak_count, 1); }
+
+
+      void
+      _M_weak_release() noexcept
+      {
+
+        ;
+ if (__gnu_cxx::__exchange_and_add_dispatch(&_M_weak_count, -1) == 1)
+   {
+            ;
+     if (_Mutex_base<_Lp>::_S_need_barriers)
+       {
+
+
+  __atomic_thread_fence (4);
+       }
+     _M_destroy();
+   }
+      }
+
+      long
+      _M_get_use_count() const noexcept
+      {
+
+
+        return __atomic_load_n(&_M_use_count, 0);
+      }
+
+    private:
+      _Sp_counted_base(_Sp_counted_base const&) = delete;
+      _Sp_counted_base& operator=(_Sp_counted_base const&) = delete;
+
+      _Atomic_word _M_use_count;
+      _Atomic_word _M_weak_count;
+    };
+
+  template<>
+    inline bool
+    _Sp_counted_base<_S_single>::
+    _M_add_ref_lock_nothrow() noexcept
+    {
+      if (_M_use_count == 0)
+ return false;
+      ++_M_use_count;
+      return true;
+    }
+
+  template<>
+    inline bool
+    _Sp_counted_base<_S_mutex>::
+    _M_add_ref_lock_nothrow() noexcept
+    {
+      __gnu_cxx::__scoped_lock sentry(*this);
+      if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, 1) == 0)
+ {
+   _M_use_count = 0;
+   return false;
+ }
+      return true;
+    }
+
+  template<>
+    inline bool
+    _Sp_counted_base<_S_atomic>::
+    _M_add_ref_lock_nothrow() noexcept
+    {
+
+      _Atomic_word __count = _M_get_use_count();
+      do
+ {
+   if (__count == 0)
+     return false;
+
+
+ }
+      while (!__atomic_compare_exchange_n(&_M_use_count, &__count, __count + 1,
+       true, 4,
+       0));
+      return true;
+    }
+
+  template<>
+    inline void
+    _Sp_counted_base<_S_single>::_M_add_ref_copy()
+    { ++_M_use_count; }
+
+  template<>
+    inline void
+    _Sp_counted_base<_S_single>::_M_release() noexcept
+    {
+      if (--_M_use_count == 0)
+        {
+          _M_dispose();
+          if (--_M_weak_count == 0)
+            _M_destroy();
+        }
+    }
+
+  template<>
+    inline void
+    _Sp_counted_base<_S_mutex>::_M_release() noexcept
+    {
+
+      ;
+      if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1)
+ {
+   _M_release_last_use();
+ }
+    }
+
+  template<>
+    inline void
+    _Sp_counted_base<_S_atomic>::_M_release() noexcept
+    {
+      ;
+
+      constexpr bool __lock_free
+ = __atomic_always_lock_free(sizeof(long long), 0)
+ && __atomic_always_lock_free(sizeof(_Atomic_word), 0);
+      constexpr bool __double_word
+ = sizeof(long long) == 2 * sizeof(_Atomic_word);
+
+
+      constexpr bool __aligned = __alignof(long long) <= alignof(void*);
+      if constexpr (__lock_free && __double_word && __aligned)
+ {
+   constexpr int __wordbits = 8 * sizeof(_Atomic_word);
+   constexpr int __shiftbits = __double_word ? __wordbits : 0;
+   constexpr long long __unique_ref = 1LL + (1LL << __shiftbits);
+   auto __both_counts = reinterpret_cast<long long*>(&_M_use_count);
+
+   ;
+   if (__atomic_load_n(__both_counts, 2) == __unique_ref)
+     {
+
+
+
+
+       _M_weak_count = _M_use_count = 0;
+       ;
+       ;
+       _M_dispose();
+       _M_destroy();
+       return;
+     }
+   if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1)
+     [[__unlikely__]]
+     {
+       _M_release_last_use_cold();
+       return;
+     }
+ }
+      else
+
+      if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1)
+ {
+   _M_release_last_use();
+ }
+    }
+
+  template<>
+    inline void
+    _Sp_counted_base<_S_single>::_M_weak_add_ref() noexcept
+    { ++_M_weak_count; }
+
+  template<>
+    inline void
+    _Sp_counted_base<_S_single>::_M_weak_release() noexcept
+    {
+      if (--_M_weak_count == 0)
+        _M_destroy();
+    }
+
+  template<>
+    inline long
+    _Sp_counted_base<_S_single>::_M_get_use_count() const noexcept
+    { return _M_use_count; }
+
+
+
+  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy>
+    class __shared_ptr;
+
+  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy>
+    class __weak_ptr;
+
+  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy>
+    class __enable_shared_from_this;
+
+  template<typename _Tp>
+    class shared_ptr;
+
+  template<typename _Tp>
+    class weak_ptr;
+
+  template<typename _Tp>
+    struct owner_less;
+
+  template<typename _Tp>
+    class enable_shared_from_this;
+
+  template<_Lock_policy _Lp = __default_lock_policy>
+    class __weak_count;
+
+  template<_Lock_policy _Lp = __default_lock_policy>
+    class __shared_count;
+
+
+  template<typename>
+    class _Sp_atomic;
+
+
+
+  template<typename _Ptr, _Lock_policy _Lp>
+    class _Sp_counted_ptr final : public _Sp_counted_base<_Lp>
+    {
+    public:
+      explicit
+      _Sp_counted_ptr(_Ptr __p) noexcept
+      : _M_ptr(__p) { }
+
+      virtual void
+      _M_dispose() noexcept
+      { delete _M_ptr; }
+
+      virtual void
+      _M_destroy() noexcept
+      { delete this; }
+
+      virtual void*
+      _M_get_deleter(const std::type_info&) noexcept
+      { return nullptr; }
+
+      _Sp_counted_ptr(const _Sp_counted_ptr&) = delete;
+      _Sp_counted_ptr& operator=(const _Sp_counted_ptr&) = delete;
+
+    private:
+      _Ptr _M_ptr;
+    };
+
+  template<>
+    inline void
+    _Sp_counted_ptr<nullptr_t, _S_single>::_M_dispose() noexcept { }
+
+  template<>
+    inline void
+    _Sp_counted_ptr<nullptr_t, _S_mutex>::_M_dispose() noexcept { }
+
+  template<>
+    inline void
+    _Sp_counted_ptr<nullptr_t, _S_atomic>::_M_dispose() noexcept { }
+
+
+
+
+
+
+  template<int _Nm, typename _Tp,
+    bool __use_ebo = !__is_final(_Tp) && __is_empty(_Tp)>
+    struct _Sp_ebo_helper;
+
+
+  template<int _Nm, typename _Tp>
+    struct _Sp_ebo_helper<_Nm, _Tp, true> : private _Tp
+    {
+      explicit _Sp_ebo_helper(const _Tp& __tp) : _Tp(__tp) { }
+      explicit _Sp_ebo_helper(_Tp&& __tp) : _Tp(std::move(__tp)) { }
+
+      static _Tp&
+      _S_get(_Sp_ebo_helper& __eboh) { return static_cast<_Tp&>(__eboh); }
+    };
+
+
+  template<int _Nm, typename _Tp>
+    struct _Sp_ebo_helper<_Nm, _Tp, false>
+    {
+      explicit _Sp_ebo_helper(const _Tp& __tp) : _M_tp(__tp) { }
+      explicit _Sp_ebo_helper(_Tp&& __tp) : _M_tp(std::move(__tp)) { }
+
+      static _Tp&
+      _S_get(_Sp_ebo_helper& __eboh)
+      { return __eboh._M_tp; }
+
+    private:
+      _Tp _M_tp;
+    };
+
+
+  template<typename _Ptr, typename _Deleter, typename _Alloc, _Lock_policy _Lp>
+    class _Sp_counted_deleter final : public _Sp_counted_base<_Lp>
+    {
+      class _Impl : _Sp_ebo_helper<0, _Deleter>, _Sp_ebo_helper<1, _Alloc>
+      {
+ typedef _Sp_ebo_helper<0, _Deleter> _Del_base;
+ typedef _Sp_ebo_helper<1, _Alloc> _Alloc_base;
+
+      public:
+ _Impl(_Ptr __p, _Deleter __d, const _Alloc& __a) noexcept
+ : _Del_base(std::move(__d)), _Alloc_base(__a), _M_ptr(__p)
+ { }
+
+ _Deleter& _M_del() noexcept { return _Del_base::_S_get(*this); }
+ _Alloc& _M_alloc() noexcept { return _Alloc_base::_S_get(*this); }
+
+ _Ptr _M_ptr;
+      };
+
+    public:
+      using __allocator_type = __alloc_rebind<_Alloc, _Sp_counted_deleter>;
+
+
+      _Sp_counted_deleter(_Ptr __p, _Deleter __d) noexcept
+      : _M_impl(__p, std::move(__d), _Alloc()) { }
+
+
+      _Sp_counted_deleter(_Ptr __p, _Deleter __d, const _Alloc& __a) noexcept
+      : _M_impl(__p, std::move(__d), __a) { }
+
+      ~_Sp_counted_deleter() noexcept { }
+
+      virtual void
+      _M_dispose() noexcept
+      { _M_impl._M_del()(_M_impl._M_ptr); }
+
+      virtual void
+      _M_destroy() noexcept
+      {
+ __allocator_type __a(_M_impl._M_alloc());
+ __allocated_ptr<__allocator_type> __guard_ptr{ __a, this };
+ this->~_Sp_counted_deleter();
+      }
+
+      virtual void*
+      _M_get_deleter(const type_info& __ti [[__gnu__::__unused__]]) noexcept
+      {
+
+
+
+        return __ti == typeid(_Deleter)
+   ? std::__addressof(_M_impl._M_del())
+   : nullptr;
+
+
+
+      }
+
+    private:
+
+
+
+      _Impl _M_impl;
+    };
+
+
+
+  struct _Sp_make_shared_tag
+  {
+  private:
+    template<typename _Tp, typename _Alloc, _Lock_policy _Lp>
+      friend class _Sp_counted_ptr_inplace;
+
+    static const type_info&
+    _S_ti() noexcept __attribute__ ((__visibility__ ("default")))
+    {
+      alignas(type_info) static constexpr char __tag[sizeof(type_info)] = { };
+      return reinterpret_cast<const type_info&>(__tag);
+    }
+
+    static bool _S_eq(const type_info&) noexcept;
+  };
+
+  template<typename _Alloc>
+    struct _Sp_alloc_shared_tag
+    {
+      const _Alloc& _M_a;
+    };
+
+  template<typename _Tp, typename _Alloc, _Lock_policy _Lp>
+    class _Sp_counted_ptr_inplace final : public _Sp_counted_base<_Lp>
+    {
+      class _Impl : _Sp_ebo_helper<0, _Alloc>
+      {
+ typedef _Sp_ebo_helper<0, _Alloc> _A_base;
+
+      public:
+ explicit _Impl(_Alloc __a) noexcept : _A_base(__a) { }
+
+ _Alloc& _M_alloc() noexcept { return _A_base::_S_get(*this); }
+
+ __gnu_cxx::__aligned_buffer<_Tp> _M_storage;
+      };
+
+    public:
+      using __allocator_type = __alloc_rebind<_Alloc, _Sp_counted_ptr_inplace>;
+
+
+      template<typename... _Args>
+ _Sp_counted_ptr_inplace(_Alloc __a, _Args&&... __args)
+ : _M_impl(__a)
+ {
+
+
+   allocator_traits<_Alloc>::construct(__a, _M_ptr(),
+       std::forward<_Args>(__args)...);
+ }
+
+      ~_Sp_counted_ptr_inplace() noexcept { }
+
+      virtual void
+      _M_dispose() noexcept
+      {
+ allocator_traits<_Alloc>::destroy(_M_impl._M_alloc(), _M_ptr());
+      }
+
+
+      virtual void
+      _M_destroy() noexcept
+      {
+ __allocator_type __a(_M_impl._M_alloc());
+ __allocated_ptr<__allocator_type> __guard_ptr{ __a, this };
+ this->~_Sp_counted_ptr_inplace();
+      }
+
+    private:
+      friend class __shared_count<_Lp>;
+
+
+
+      virtual void*
+      _M_get_deleter(const std::type_info& __ti) noexcept override
+      {
+ auto __ptr = const_cast<typename remove_cv<_Tp>::type*>(_M_ptr());
+
+
+
+
+ if (&__ti == &_Sp_make_shared_tag::_S_ti()
+     ||
+
+     __ti == typeid(_Sp_make_shared_tag)
+
+
+
+    )
+   return __ptr;
+ return nullptr;
+      }
+
+      _Tp* _M_ptr() noexcept { return _M_impl._M_storage._M_ptr(); }
+
+      _Impl _M_impl;
+    };
+
+
+  struct _Sp_overwrite_tag { };
+
+
+
+
+
+  template<typename _Tp, typename _Alloc, _Lock_policy _Lp>
+    requires is_same_v<typename _Alloc::value_type, _Sp_overwrite_tag>
+    class _Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp> final
+
+
+
+
+    : public _Sp_counted_base<_Lp>
+    {
+      [[no_unique_address]] _Alloc _M_alloc;
+
+      union {
+ _Tp _M_obj;
+ char _M_unused;
+      };
+
+      friend class __shared_count<_Lp>;
+
+      _Tp* _M_ptr() noexcept { return std::__addressof(_M_obj); }
+
+    public:
+      using __allocator_type = __alloc_rebind<_Alloc, _Sp_counted_ptr_inplace>;
+
+      _Sp_counted_ptr_inplace(const _Alloc& __a)
+      : _M_alloc(__a)
+      {
+ ::new((void*)_M_ptr()) _Tp;
+      }
+
+      ~_Sp_counted_ptr_inplace() noexcept { }
+
+      virtual void
+      _M_dispose() noexcept
+      {
+ _M_obj.~_Tp();
+      }
+
+
+      virtual void
+      _M_destroy() noexcept
+      {
+ using pointer = typename allocator_traits<__allocator_type>::pointer;
+ __allocator_type __a(_M_alloc);
+ auto __p = pointer_traits<pointer>::pointer_to(*this);
+ __allocated_ptr<__allocator_type> __guard_ptr{ __a, __p };
+ this->~_Sp_counted_ptr_inplace();
+      }
+
+      void*
+      _M_get_deleter(const std::type_info&) noexcept override
+      { return nullptr; }
+    };
+
+
+
+  struct _Sp_overwrite_tag;
+
+
+  template<typename _Alloc>
+    struct _Sp_counted_array_base
+    {
+      [[no_unique_address]] _Alloc _M_alloc{};
+      size_t _M_n = 0;
+      bool _M_overwrite = false;
+
+      typename allocator_traits<_Alloc>::pointer
+      _M_alloc_array(size_t __tail)
+      {
+ return allocator_traits<_Alloc>::allocate(_M_alloc, _M_n + __tail);
+      }
+
+      void
+      _M_dealloc_array(typename allocator_traits<_Alloc>::pointer __p,
+         size_t __tail)
+      {
+ allocator_traits<_Alloc>::deallocate(_M_alloc, __p, _M_n + __tail);
+      }
+
+
+      template<typename _Init>
+ void
+ _M_init(typename allocator_traits<_Alloc>::value_type* __p,
+  _Init __init)
+ {
+   using _Tp = remove_pointer_t<_Init>;
+   using _Up = typename allocator_traits<_Alloc>::value_type;
+
+   if constexpr (is_same_v<_Init, _Sp_overwrite_tag>)
+     {
+       std::uninitialized_default_construct_n(__p, _M_n);
+       _M_overwrite = true;
+     }
+   else if (__init == nullptr)
+     std::__uninitialized_default_n_a(__p, _M_n, _M_alloc);
+   else if constexpr (!is_array_v<_Tp>)
+     std::__uninitialized_fill_n_a(__p, _M_n, *__init, _M_alloc);
+   else
+     {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+       struct _Iter
+       {
+  using value_type = _Up;
+  using difference_type = ptrdiff_t;
+  using pointer = const _Up*;
+  using reference = const _Up&;
+  using iterator_category = forward_iterator_tag;
+
+  const _Up* _M_p;
+  size_t _M_len;
+  size_t _M_pos;
+
+  _Iter& operator++() { ++_M_pos; return *this; }
+  _Iter operator++(int) { auto __i(*this); ++_M_pos; return __i; }
+
+  reference operator*() const { return _M_p[_M_pos % _M_len]; }
+  pointer operator->() const { return _M_p + (_M_pos % _M_len); }
+
+  bool operator==(const _Iter& __i) const
+  { return _M_pos == __i._M_pos; }
+       };
+#pragma GCC diagnostic pop
+
+       _Iter __first{_S_first_elem(__init), sizeof(_Tp) / sizeof(_Up)};
+       _Iter __last = __first;
+       __last._M_pos = _M_n;
+       std::__uninitialized_copy_a(__first, __last, __p, _M_alloc);
+     }
+ }
+
+    protected:
+
+      void
+      _M_dispose_array(typename allocator_traits<_Alloc>::value_type* __p)
+      {
+ if (_M_overwrite)
+   std::destroy_n(__p, _M_n);
+ else
+   {
+     size_t __n = _M_n;
+     while (__n--)
+       allocator_traits<_Alloc>::destroy(_M_alloc, __p + __n);
+   }
+      }
+
+    private:
+      template<typename _Tp>
+ static _Tp*
+ _S_first_elem(_Tp* __p) { return __p; }
+
+      template<typename _Tp, size_t _Nm>
+ static auto
+ _S_first_elem(_Tp (*__p)[_Nm]) { return _S_first_elem(*__p); }
+    };
+
+
+
+  template<typename _Alloc, _Lock_policy _Lp>
+    class _Sp_counted_array final
+    : public _Sp_counted_base<_Lp>, _Sp_counted_array_base<_Alloc>
+    {
+      using pointer = typename allocator_traits<_Alloc>::pointer;
+
+      pointer _M_alloc_ptr;
+
+      auto _M_ptr() const noexcept { return std::to_address(_M_alloc_ptr); }
+
+      friend class __shared_count<_Lp>;
+
+    public:
+      _Sp_counted_array(const _Sp_counted_array_base<_Alloc>& __a,
+   pointer __p) noexcept
+      : _Sp_counted_array_base<_Alloc>(__a), _M_alloc_ptr(__p)
+      { }
+
+      ~_Sp_counted_array() = default;
+
+      virtual void
+      _M_dispose() noexcept
+      {
+ if (this->_M_n)
+   this->_M_dispose_array(_M_ptr());
+      }
+
+
+      virtual void
+      _M_destroy() noexcept
+      {
+ _Sp_counted_array_base<_Alloc> __a = *this;
+ pointer __p = _M_alloc_ptr;
+ this->~_Sp_counted_array();
+ __a._M_dealloc_array(__p, _S_tail());
+      }
+
+
+
+      static constexpr size_t
+      _S_tail()
+      {
+
+ using _Tp = typename allocator_traits<_Alloc>::value_type;
+
+
+ size_t __bytes = sizeof(_Sp_counted_array);
+
+
+ if constexpr (alignof(_Tp) < alignof(_Sp_counted_array))
+   __bytes += alignof(_Sp_counted_array) - alignof(_Tp);
+
+ return (__bytes + sizeof(_Tp) - 1) / sizeof(_Tp);
+      }
+
+      void*
+      _M_get_deleter(const std::type_info&) noexcept override
+      { return nullptr; }
+    };
+
+
+
+  struct __sp_array_delete
+  {
+    template<typename _Yp>
+      void operator()(_Yp* __p) const { delete[] __p; }
+  };
+
+  template<_Lock_policy _Lp>
+    class __shared_count
+    {
+
+      template<typename _Tp>
+ struct __not_alloc_shared_tag { using type = void; };
+
+      template<typename _Tp>
+ struct __not_alloc_shared_tag<_Sp_alloc_shared_tag<_Tp>> { };
+
+
+      template<typename _Alloc>
+ struct __not_alloc_shared_tag<_Sp_counted_array_base<_Alloc>> { };
+
+
+    public:
+      constexpr __shared_count() noexcept : _M_pi(0)
+      { }
+
+      template<typename _Ptr>
+        explicit
+ __shared_count(_Ptr __p) : _M_pi(0)
+ {
+   try
+     {
+       _M_pi = new _Sp_counted_ptr<_Ptr, _Lp>(__p);
+     }
+   catch(...)
+     {
+       delete __p;
+       throw;
+     }
+ }
+
+      template<typename _Ptr>
+ __shared_count(_Ptr __p, false_type)
+ : __shared_count(__p)
+ { }
+
+      template<typename _Ptr>
+ __shared_count(_Ptr __p, true_type)
+ : __shared_count(__p, __sp_array_delete{}, allocator<void>())
+ { }
+
+      template<typename _Ptr, typename _Deleter,
+        typename = typename __not_alloc_shared_tag<_Deleter>::type>
+ __shared_count(_Ptr __p, _Deleter __d)
+ : __shared_count(__p, std::move(__d), allocator<void>())
+ { }
+
+      template<typename _Ptr, typename _Deleter, typename _Alloc,
+        typename = typename __not_alloc_shared_tag<_Deleter>::type>
+ __shared_count(_Ptr __p, _Deleter __d, _Alloc __a) : _M_pi(0)
+ {
+   typedef _Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp> _Sp_cd_type;
+   try
+     {
+       typename _Sp_cd_type::__allocator_type __a2(__a);
+       auto __guard = std::__allocate_guarded(__a2);
+       _Sp_cd_type* __mem = __guard.get();
+       ::new (__mem) _Sp_cd_type(__p, std::move(__d), std::move(__a));
+       _M_pi = __mem;
+       __guard = nullptr;
+     }
+   catch(...)
+     {
+       __d(__p);
+       throw;
+     }
+ }
+
+      template<typename _Tp, typename _Alloc, typename... _Args>
+ __shared_count(_Tp*& __p, _Sp_alloc_shared_tag<_Alloc> __a,
+         _Args&&... __args)
+ {
+   typedef _Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp> _Sp_cp_type;
+   typename _Sp_cp_type::__allocator_type __a2(__a._M_a);
+   auto __guard = std::__allocate_guarded(__a2);
+   _Sp_cp_type* __mem = __guard.get();
+   auto __pi = ::new (__mem)
+     _Sp_cp_type(__a._M_a, std::forward<_Args>(__args)...);
+   __guard = nullptr;
+   _M_pi = __pi;
+   __p = __pi->_M_ptr();
+ }
+
+
+      template<typename _Tp, typename _Alloc, typename _Init>
+ __shared_count(_Tp*& __p, const _Sp_counted_array_base<_Alloc>& __a,
+         _Init __init)
+ {
+   using _Up = remove_all_extents_t<_Tp>;
+   static_assert(is_same_v<_Up, typename _Alloc::value_type>);
+
+   using _Sp_ca_type = _Sp_counted_array<_Alloc, _Lp>;
+   const size_t __tail = _Sp_ca_type::_S_tail();
+
+   struct _Guarded_ptr : _Sp_counted_array_base<_Alloc>
+   {
+     typename allocator_traits<_Alloc>::pointer _M_ptr;
+
+     _Guarded_ptr(_Sp_counted_array_base<_Alloc> __a)
+     : _Sp_counted_array_base<_Alloc>(__a),
+       _M_ptr(this->_M_alloc_array(_Sp_ca_type::_S_tail()))
+     { }
+
+     ~_Guarded_ptr()
+     {
+       if (_M_ptr)
+  this->_M_dealloc_array(_M_ptr, _Sp_ca_type::_S_tail());
+     }
+   };
+
+   _Guarded_ptr __guard{__a};
+   _Up* const __raw = std::to_address(__guard._M_ptr);
+   __guard._M_init(__raw, __init);
+
+   void* __c = __raw + __a._M_n;
+   if constexpr (alignof(_Up) < alignof(_Sp_ca_type))
+     {
+       size_t __space = sizeof(_Up) * __tail;
+       __c = std::align(alignof(_Sp_ca_type), sizeof(_Sp_ca_type),
+          __c, __space);
+     }
+   auto __pi = ::new(__c) _Sp_ca_type(__guard, __guard._M_ptr);
+   __guard._M_ptr = nullptr;
+   _M_pi = __pi;
+   __p = reinterpret_cast<_Tp*>(__raw);
+ }
+
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+      template<typename _Tp>
+        explicit
+ __shared_count(std::auto_ptr<_Tp>&& __r);
+#pragma GCC diagnostic pop
+
+
+
+      template<typename _Tp, typename _Del>
+        explicit
+ __shared_count(std::unique_ptr<_Tp, _Del>&& __r) : _M_pi(0)
+ {
+
+
+   if (__r.get() == nullptr)
+     return;
+
+   using _Ptr = typename unique_ptr<_Tp, _Del>::pointer;
+   using _Del2 = __conditional_t<is_reference<_Del>::value,
+       reference_wrapper<typename remove_reference<_Del>::type>,
+       _Del>;
+   using _Sp_cd_type
+     = _Sp_counted_deleter<_Ptr, _Del2, allocator<void>, _Lp>;
+   using _Alloc = allocator<_Sp_cd_type>;
+   using _Alloc_traits = allocator_traits<_Alloc>;
+   _Alloc __a;
+   _Sp_cd_type* __mem = _Alloc_traits::allocate(__a, 1);
+
+
+
+   _Alloc_traits::construct(__a, __mem, __r.release(),
+       std::forward<_Del>(__r.get_deleter()));
+   _M_pi = __mem;
+ }
+
+
+      explicit __shared_count(const __weak_count<_Lp>& __r);
+
+
+      explicit
+      __shared_count(const __weak_count<_Lp>& __r, std::nothrow_t) noexcept;
+
+      ~__shared_count() noexcept
+      {
+ if (_M_pi != nullptr)
+   _M_pi->_M_release();
+      }
+
+      __shared_count(const __shared_count& __r) noexcept
+      : _M_pi(__r._M_pi)
+      {
+ if (_M_pi != nullptr)
+   _M_pi->_M_add_ref_copy();
+      }
+
+      __shared_count&
+      operator=(const __shared_count& __r) noexcept
+      {
+ _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
+ if (__tmp != _M_pi)
+   {
+     if (__tmp != nullptr)
+       __tmp->_M_add_ref_copy();
+     if (_M_pi != nullptr)
+       _M_pi->_M_release();
+     _M_pi = __tmp;
+   }
+ return *this;
+      }
+
+      void
+      _M_swap(__shared_count& __r) noexcept
+      {
+ _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
+ __r._M_pi = _M_pi;
+ _M_pi = __tmp;
+      }
+
+      long
+      _M_get_use_count() const noexcept
+      { return _M_pi ? _M_pi->_M_get_use_count() : 0; }
+
+      bool
+      _M_unique() const noexcept
+      { return this->_M_get_use_count() == 1; }
+
+      void*
+      _M_get_deleter(const std::type_info& __ti) const noexcept
+      { return _M_pi ? _M_pi->_M_get_deleter(__ti) : nullptr; }
+
+      bool
+      _M_less(const __shared_count& __rhs) const noexcept
+      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
+
+      bool
+      _M_less(const __weak_count<_Lp>& __rhs) const noexcept
+      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
+
+
+      friend inline bool
+      operator==(const __shared_count& __a, const __shared_count& __b) noexcept
+      { return __a._M_pi == __b._M_pi; }
+
+    private:
+      friend class __weak_count<_Lp>;
+
+      template<typename> friend class _Sp_atomic;
+
+
+
+
+
+      _Sp_counted_base<_Lp>* _M_pi;
+    };
+
+
+  template<_Lock_policy _Lp>
+    class __weak_count
+    {
+    public:
+      constexpr __weak_count() noexcept : _M_pi(nullptr)
+      { }
+
+      __weak_count(const __shared_count<_Lp>& __r) noexcept
+      : _M_pi(__r._M_pi)
+      {
+ if (_M_pi != nullptr)
+   _M_pi->_M_weak_add_ref();
+      }
+
+      __weak_count(const __weak_count& __r) noexcept
+      : _M_pi(__r._M_pi)
+      {
+ if (_M_pi != nullptr)
+   _M_pi->_M_weak_add_ref();
+      }
+
+      __weak_count(__weak_count&& __r) noexcept
+      : _M_pi(__r._M_pi)
+      { __r._M_pi = nullptr; }
+
+      ~__weak_count() noexcept
+      {
+ if (_M_pi != nullptr)
+   _M_pi->_M_weak_release();
+      }
+
+      __weak_count&
+      operator=(const __shared_count<_Lp>& __r) noexcept
+      {
+ _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
+ if (__tmp != nullptr)
+   __tmp->_M_weak_add_ref();
+ if (_M_pi != nullptr)
+   _M_pi->_M_weak_release();
+ _M_pi = __tmp;
+ return *this;
+      }
+
+      __weak_count&
+      operator=(const __weak_count& __r) noexcept
+      {
+ _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
+ if (__tmp != nullptr)
+   __tmp->_M_weak_add_ref();
+ if (_M_pi != nullptr)
+   _M_pi->_M_weak_release();
+ _M_pi = __tmp;
+ return *this;
+      }
+
+      __weak_count&
+      operator=(__weak_count&& __r) noexcept
+      {
+ if (_M_pi != nullptr)
+   _M_pi->_M_weak_release();
+ _M_pi = __r._M_pi;
+        __r._M_pi = nullptr;
+ return *this;
+      }
+
+      void
+      _M_swap(__weak_count& __r) noexcept
+      {
+ _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
+ __r._M_pi = _M_pi;
+ _M_pi = __tmp;
+      }
+
+      long
+      _M_get_use_count() const noexcept
+      { return _M_pi != nullptr ? _M_pi->_M_get_use_count() : 0; }
+
+      bool
+      _M_less(const __weak_count& __rhs) const noexcept
+      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
+
+      bool
+      _M_less(const __shared_count<_Lp>& __rhs) const noexcept
+      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
+
+
+      friend inline bool
+      operator==(const __weak_count& __a, const __weak_count& __b) noexcept
+      { return __a._M_pi == __b._M_pi; }
+
+    private:
+      friend class __shared_count<_Lp>;
+
+      template<typename> friend class _Sp_atomic;
+
+
+      _Sp_counted_base<_Lp>* _M_pi;
+    };
+
+
+  template<_Lock_policy _Lp>
+    inline
+    __shared_count<_Lp>::__shared_count(const __weak_count<_Lp>& __r)
+    : _M_pi(__r._M_pi)
+    {
+      if (_M_pi == nullptr || !_M_pi->_M_add_ref_lock_nothrow())
+ __throw_bad_weak_ptr();
+    }
+
+
+  template<_Lock_policy _Lp>
+    inline
+    __shared_count<_Lp>::
+    __shared_count(const __weak_count<_Lp>& __r, std::nothrow_t) noexcept
+    : _M_pi(__r._M_pi)
+    {
+      if (_M_pi && !_M_pi->_M_add_ref_lock_nothrow())
+ _M_pi = nullptr;
+    }
+
+
+
+
+
+  template<typename _Yp_ptr, typename _Tp_ptr>
+    struct __sp_compatible_with
+    : false_type
+    { };
+
+  template<typename _Yp, typename _Tp>
+    struct __sp_compatible_with<_Yp*, _Tp*>
+    : is_convertible<_Yp*, _Tp*>::type
+    { };
+
+  template<typename _Up, size_t _Nm>
+    struct __sp_compatible_with<_Up(*)[_Nm], _Up(*)[]>
+    : true_type
+    { };
+
+  template<typename _Up, size_t _Nm>
+    struct __sp_compatible_with<_Up(*)[_Nm], const _Up(*)[]>
+    : true_type
+    { };
+
+  template<typename _Up, size_t _Nm>
+    struct __sp_compatible_with<_Up(*)[_Nm], volatile _Up(*)[]>
+    : true_type
+    { };
+
+  template<typename _Up, size_t _Nm>
+    struct __sp_compatible_with<_Up(*)[_Nm], const volatile _Up(*)[]>
+    : true_type
+    { };
+
+
+  template<typename _Up, size_t _Nm, typename _Yp, typename = void>
+    struct __sp_is_constructible_arrN
+    : false_type
+    { };
+
+  template<typename _Up, size_t _Nm, typename _Yp>
+    struct __sp_is_constructible_arrN<_Up, _Nm, _Yp, __void_t<_Yp[_Nm]>>
+    : is_convertible<_Yp(*)[_Nm], _Up(*)[_Nm]>::type
+    { };
+
+
+  template<typename _Up, typename _Yp, typename = void>
+    struct __sp_is_constructible_arr
+    : false_type
+    { };
+
+  template<typename _Up, typename _Yp>
+    struct __sp_is_constructible_arr<_Up, _Yp, __void_t<_Yp[]>>
+    : is_convertible<_Yp(*)[], _Up(*)[]>::type
+    { };
+
+
+  template<typename _Tp, typename _Yp>
+    struct __sp_is_constructible;
+
+
+  template<typename _Up, size_t _Nm, typename _Yp>
+    struct __sp_is_constructible<_Up[_Nm], _Yp>
+    : __sp_is_constructible_arrN<_Up, _Nm, _Yp>::type
+    { };
+
+
+  template<typename _Up, typename _Yp>
+    struct __sp_is_constructible<_Up[], _Yp>
+    : __sp_is_constructible_arr<_Up, _Yp>::type
+    { };
+
+
+  template<typename _Tp, typename _Yp>
+    struct __sp_is_constructible
+    : is_convertible<_Yp*, _Tp*>::type
+    { };
+
+
+
+  template<typename _Tp, _Lock_policy _Lp,
+    bool = is_array<_Tp>::value, bool = is_void<_Tp>::value>
+    class __shared_ptr_access
+    {
+    public:
+      using element_type = _Tp;
+
+      element_type&
+      operator*() const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_get() != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *_M_get();
+      }
+
+      element_type*
+      operator->() const noexcept
+      {
+ ;
+ return _M_get();
+      }
+
+    private:
+      element_type*
+      _M_get() const noexcept
+      { return static_cast<const __shared_ptr<_Tp, _Lp>*>(this)->get(); }
+    };
+
+
+  template<typename _Tp, _Lock_policy _Lp>
+    class __shared_ptr_access<_Tp, _Lp, false, true>
+    {
+    public:
+      using element_type = _Tp;
+
+      element_type*
+      operator->() const noexcept
+      {
+ auto __ptr = static_cast<const __shared_ptr<_Tp, _Lp>*>(this)->get();
+ ;
+ return __ptr;
+      }
+    };
+
+
+  template<typename _Tp, _Lock_policy _Lp>
+    class __shared_ptr_access<_Tp, _Lp, true, false>
+    {
+    public:
+      using element_type = typename remove_extent<_Tp>::type;
+# 1408 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+      element_type&
+      operator[](ptrdiff_t __i) const noexcept
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_get() != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!extent<_Tp>::value || __i < extent<_Tp>::value), false)) std::__glibcxx_assert_fail(); } while (false);
+ return _M_get()[__i];
+      }
+
+    private:
+      element_type*
+      _M_get() const noexcept
+      { return static_cast<const __shared_ptr<_Tp, _Lp>*>(this)->get(); }
+    };
+
+  template<typename _Tp, _Lock_policy _Lp>
+    class __shared_ptr
+    : public __shared_ptr_access<_Tp, _Lp>
+    {
+    public:
+      using element_type = typename remove_extent<_Tp>::type;
+
+    private:
+
+      template<typename _Yp>
+ using _SafeConv
+   = typename enable_if<__sp_is_constructible<_Tp, _Yp>::value>::type;
+
+
+      template<typename _Yp, typename _Res = void>
+ using _Compatible = typename
+   enable_if<__sp_compatible_with<_Yp*, _Tp*>::value, _Res>::type;
+
+
+      template<typename _Yp>
+ using _Assignable = _Compatible<_Yp, __shared_ptr&>;
+
+
+      template<typename _Yp, typename _Del, typename _Res = void,
+        typename _Ptr = typename unique_ptr<_Yp, _Del>::pointer>
+ using _UniqCompatible = __enable_if_t<__and_<
+   __sp_compatible_with<_Yp*, _Tp*>,
+   is_convertible<_Ptr, element_type*>,
+   is_move_constructible<_Del>
+   >::value, _Res>;
+
+
+      template<typename _Yp, typename _Del>
+ using _UniqAssignable = _UniqCompatible<_Yp, _Del, __shared_ptr&>;
+
+    public:
+
+
+      using weak_type = __weak_ptr<_Tp, _Lp>;
+
+
+      constexpr __shared_ptr() noexcept
+      : _M_ptr(0), _M_refcount()
+      { }
+
+      template<typename _Yp, typename = _SafeConv<_Yp>>
+ explicit
+ __shared_ptr(_Yp* __p)
+ : _M_ptr(__p), _M_refcount(__p, typename is_array<_Tp>::type())
+ {
+   static_assert( !is_void<_Yp>::value, "incomplete type" );
+   static_assert( sizeof(_Yp) > 0, "incomplete type" );
+   _M_enable_shared_from_this_with(__p);
+ }
+
+      template<typename _Yp, typename _Deleter, typename = _SafeConv<_Yp>>
+ __shared_ptr(_Yp* __p, _Deleter __d)
+ : _M_ptr(__p), _M_refcount(__p, std::move(__d))
+ {
+   static_assert(__is_invocable<_Deleter&, _Yp*&>::value,
+       "deleter expression d(p) is well-formed");
+   _M_enable_shared_from_this_with(__p);
+ }
+
+      template<typename _Yp, typename _Deleter, typename _Alloc,
+        typename = _SafeConv<_Yp>>
+ __shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a)
+ : _M_ptr(__p), _M_refcount(__p, std::move(__d), std::move(__a))
+ {
+   static_assert(__is_invocable<_Deleter&, _Yp*&>::value,
+       "deleter expression d(p) is well-formed");
+   _M_enable_shared_from_this_with(__p);
+ }
+
+      template<typename _Deleter>
+ __shared_ptr(nullptr_t __p, _Deleter __d)
+ : _M_ptr(0), _M_refcount(__p, std::move(__d))
+ { }
+
+      template<typename _Deleter, typename _Alloc>
+        __shared_ptr(nullptr_t __p, _Deleter __d, _Alloc __a)
+ : _M_ptr(0), _M_refcount(__p, std::move(__d), std::move(__a))
+ { }
+
+
+      template<typename _Yp>
+ __shared_ptr(const __shared_ptr<_Yp, _Lp>& __r,
+       element_type* __p) noexcept
+ : _M_ptr(__p), _M_refcount(__r._M_refcount)
+ { }
+
+
+      template<typename _Yp>
+ __shared_ptr(__shared_ptr<_Yp, _Lp>&& __r,
+       element_type* __p) noexcept
+ : _M_ptr(__p), _M_refcount()
+ {
+   _M_refcount._M_swap(__r._M_refcount);
+   __r._M_ptr = nullptr;
+ }
+
+      __shared_ptr(const __shared_ptr&) noexcept = default;
+      __shared_ptr& operator=(const __shared_ptr&) noexcept = default;
+      ~__shared_ptr() = default;
+
+      template<typename _Yp, typename = _Compatible<_Yp>>
+ __shared_ptr(const __shared_ptr<_Yp, _Lp>& __r) noexcept
+ : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount)
+ { }
+
+      __shared_ptr(__shared_ptr&& __r) noexcept
+      : _M_ptr(__r._M_ptr), _M_refcount()
+      {
+ _M_refcount._M_swap(__r._M_refcount);
+ __r._M_ptr = nullptr;
+      }
+
+      template<typename _Yp, typename = _Compatible<_Yp>>
+ __shared_ptr(__shared_ptr<_Yp, _Lp>&& __r) noexcept
+ : _M_ptr(__r._M_ptr), _M_refcount()
+ {
+   _M_refcount._M_swap(__r._M_refcount);
+   __r._M_ptr = nullptr;
+ }
+
+      template<typename _Yp, typename = _Compatible<_Yp>>
+ explicit __shared_ptr(const __weak_ptr<_Yp, _Lp>& __r)
+ : _M_refcount(__r._M_refcount)
+ {
+
+
+   _M_ptr = __r._M_ptr;
+ }
+
+
+      template<typename _Yp, typename _Del,
+        typename = _UniqCompatible<_Yp, _Del>>
+ __shared_ptr(unique_ptr<_Yp, _Del>&& __r)
+ : _M_ptr(__r.get()), _M_refcount()
+ {
+   auto __raw = __to_address(__r.get());
+   _M_refcount = __shared_count<_Lp>(std::move(__r));
+   _M_enable_shared_from_this_with(__raw);
+ }
+# 1586 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+      template<typename _Yp, typename = _Compatible<_Yp>>
+ __shared_ptr(auto_ptr<_Yp>&& __r);
+#pragma GCC diagnostic pop
+
+
+      constexpr __shared_ptr(nullptr_t) noexcept : __shared_ptr() { }
+
+      template<typename _Yp>
+ _Assignable<_Yp>
+ operator=(const __shared_ptr<_Yp, _Lp>& __r) noexcept
+ {
+   _M_ptr = __r._M_ptr;
+   _M_refcount = __r._M_refcount;
+   return *this;
+ }
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+      template<typename _Yp>
+ _Assignable<_Yp>
+ operator=(auto_ptr<_Yp>&& __r)
+ {
+   __shared_ptr(std::move(__r)).swap(*this);
+   return *this;
+ }
+#pragma GCC diagnostic pop
+
+
+      __shared_ptr&
+      operator=(__shared_ptr&& __r) noexcept
+      {
+ __shared_ptr(std::move(__r)).swap(*this);
+ return *this;
+      }
+
+      template<class _Yp>
+ _Assignable<_Yp>
+ operator=(__shared_ptr<_Yp, _Lp>&& __r) noexcept
+ {
+   __shared_ptr(std::move(__r)).swap(*this);
+   return *this;
+ }
+
+      template<typename _Yp, typename _Del>
+ _UniqAssignable<_Yp, _Del>
+ operator=(unique_ptr<_Yp, _Del>&& __r)
+ {
+   __shared_ptr(std::move(__r)).swap(*this);
+   return *this;
+ }
+
+      void
+      reset() noexcept
+      { __shared_ptr().swap(*this); }
+
+      template<typename _Yp>
+ _SafeConv<_Yp>
+ reset(_Yp* __p)
+ {
+
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__p == nullptr || __p != _M_ptr), false)) std::__glibcxx_assert_fail(); } while (false);
+   __shared_ptr(__p).swap(*this);
+ }
+
+      template<typename _Yp, typename _Deleter>
+ _SafeConv<_Yp>
+ reset(_Yp* __p, _Deleter __d)
+ { __shared_ptr(__p, std::move(__d)).swap(*this); }
+
+      template<typename _Yp, typename _Deleter, typename _Alloc>
+ _SafeConv<_Yp>
+ reset(_Yp* __p, _Deleter __d, _Alloc __a)
+        { __shared_ptr(__p, std::move(__d), std::move(__a)).swap(*this); }
+
+
+      element_type*
+      get() const noexcept
+      { return _M_ptr; }
+
+
+      explicit operator bool() const noexcept
+      { return _M_ptr != nullptr; }
+
+
+      bool
+      unique() const noexcept
+      { return _M_refcount._M_unique(); }
+
+
+      long
+      use_count() const noexcept
+      { return _M_refcount._M_get_use_count(); }
+
+
+      void
+      swap(__shared_ptr<_Tp, _Lp>& __other) noexcept
+      {
+ std::swap(_M_ptr, __other._M_ptr);
+ _M_refcount._M_swap(__other._M_refcount);
+      }
+# 1698 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+      template<typename _Tp1>
+ bool
+ owner_before(__shared_ptr<_Tp1, _Lp> const& __rhs) const noexcept
+ { return _M_refcount._M_less(__rhs._M_refcount); }
+
+      template<typename _Tp1>
+ bool
+ owner_before(__weak_ptr<_Tp1, _Lp> const& __rhs) const noexcept
+ { return _M_refcount._M_less(__rhs._M_refcount); }
+
+
+    protected:
+
+      template<typename _Alloc, typename... _Args>
+ __shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
+ : _M_ptr(), _M_refcount(_M_ptr, __tag, std::forward<_Args>(__args)...)
+ { _M_enable_shared_from_this_with(_M_ptr); }
+
+      template<typename _Tp1, _Lock_policy _Lp1, typename _Alloc,
+        typename... _Args>
+ friend __shared_ptr<_Tp1, _Lp1>
+ __allocate_shared(const _Alloc& __a, _Args&&... __args);
+
+
+
+      template<typename _Alloc, typename _Init = const remove_extent_t<_Tp>*>
+ __shared_ptr(const _Sp_counted_array_base<_Alloc>& __a,
+       _Init __init = nullptr)
+ : _M_ptr(), _M_refcount(_M_ptr, __a, __init)
+ { }
+
+
+
+
+      __shared_ptr(const __weak_ptr<_Tp, _Lp>& __r, std::nothrow_t) noexcept
+      : _M_refcount(__r._M_refcount, std::nothrow)
+      {
+ _M_ptr = _M_refcount._M_get_use_count() ? __r._M_ptr : nullptr;
+      }
+
+      friend class __weak_ptr<_Tp, _Lp>;
+
+    private:
+
+      template<typename _Yp>
+ using __esft_base_t = decltype(__enable_shared_from_this_base(
+       std::declval<const __shared_count<_Lp>&>(),
+       std::declval<_Yp*>()));
+
+
+      template<typename _Yp, typename = void>
+ struct __has_esft_base
+ : false_type { };
+
+      template<typename _Yp>
+ struct __has_esft_base<_Yp, __void_t<__esft_base_t<_Yp>>>
+ : __not_<is_array<_Tp>> { };
+
+      template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
+ typename enable_if<__has_esft_base<_Yp2>::value>::type
+ _M_enable_shared_from_this_with(_Yp* __p) noexcept
+ {
+   if (auto __base = __enable_shared_from_this_base(_M_refcount, __p))
+     __base->_M_weak_assign(const_cast<_Yp2*>(__p), _M_refcount);
+ }
+
+      template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
+ typename enable_if<!__has_esft_base<_Yp2>::value>::type
+ _M_enable_shared_from_this_with(_Yp*) noexcept
+ { }
+
+      void*
+      _M_get_deleter(const std::type_info& __ti) const noexcept
+      { return _M_refcount._M_get_deleter(__ti); }
+
+      template<typename _Tp1, _Lock_policy _Lp1> friend class __shared_ptr;
+      template<typename _Tp1, _Lock_policy _Lp1> friend class __weak_ptr;
+
+      template<typename _Del, typename _Tp1, _Lock_policy _Lp1>
+ friend _Del* get_deleter(const __shared_ptr<_Tp1, _Lp1>&) noexcept;
+
+      template<typename _Del, typename _Tp1>
+ friend _Del* get_deleter(const shared_ptr<_Tp1>&) noexcept;
+
+
+      friend _Sp_atomic<shared_ptr<_Tp>>;
+
+
+
+
+
+      element_type* _M_ptr;
+      __shared_count<_Lp> _M_refcount;
+    };
+
+
+
+  template<typename _Tp1, typename _Tp2, _Lock_policy _Lp>
+    inline bool
+    operator==(const __shared_ptr<_Tp1, _Lp>& __a,
+        const __shared_ptr<_Tp2, _Lp>& __b) noexcept
+    { return __a.get() == __b.get(); }
+
+  template<typename _Tp, _Lock_policy _Lp>
+    inline bool
+    operator==(const __shared_ptr<_Tp, _Lp>& __a, nullptr_t) noexcept
+    { return !__a; }
+
+
+  template<typename _Tp, typename _Up, _Lock_policy _Lp>
+    inline strong_ordering
+    operator<=>(const __shared_ptr<_Tp, _Lp>& __a,
+  const __shared_ptr<_Up, _Lp>& __b) noexcept
+    { return compare_three_way()(__a.get(), __b.get()); }
+
+  template<typename _Tp, _Lock_policy _Lp>
+    inline strong_ordering
+    operator<=>(const __shared_ptr<_Tp, _Lp>& __a, nullptr_t) noexcept
+    {
+      using pointer = typename __shared_ptr<_Tp, _Lp>::element_type*;
+      return compare_three_way()(__a.get(), static_cast<pointer>(nullptr));
+    }
+# 1919 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+  template<typename _Tp, _Lock_policy _Lp>
+    inline void
+    swap(__shared_ptr<_Tp, _Lp>& __a, __shared_ptr<_Tp, _Lp>& __b) noexcept
+    { __a.swap(__b); }
+# 1931 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
+    inline __shared_ptr<_Tp, _Lp>
+    static_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
+    {
+      using _Sp = __shared_ptr<_Tp, _Lp>;
+      return _Sp(__r, static_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+
+
+
+
+  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
+    inline __shared_ptr<_Tp, _Lp>
+    const_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
+    {
+      using _Sp = __shared_ptr<_Tp, _Lp>;
+      return _Sp(__r, const_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+
+
+
+
+  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
+    inline __shared_ptr<_Tp, _Lp>
+    dynamic_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
+    {
+      using _Sp = __shared_ptr<_Tp, _Lp>;
+      if (auto* __p = dynamic_cast<typename _Sp::element_type*>(__r.get()))
+ return _Sp(__r, __p);
+      return _Sp();
+    }
+
+
+  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
+    inline __shared_ptr<_Tp, _Lp>
+    reinterpret_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
+    {
+      using _Sp = __shared_ptr<_Tp, _Lp>;
+      return _Sp(__r, reinterpret_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+  template<typename _Tp, _Lock_policy _Lp>
+    class __weak_ptr
+    {
+      template<typename _Yp, typename _Res = void>
+ using _Compatible = typename
+   enable_if<__sp_compatible_with<_Yp*, _Tp*>::value, _Res>::type;
+
+
+      template<typename _Yp>
+ using _Assignable = _Compatible<_Yp, __weak_ptr&>;
+
+    public:
+      using element_type = typename remove_extent<_Tp>::type;
+
+      constexpr __weak_ptr() noexcept
+      : _M_ptr(nullptr), _M_refcount()
+      { }
+
+      __weak_ptr(const __weak_ptr&) noexcept = default;
+
+      ~__weak_ptr() = default;
+# 2013 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
+      template<typename _Yp, typename = _Compatible<_Yp>>
+ __weak_ptr(const __weak_ptr<_Yp, _Lp>& __r) noexcept
+ : _M_refcount(__r._M_refcount)
+        { _M_ptr = __r.lock().get(); }
+
+      template<typename _Yp, typename = _Compatible<_Yp>>
+ __weak_ptr(const __shared_ptr<_Yp, _Lp>& __r) noexcept
+ : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount)
+ { }
+
+      __weak_ptr(__weak_ptr&& __r) noexcept
+      : _M_ptr(__r._M_ptr), _M_refcount(std::move(__r._M_refcount))
+      { __r._M_ptr = nullptr; }
+
+      template<typename _Yp, typename = _Compatible<_Yp>>
+ __weak_ptr(__weak_ptr<_Yp, _Lp>&& __r) noexcept
+ : _M_ptr(__r.lock().get()), _M_refcount(std::move(__r._M_refcount))
+        { __r._M_ptr = nullptr; }
+
+      __weak_ptr&
+      operator=(const __weak_ptr& __r) noexcept = default;
+
+      template<typename _Yp>
+ _Assignable<_Yp>
+ operator=(const __weak_ptr<_Yp, _Lp>& __r) noexcept
+ {
+   _M_ptr = __r.lock().get();
+   _M_refcount = __r._M_refcount;
+   return *this;
+ }
+
+      template<typename _Yp>
+ _Assignable<_Yp>
+ operator=(const __shared_ptr<_Yp, _Lp>& __r) noexcept
+ {
+   _M_ptr = __r._M_ptr;
+   _M_refcount = __r._M_refcount;
+   return *this;
+ }
+
+      __weak_ptr&
+      operator=(__weak_ptr&& __r) noexcept
+      {
+ __weak_ptr(std::move(__r)).swap(*this);
+ return *this;
+      }
+
+      template<typename _Yp>
+ _Assignable<_Yp>
+ operator=(__weak_ptr<_Yp, _Lp>&& __r) noexcept
+ {
+   _M_ptr = __r.lock().get();
+   _M_refcount = std::move(__r._M_refcount);
+   __r._M_ptr = nullptr;
+   return *this;
+ }
+
+      __shared_ptr<_Tp, _Lp>
+      lock() const noexcept
+      { return __shared_ptr<element_type, _Lp>(*this, std::nothrow); }
+
+      long
+      use_count() const noexcept
+      { return _M_refcount._M_get_use_count(); }
+
+      bool
+      expired() const noexcept
+      { return _M_refcount._M_get_use_count() == 0; }
+
+      template<typename _Tp1>
+ bool
+ owner_before(const __shared_ptr<_Tp1, _Lp>& __rhs) const noexcept
+ { return _M_refcount._M_less(__rhs._M_refcount); }
+
+      template<typename _Tp1>
+ bool
+ owner_before(const __weak_ptr<_Tp1, _Lp>& __rhs) const noexcept
+ { return _M_refcount._M_less(__rhs._M_refcount); }
+
+      void
+      reset() noexcept
+      { __weak_ptr().swap(*this); }
+
+      void
+      swap(__weak_ptr& __s) noexcept
+      {
+ std::swap(_M_ptr, __s._M_ptr);
+ _M_refcount._M_swap(__s._M_refcount);
+      }
+
+    private:
+
+      void
+      _M_assign(_Tp* __ptr, const __shared_count<_Lp>& __refcount) noexcept
+      {
+ if (use_count() == 0)
+   {
+     _M_ptr = __ptr;
+     _M_refcount = __refcount;
+   }
+      }
+
+      template<typename _Tp1, _Lock_policy _Lp1> friend class __shared_ptr;
+      template<typename _Tp1, _Lock_policy _Lp1> friend class __weak_ptr;
+      friend class __enable_shared_from_this<_Tp, _Lp>;
+      friend class enable_shared_from_this<_Tp>;
+
+      friend _Sp_atomic<weak_ptr<_Tp>>;
+
+
+      element_type* _M_ptr;
+      __weak_count<_Lp> _M_refcount;
+    };
+
+
+  template<typename _Tp, _Lock_policy _Lp>
+    inline void
+    swap(__weak_ptr<_Tp, _Lp>& __a, __weak_ptr<_Tp, _Lp>& __b) noexcept
+    { __a.swap(__b); }
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+  template<typename _Tp, typename _Tp1>
+    struct _Sp_owner_less : public binary_function<_Tp, _Tp, bool>
+    {
+      bool
+      operator()(const _Tp& __lhs, const _Tp& __rhs) const noexcept
+      { return __lhs.owner_before(__rhs); }
+
+      bool
+      operator()(const _Tp& __lhs, const _Tp1& __rhs) const noexcept
+      { return __lhs.owner_before(__rhs); }
+
+      bool
+      operator()(const _Tp1& __lhs, const _Tp& __rhs) const noexcept
+      { return __lhs.owner_before(__rhs); }
+    };
+#pragma GCC diagnostic pop
+
+  template<>
+    struct _Sp_owner_less<void, void>
+    {
+      template<typename _Tp, typename _Up>
+ auto
+ operator()(const _Tp& __lhs, const _Up& __rhs) const noexcept
+ -> decltype(__lhs.owner_before(__rhs))
+ { return __lhs.owner_before(__rhs); }
+
+      using is_transparent = void;
+    };
+
+  template<typename _Tp, _Lock_policy _Lp>
+    struct owner_less<__shared_ptr<_Tp, _Lp>>
+    : public _Sp_owner_less<__shared_ptr<_Tp, _Lp>, __weak_ptr<_Tp, _Lp>>
+    { };
+
+  template<typename _Tp, _Lock_policy _Lp>
+    struct owner_less<__weak_ptr<_Tp, _Lp>>
+    : public _Sp_owner_less<__weak_ptr<_Tp, _Lp>, __shared_ptr<_Tp, _Lp>>
+    { };
+
+
+  template<typename _Tp, _Lock_policy _Lp>
+    class __enable_shared_from_this
+    {
+    protected:
+      constexpr __enable_shared_from_this() noexcept { }
+
+      __enable_shared_from_this(const __enable_shared_from_this&) noexcept { }
+
+      __enable_shared_from_this&
+      operator=(const __enable_shared_from_this&) noexcept
+      { return *this; }
+
+      ~__enable_shared_from_this() { }
+
+    public:
+      __shared_ptr<_Tp, _Lp>
+      shared_from_this()
+      { return __shared_ptr<_Tp, _Lp>(this->_M_weak_this); }
+
+      __shared_ptr<const _Tp, _Lp>
+      shared_from_this() const
+      { return __shared_ptr<const _Tp, _Lp>(this->_M_weak_this); }
+
+
+      __weak_ptr<_Tp, _Lp>
+      weak_from_this() noexcept
+      { return this->_M_weak_this; }
+
+      __weak_ptr<const _Tp, _Lp>
+      weak_from_this() const noexcept
+      { return this->_M_weak_this; }
+
+
+    private:
+      template<typename _Tp1>
+ void
+ _M_weak_assign(_Tp1* __p, const __shared_count<_Lp>& __n) const noexcept
+ { _M_weak_this._M_assign(__p, __n); }
+
+      friend const __enable_shared_from_this*
+      __enable_shared_from_this_base(const __shared_count<_Lp>&,
+         const __enable_shared_from_this* __p)
+      { return __p; }
+
+      template<typename, _Lock_policy>
+ friend class __shared_ptr;
+
+      mutable __weak_ptr<_Tp, _Lp> _M_weak_this;
+    };
+
+  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy,
+    typename _Alloc, typename... _Args>
+    inline __shared_ptr<_Tp, _Lp>
+    __allocate_shared(const _Alloc& __a, _Args&&... __args)
+    {
+      static_assert(!is_array<_Tp>::value, "make_shared<T[]> not supported");
+
+      return __shared_ptr<_Tp, _Lp>(_Sp_alloc_shared_tag<_Alloc>{__a},
+        std::forward<_Args>(__args)...);
+    }
+
+  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy,
+    typename... _Args>
+    inline __shared_ptr<_Tp, _Lp>
+    __make_shared(_Args&&... __args)
+    {
+      typedef typename std::remove_const<_Tp>::type _Tp_nc;
+      return std::__allocate_shared<_Tp, _Lp>(std::allocator<_Tp_nc>(),
+           std::forward<_Args>(__args)...);
+    }
+
+
+  template<typename _Tp, _Lock_policy _Lp>
+    struct hash<__shared_ptr<_Tp, _Lp>>
+    : public __hash_base<size_t, __shared_ptr<_Tp, _Lp>>
+    {
+      size_t
+      operator()(const __shared_ptr<_Tp, _Lp>& __s) const noexcept
+      {
+ return hash<typename __shared_ptr<_Tp, _Lp>::element_type*>()(
+     __s.get());
+      }
+    };
+
+
+}
+# 54 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 2 3
+
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+# 68 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Ch, typename _Tr, typename _Tp, _Lock_policy _Lp>
+    inline std::basic_ostream<_Ch, _Tr>&
+    operator<<(std::basic_ostream<_Ch, _Tr>& __os,
+        const __shared_ptr<_Tp, _Lp>& __p)
+    {
+      __os << __p.get();
+      return __os;
+    }
+
+  template<typename _Del, typename _Tp, _Lock_policy _Lp>
+    inline _Del*
+    get_deleter(const __shared_ptr<_Tp, _Lp>& __p) noexcept
+    {
+
+      return static_cast<_Del*>(__p._M_get_deleter(typeid(_Del)));
+
+
+
+    }
+
+
+
+
+
+  template<typename _Del, typename _Tp>
+    inline _Del*
+    get_deleter(const shared_ptr<_Tp>& __p) noexcept
+    {
+
+      return static_cast<_Del*>(__p._M_get_deleter(typeid(_Del)));
+
+
+
+    }
+
+
+
+
+
+  template<typename _Tp>
+    requires (!is_array_v<_Tp>)
+    using _NonArray = _Tp;
+# 118 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp>
+    requires is_array_v<_Tp> && (extent_v<_Tp> == 0)
+    using _UnboundedArray = _Tp;
+# 129 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp>
+    requires (extent_v<_Tp> != 0)
+    using _BoundedArray = _Tp;
+# 141 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp>
+    requires (!is_array_v<_Tp>) || (extent_v<_Tp> != 0)
+    using _NotUnboundedArray = _Tp;
+# 174 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp>
+    class shared_ptr : public __shared_ptr<_Tp>
+    {
+      template<typename... _Args>
+ using _Constructible = typename enable_if<
+   is_constructible<__shared_ptr<_Tp>, _Args...>::value
+ >::type;
+
+      template<typename _Arg>
+ using _Assignable = typename enable_if<
+   is_assignable<__shared_ptr<_Tp>&, _Arg>::value, shared_ptr&
+ >::type;
+
+    public:
+
+
+      using element_type = typename __shared_ptr<_Tp>::element_type;
+
+
+
+
+      using weak_type = weak_ptr<_Tp>;
+
+
+
+
+
+      constexpr shared_ptr() noexcept : __shared_ptr<_Tp>() { }
+
+      shared_ptr(const shared_ptr&) noexcept = default;
+
+
+
+
+
+
+
+      template<typename _Yp, typename = _Constructible<_Yp*>>
+ explicit
+ shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
+# 228 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Yp, typename _Deleter,
+        typename = _Constructible<_Yp*, _Deleter>>
+ shared_ptr(_Yp* __p, _Deleter __d)
+        : __shared_ptr<_Tp>(__p, std::move(__d)) { }
+# 246 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Deleter>
+ shared_ptr(nullptr_t __p, _Deleter __d)
+        : __shared_ptr<_Tp>(__p, std::move(__d)) { }
+# 265 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Yp, typename _Deleter, typename _Alloc,
+        typename = _Constructible<_Yp*, _Deleter, _Alloc>>
+ shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a)
+ : __shared_ptr<_Tp>(__p, std::move(__d), std::move(__a)) { }
+# 285 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Deleter, typename _Alloc>
+ shared_ptr(nullptr_t __p, _Deleter __d, _Alloc __a)
+ : __shared_ptr<_Tp>(__p, std::move(__d), std::move(__a)) { }
+# 309 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Yp>
+ shared_ptr(const shared_ptr<_Yp>& __r, element_type* __p) noexcept
+ : __shared_ptr<_Tp>(__r, __p) { }
+# 337 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Yp>
+ shared_ptr(shared_ptr<_Yp>&& __r, element_type* __p) noexcept
+ : __shared_ptr<_Tp>(std::move(__r), __p) { }
+# 348 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Yp,
+        typename = _Constructible<const shared_ptr<_Yp>&>>
+ shared_ptr(const shared_ptr<_Yp>& __r) noexcept
+        : __shared_ptr<_Tp>(__r) { }
+
+
+
+
+
+
+      shared_ptr(shared_ptr&& __r) noexcept
+      : __shared_ptr<_Tp>(std::move(__r)) { }
+
+
+
+
+
+
+      template<typename _Yp, typename = _Constructible<shared_ptr<_Yp>>>
+ shared_ptr(shared_ptr<_Yp>&& __r) noexcept
+ : __shared_ptr<_Tp>(std::move(__r)) { }
+# 378 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      template<typename _Yp, typename = _Constructible<const weak_ptr<_Yp>&>>
+ explicit shared_ptr(const weak_ptr<_Yp>& __r)
+ : __shared_ptr<_Tp>(__r) { }
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+      template<typename _Yp, typename = _Constructible<auto_ptr<_Yp>>>
+ shared_ptr(auto_ptr<_Yp>&& __r);
+#pragma GCC diagnostic pop
+
+
+
+
+      template<typename _Yp, typename _Del,
+        typename = _Constructible<unique_ptr<_Yp, _Del>>>
+ shared_ptr(unique_ptr<_Yp, _Del>&& __r)
+ : __shared_ptr<_Tp>(std::move(__r)) { }
+# 411 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+      constexpr shared_ptr(nullptr_t) noexcept : shared_ptr() { }
+
+      shared_ptr& operator=(const shared_ptr&) noexcept = default;
+
+      template<typename _Yp>
+ _Assignable<const shared_ptr<_Yp>&>
+ operator=(const shared_ptr<_Yp>& __r) noexcept
+ {
+   this->__shared_ptr<_Tp>::operator=(__r);
+   return *this;
+ }
+
+
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+      template<typename _Yp>
+ _Assignable<auto_ptr<_Yp>>
+ operator=(auto_ptr<_Yp>&& __r)
+ {
+   this->__shared_ptr<_Tp>::operator=(std::move(__r));
+   return *this;
+ }
+#pragma GCC diagnostic pop
+
+
+      shared_ptr&
+      operator=(shared_ptr&& __r) noexcept
+      {
+ this->__shared_ptr<_Tp>::operator=(std::move(__r));
+ return *this;
+      }
+
+      template<class _Yp>
+ _Assignable<shared_ptr<_Yp>>
+ operator=(shared_ptr<_Yp>&& __r) noexcept
+ {
+   this->__shared_ptr<_Tp>::operator=(std::move(__r));
+   return *this;
+ }
+
+      template<typename _Yp, typename _Del>
+ _Assignable<unique_ptr<_Yp, _Del>>
+ operator=(unique_ptr<_Yp, _Del>&& __r)
+ {
+   this->__shared_ptr<_Tp>::operator=(std::move(__r));
+   return *this;
+ }
+
+    private:
+
+      template<typename _Alloc, typename... _Args>
+ shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
+ : __shared_ptr<_Tp>(__tag, std::forward<_Args>(__args)...)
+ { }
+
+      template<typename _Yp, typename _Alloc, typename... _Args>
+ friend shared_ptr<_NonArray<_Yp>>
+ allocate_shared(const _Alloc&, _Args&&...);
+
+      template<typename _Yp, typename... _Args>
+ friend shared_ptr<_NonArray<_Yp>>
+ make_shared(_Args&&...);
+
+
+
+      template<typename _Alloc, typename _Init = const remove_extent_t<_Tp>*>
+ shared_ptr(const _Sp_counted_array_base<_Alloc>& __a,
+     _Init __init = nullptr)
+ : __shared_ptr<_Tp>(__a, __init)
+ { }
+
+      template<typename _Yp, typename _Alloc>
+ friend shared_ptr<_UnboundedArray<_Yp>>
+ allocate_shared(const _Alloc&, size_t);
+
+      template<typename _Yp>
+ friend shared_ptr<_UnboundedArray<_Yp>>
+ make_shared(size_t);
+
+      template<typename _Yp, typename _Alloc>
+ friend shared_ptr<_UnboundedArray<_Yp>>
+ allocate_shared(const _Alloc&, size_t, const remove_extent_t<_Yp>&);
+
+      template<typename _Yp>
+ friend shared_ptr<_UnboundedArray<_Yp>>
+ make_shared(size_t, const remove_extent_t<_Yp>&);
+
+      template<typename _Yp, typename _Alloc>
+ friend shared_ptr<_BoundedArray<_Yp>>
+ allocate_shared(const _Alloc&);
+
+      template<typename _Yp>
+ friend shared_ptr<_BoundedArray<_Yp>>
+ make_shared();
+
+      template<typename _Yp, typename _Alloc>
+ friend shared_ptr<_BoundedArray<_Yp>>
+ allocate_shared(const _Alloc&, const remove_extent_t<_Yp>&);
+
+      template<typename _Yp>
+ friend shared_ptr<_BoundedArray<_Yp>>
+ make_shared(const remove_extent_t<_Yp>&);
+
+
+      template<typename _Yp, typename _Alloc>
+ friend shared_ptr<_NotUnboundedArray<_Yp>>
+ allocate_shared_for_overwrite(const _Alloc&);
+
+      template<typename _Yp>
+ friend shared_ptr<_NotUnboundedArray<_Yp>>
+ make_shared_for_overwrite();
+
+      template<typename _Yp, typename _Alloc>
+ friend shared_ptr<_UnboundedArray<_Yp>>
+ allocate_shared_for_overwrite(const _Alloc&, size_t);
+
+      template<typename _Yp>
+ friend shared_ptr<_UnboundedArray<_Yp>>
+ make_shared_for_overwrite(size_t);
+
+
+
+
+      shared_ptr(const weak_ptr<_Tp>& __r, std::nothrow_t) noexcept
+      : __shared_ptr<_Tp>(__r, std::nothrow) { }
+
+      friend class weak_ptr<_Tp>;
+    };
+
+
+  template<typename _Tp>
+    shared_ptr(weak_ptr<_Tp>) -> shared_ptr<_Tp>;
+  template<typename _Tp, typename _Del>
+    shared_ptr(unique_ptr<_Tp, _Del>) -> shared_ptr<_Tp>;
+
+
+
+
+
+
+
+  template<typename _Tp, typename _Up>
+    [[__nodiscard__]] inline bool
+    operator==(const shared_ptr<_Tp>& __a, const shared_ptr<_Up>& __b) noexcept
+    { return __a.get() == __b.get(); }
+
+
+  template<typename _Tp>
+    [[__nodiscard__]] inline bool
+    operator==(const shared_ptr<_Tp>& __a, nullptr_t) noexcept
+    { return !__a; }
+
+
+  template<typename _Tp, typename _Up>
+    inline strong_ordering
+    operator<=>(const shared_ptr<_Tp>& __a,
+  const shared_ptr<_Up>& __b) noexcept
+    { return compare_three_way()(__a.get(), __b.get()); }
+
+  template<typename _Tp>
+    inline strong_ordering
+    operator<=>(const shared_ptr<_Tp>& __a, nullptr_t) noexcept
+    {
+      using pointer = typename shared_ptr<_Tp>::element_type*;
+      return compare_three_way()(__a.get(), static_cast<pointer>(nullptr));
+    }
+# 689 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp>
+    inline void
+    swap(shared_ptr<_Tp>& __a, shared_ptr<_Tp>& __b) noexcept
+    { __a.swap(__b); }
+
+
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    static_pointer_cast(const shared_ptr<_Up>& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      return _Sp(__r, static_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    const_pointer_cast(const shared_ptr<_Up>& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      return _Sp(__r, const_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    dynamic_pointer_cast(const shared_ptr<_Up>& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      if (auto* __p = dynamic_cast<typename _Sp::element_type*>(__r.get()))
+ return _Sp(__r, __p);
+      return _Sp();
+    }
+
+
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    reinterpret_pointer_cast(const shared_ptr<_Up>& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      return _Sp(__r, reinterpret_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+
+
+
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    static_pointer_cast(shared_ptr<_Up>&& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      return _Sp(std::move(__r),
+   static_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    const_pointer_cast(shared_ptr<_Up>&& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      return _Sp(std::move(__r),
+   const_cast<typename _Sp::element_type*>(__r.get()));
+    }
+
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    dynamic_pointer_cast(shared_ptr<_Up>&& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      if (auto* __p = dynamic_cast<typename _Sp::element_type*>(__r.get()))
+ return _Sp(std::move(__r), __p);
+      return _Sp();
+    }
+
+
+
+  template<typename _Tp, typename _Up>
+    inline shared_ptr<_Tp>
+    reinterpret_pointer_cast(shared_ptr<_Up>&& __r) noexcept
+    {
+      using _Sp = shared_ptr<_Tp>;
+      return _Sp(std::move(__r),
+   reinterpret_cast<typename _Sp::element_type*>(__r.get()));
+    }
+# 809 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp>
+    class weak_ptr : public __weak_ptr<_Tp>
+    {
+      template<typename _Arg>
+ using _Constructible = typename enable_if<
+   is_constructible<__weak_ptr<_Tp>, _Arg>::value
+ >::type;
+
+      template<typename _Arg>
+ using _Assignable = typename enable_if<
+   is_assignable<__weak_ptr<_Tp>&, _Arg>::value, weak_ptr&
+ >::type;
+
+    public:
+      constexpr weak_ptr() noexcept = default;
+
+      template<typename _Yp,
+        typename = _Constructible<const shared_ptr<_Yp>&>>
+ weak_ptr(const shared_ptr<_Yp>& __r) noexcept
+ : __weak_ptr<_Tp>(__r) { }
+
+      weak_ptr(const weak_ptr&) noexcept = default;
+
+      template<typename _Yp, typename = _Constructible<const weak_ptr<_Yp>&>>
+ weak_ptr(const weak_ptr<_Yp>& __r) noexcept
+ : __weak_ptr<_Tp>(__r) { }
+
+      weak_ptr(weak_ptr&&) noexcept = default;
+
+      template<typename _Yp, typename = _Constructible<weak_ptr<_Yp>>>
+ weak_ptr(weak_ptr<_Yp>&& __r) noexcept
+ : __weak_ptr<_Tp>(std::move(__r)) { }
+
+      weak_ptr&
+      operator=(const weak_ptr& __r) noexcept = default;
+
+      template<typename _Yp>
+ _Assignable<const weak_ptr<_Yp>&>
+ operator=(const weak_ptr<_Yp>& __r) noexcept
+ {
+   this->__weak_ptr<_Tp>::operator=(__r);
+   return *this;
+ }
+
+      template<typename _Yp>
+ _Assignable<const shared_ptr<_Yp>&>
+ operator=(const shared_ptr<_Yp>& __r) noexcept
+ {
+   this->__weak_ptr<_Tp>::operator=(__r);
+   return *this;
+ }
+
+      weak_ptr&
+      operator=(weak_ptr&& __r) noexcept = default;
+
+      template<typename _Yp>
+ _Assignable<weak_ptr<_Yp>>
+ operator=(weak_ptr<_Yp>&& __r) noexcept
+ {
+   this->__weak_ptr<_Tp>::operator=(std::move(__r));
+   return *this;
+ }
+
+      shared_ptr<_Tp>
+      lock() const noexcept
+      { return shared_ptr<_Tp>(*this, std::nothrow); }
+    };
+
+
+  template<typename _Tp>
+    weak_ptr(shared_ptr<_Tp>) -> weak_ptr<_Tp>;
+
+
+
+
+
+  template<typename _Tp>
+    inline void
+    swap(weak_ptr<_Tp>& __a, weak_ptr<_Tp>& __b) noexcept
+    { __a.swap(__b); }
+
+
+
+  template<typename _Tp = void>
+    struct owner_less;
+
+
+  template<>
+    struct owner_less<void> : _Sp_owner_less<void, void>
+    { };
+
+
+  template<typename _Tp>
+    struct owner_less<shared_ptr<_Tp>>
+    : public _Sp_owner_less<shared_ptr<_Tp>, weak_ptr<_Tp>>
+    { };
+
+
+  template<typename _Tp>
+    struct owner_less<weak_ptr<_Tp>>
+    : public _Sp_owner_less<weak_ptr<_Tp>, shared_ptr<_Tp>>
+    { };
+
+
+
+
+
+
+  template<typename _Tp>
+    class enable_shared_from_this
+    {
+    protected:
+      constexpr enable_shared_from_this() noexcept { }
+
+      enable_shared_from_this(const enable_shared_from_this&) noexcept { }
+
+      enable_shared_from_this&
+      operator=(const enable_shared_from_this&) noexcept
+      { return *this; }
+
+      ~enable_shared_from_this() { }
+
+    public:
+      shared_ptr<_Tp>
+      shared_from_this()
+      { return shared_ptr<_Tp>(this->_M_weak_this); }
+
+      shared_ptr<const _Tp>
+      shared_from_this() const
+      { return shared_ptr<const _Tp>(this->_M_weak_this); }
+
+
+
+
+
+
+      weak_ptr<_Tp>
+      weak_from_this() noexcept
+      { return this->_M_weak_this; }
+
+      weak_ptr<const _Tp>
+      weak_from_this() const noexcept
+      { return this->_M_weak_this; }
+
+
+
+    private:
+      template<typename _Tp1>
+ void
+ _M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept
+ { _M_weak_this._M_assign(__p, __n); }
+
+
+      friend const enable_shared_from_this*
+      __enable_shared_from_this_base(const __shared_count<>&,
+         const enable_shared_from_this* __p)
+      { return __p; }
+
+      template<typename, _Lock_policy>
+ friend class __shared_ptr;
+
+      mutable weak_ptr<_Tp> _M_weak_this;
+    };
+# 986 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp, typename _Alloc, typename... _Args>
+    inline shared_ptr<_NonArray<_Tp>>
+    allocate_shared(const _Alloc& __a, _Args&&... __args)
+    {
+      return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{__a},
+        std::forward<_Args>(__args)...);
+    }
+# 1001 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
+  template<typename _Tp, typename... _Args>
+    inline shared_ptr<_NonArray<_Tp>>
+    make_shared(_Args&&... __args)
+    {
+      using _Alloc = allocator<void>;
+      _Alloc __a;
+      return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{__a},
+        std::forward<_Args>(__args)...);
+    }
+
+
+
+  template<typename _Tp, typename _Alloc = allocator<void>>
+    auto
+    __make_shared_arr_tag(size_t __n, const _Alloc& __a = _Alloc()) noexcept
+    {
+      using _Up = remove_all_extents_t<_Tp>;
+      using _UpAlloc = __alloc_rebind<_Alloc, _Up>;
+      size_t __s = sizeof(remove_extent_t<_Tp>) / sizeof(_Up);
+      if (__builtin_mul_overflow(__s, __n, &__n))
+ std::__throw_bad_array_new_length();
+      return _Sp_counted_array_base<_UpAlloc>{_UpAlloc(__a), __n};
+    }
+
+
+  template<typename _Tp, typename _Alloc>
+    inline shared_ptr<_UnboundedArray<_Tp>>
+    allocate_shared(const _Alloc& __a, size_t __n)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n, __a));
+    }
+
+  template<typename _Tp>
+    inline shared_ptr<_UnboundedArray<_Tp>>
+    make_shared(size_t __n)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n));
+    }
+
+  template<typename _Tp, typename _Alloc>
+    inline shared_ptr<_UnboundedArray<_Tp>>
+    allocate_shared(const _Alloc& __a, size_t __n,
+      const remove_extent_t<_Tp>& __u)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n, __a),
+        std::__addressof(__u));
+    }
+
+  template<typename _Tp>
+    inline shared_ptr<_UnboundedArray<_Tp>>
+    make_shared(size_t __n, const remove_extent_t<_Tp>& __u)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n),
+        std::__addressof(__u));
+    }
+
+
+  template<typename _Tp, typename _Alloc = allocator<void>>
+    auto
+    __make_shared_arrN_tag(const _Alloc& __a = _Alloc()) noexcept
+    {
+      using _Up = remove_all_extents_t<_Tp>;
+      using _UpAlloc = __alloc_rebind<_Alloc, _Up>;
+      size_t __n = sizeof(_Tp) / sizeof(_Up);
+      return _Sp_counted_array_base<_UpAlloc>{_UpAlloc(__a), __n};
+    }
+
+
+  template<typename _Tp, typename _Alloc>
+    inline shared_ptr<_BoundedArray<_Tp>>
+    allocate_shared(const _Alloc& __a)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(__a));
+    }
+
+  template<typename _Tp>
+    inline shared_ptr<_BoundedArray<_Tp>>
+    make_shared()
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>());
+    }
+
+  template<typename _Tp, typename _Alloc>
+    inline shared_ptr<_BoundedArray<_Tp>>
+    allocate_shared(const _Alloc& __a, const remove_extent_t<_Tp>& __u)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(__a),
+        std::__addressof(__u));
+    }
+
+  template<typename _Tp>
+    inline shared_ptr<_BoundedArray<_Tp>>
+    make_shared(const remove_extent_t<_Tp>& __u)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(),
+        std::__addressof(__u));
+    }
+
+
+  template<typename _Tp, typename _Alloc>
+    inline shared_ptr<_NotUnboundedArray<_Tp>>
+    allocate_shared_for_overwrite(const _Alloc& __a)
+    {
+      if constexpr (is_array_v<_Tp>)
+ return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(__a),
+          _Sp_overwrite_tag{});
+      else
+ {
+
+
+   using _Alloc2 = __alloc_rebind<_Alloc, _Sp_overwrite_tag>;
+   _Alloc2 __a2 = __a;
+   return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc2>{__a2});
+ }
+    }
+
+  template<typename _Tp>
+    inline shared_ptr<_NotUnboundedArray<_Tp>>
+    make_shared_for_overwrite()
+    {
+      if constexpr (is_array_v<_Tp>)
+ return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(),
+          _Sp_overwrite_tag{});
+      else
+ {
+   using _Alloc = allocator<_Sp_overwrite_tag>;
+   return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{{}});
+ }
+    }
+
+  template<typename _Tp, typename _Alloc>
+    inline shared_ptr<_UnboundedArray<_Tp>>
+    allocate_shared_for_overwrite(const _Alloc& __a, size_t __n)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n, __a),
+        _Sp_overwrite_tag{});
+    }
+
+  template<typename _Tp>
+    inline shared_ptr<_UnboundedArray<_Tp>>
+    make_shared_for_overwrite(size_t __n)
+    {
+      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n),
+        _Sp_overwrite_tag{});
+    }
+
+
+
+
+  template<typename _Tp>
+    struct hash<shared_ptr<_Tp>>
+    : public __hash_base<size_t, shared_ptr<_Tp>>
+    {
+      size_t
+      operator()(const shared_ptr<_Tp>& __s) const noexcept
+      {
+ return std::hash<typename shared_ptr<_Tp>::element_type*>()(__s.get());
+      }
+    };
+
+
+  template<typename _Tp>
+    static constexpr bool __is_shared_ptr = false;
+  template<typename _Tp>
+    static constexpr bool __is_shared_ptr<shared_ptr<_Tp>> = true;
+
+
+
+
+
+
+  namespace __detail::__variant
+  {
+    template<typename> struct _Never_valueless_alt;
+
+
+
+    template<typename _Tp>
+      struct _Never_valueless_alt<std::shared_ptr<_Tp>>
+      : std::true_type
+      { };
+
+
+
+    template<typename _Tp>
+      struct _Never_valueless_alt<std::weak_ptr<_Tp>>
+      : std::true_type
+      { };
+  }
+
+
+
+}
+# 47 "/usr/include/c++/14.2.1/bits/fs_path.h" 2 3
+# 57 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+namespace filesystem
+{
+namespace __cxx11 {
+
+  class path;
+
+
+namespace __detail
+{
+
+
+  template<typename _CharT>
+    inline constexpr bool __is_encoded_char = false;
+  template<>
+    inline constexpr bool __is_encoded_char<char> = true;
+
+  template<>
+    inline constexpr bool __is_encoded_char<char8_t> = true;
+
+
+  template<>
+    inline constexpr bool __is_encoded_char<wchar_t> = true;
+
+  template<>
+    inline constexpr bool __is_encoded_char<char16_t> = true;
+  template<>
+    inline constexpr bool __is_encoded_char<char32_t> = true;
+
+
+  template<typename _Iter>
+    using __safe_iterator_traits = std::iterator_traits<_Iter>;
+# 104 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  template<typename _Iter_traits, typename = void>
+    inline constexpr bool __is_path_iter_src = false;
+
+  template<typename _Iter_traits>
+    inline constexpr bool
+    __is_path_iter_src<_Iter_traits, void_t<typename _Iter_traits::value_type>>
+      = __is_encoded_char<typename _Iter_traits::value_type>;
+
+  template<typename _Source>
+    inline constexpr bool __is_path_src
+      = __is_path_iter_src<iterator_traits<decay_t<_Source>>>;
+
+  template<>
+    inline constexpr bool __is_path_src<path> = false;
+
+  template<>
+    inline constexpr bool __is_path_src<volatile path> = false;
+
+  template<>
+    inline constexpr bool __is_path_src<void*> = false;
+
+  template<>
+    inline constexpr bool __is_path_src<const void*> = false;
+
+  template<>
+    inline constexpr bool __is_path_src<volatile void*> = false;
+
+  template<>
+    inline constexpr bool __is_path_src<const volatile void*> = false;
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    inline constexpr bool
+      __is_path_src<basic_string<_CharT, _Traits, _Alloc>>
+ = __is_encoded_char<_CharT>;
+
+  template<typename _CharT, typename _Traits>
+    inline constexpr bool
+      __is_path_src<basic_string_view<_CharT, _Traits>>
+ = __is_encoded_char<_CharT>;
+
+
+  template<typename _Tp>
+    using _Path = enable_if_t<__is_path_src<_Tp>, path>;
+
+
+  template<typename _Iter, typename _Tr = __safe_iterator_traits<_Iter>>
+    using _Path2 = enable_if_t<__is_path_iter_src<_Tr>, path>;
+
+
+  template<typename _Iter>
+    constexpr bool __is_contiguous = std::contiguous_iterator<_Iter>;
+
+
+
+
+
+  template<typename _Tp>
+    constexpr bool __is_contiguous<_Tp*> = true;
+
+  template<typename _Tp, typename _Seq>
+    constexpr bool
+    __is_contiguous<__gnu_cxx::__normal_iterator<_Tp*, _Seq>> = true;
+
+
+
+  template<typename _EcharT>
+    using __unified_u8_t
+      = __conditional_t<is_same_v<_EcharT, char8_t>, char, _EcharT>;
+# 181 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    inline basic_string_view<_CharT>
+    __effective_range(const basic_string<_CharT, _Traits, _Alloc>& __source)
+    noexcept
+    { return __source; }
+
+  template<typename _CharT, typename _Traits>
+    inline basic_string_view<_CharT>
+    __effective_range(const basic_string_view<_CharT, _Traits>& __source)
+    noexcept
+    { return __source; }
+
+
+  template<typename _Source>
+    auto
+    __effective_range(const _Source& __source)
+    {
+
+      using _Iter = decltype(std::__niter_base(__source));
+      using value_type = typename iterator_traits<_Iter>::value_type;
+
+      if constexpr (__is_contiguous<_Iter>)
+ return basic_string_view<value_type>{&*__source};
+      else
+ {
+
+
+   basic_string<__unified_u8_t<value_type>> __str;
+   _Source __it = __source;
+   for (value_type __ch = *__it; __ch != value_type(); __ch = *++__it)
+     __str.push_back(__ch);
+   return __str;
+ }
+    }
+
+
+  template<typename _Source>
+    struct __source_value_type_impl
+    {
+      using type
+ = typename __safe_iterator_traits<decay_t<_Source>>::value_type;
+    };
+
+  template<typename _CharT, typename _Traits, typename _Alloc>
+    struct __source_value_type_impl<basic_string<_CharT, _Traits, _Alloc>>
+    {
+      using type = _CharT;
+    };
+
+  template<typename _CharT, typename _Traits>
+    struct __source_value_type_impl<basic_string_view<_CharT, _Traits>>
+    {
+      using type = _CharT;
+    };
+
+
+  template<typename _Source>
+    using __source_value_t = typename __source_value_type_impl<_Source>::type;
+
+
+
+
+  template<typename _Tp, typename _Val = __source_value_t<_Tp>>
+    using __value_type_is_char
+      = std::enable_if_t<std::is_same_v<_Val, char>, _Val>;
+
+
+
+  template<typename _Tp, typename _Val = __source_value_t<_Tp>>
+    using __value_type_is_char_or_char8_t
+      = std::enable_if_t<std::is_same_v<_Val, char>
+
+    || std::is_same_v<_Val, char8_t>
+
+    , _Val>;
+
+
+  template<typename _InputIterator>
+    inline auto
+    __string_from_range(_InputIterator __first, _InputIterator __last)
+    {
+      using _EcharT
+ = typename std::iterator_traits<_InputIterator>::value_type;
+      static_assert(__is_encoded_char<_EcharT>);
+
+      if constexpr (__is_contiguous<_InputIterator>)
+ {
+
+   if (auto __len = __last - __first) [[__likely__]]
+     return basic_string_view<_EcharT>(&*__first, __len);
+   return basic_string_view<_EcharT>();
+ }
+      else
+ {
+
+   return basic_string<__unified_u8_t<_EcharT>>(__first, __last);
+ }
+    }
+
+
+}
+# 293 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  class path
+  {
+  public:
+# 304 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+    using value_type = char;
+
+    static constexpr value_type preferred_separator = '/';
+
+    using string_type = std::basic_string<value_type>;
+
+
+    enum format : unsigned char { native_format, generic_format, auto_format };
+
+
+
+    path() noexcept { }
+
+    path(const path& __p) = default;
+
+    path(path&& __p) noexcept
+    : _M_pathname(std::move(__p._M_pathname)),
+      _M_cmpts(std::move(__p._M_cmpts))
+    { __p.clear(); }
+
+    path(string_type&& __source, format = auto_format)
+    : _M_pathname(std::move(__source))
+    { _M_split_cmpts(); }
+
+    template<typename _Source,
+      typename _Require = __detail::_Path<_Source>>
+      path(_Source const& __source, format = auto_format)
+      : _M_pathname(_S_convert(__detail::__effective_range(__source)))
+      { _M_split_cmpts(); }
+
+    template<typename _InputIterator,
+      typename _Require = __detail::_Path2<_InputIterator>>
+      path(_InputIterator __first, _InputIterator __last, format = auto_format)
+      : _M_pathname(_S_convert(__detail::__string_from_range(__first, __last)))
+      { _M_split_cmpts(); }
+
+    template<typename _Source,
+      typename _Require = __detail::_Path<_Source>,
+      typename _Require2 = __detail::__value_type_is_char<_Source>>
+      path(_Source const& __src, const locale& __loc, format = auto_format)
+      : _M_pathname(_S_convert_loc(__detail::__effective_range(__src), __loc))
+      { _M_split_cmpts(); }
+
+    template<typename _InputIterator,
+      typename _Require = __detail::_Path2<_InputIterator>,
+      typename _Req2 = __detail::__value_type_is_char<_InputIterator>>
+      path(_InputIterator __first, _InputIterator __last, const locale& __loc,
+    format = auto_format)
+      : _M_pathname(_S_convert_loc(__first, __last, __loc))
+      { _M_split_cmpts(); }
+
+    ~path() = default;
+
+
+
+    path& operator=(const path&);
+    path& operator=(path&&) noexcept;
+    path& operator=(string_type&& __source);
+    path& assign(string_type&& __source);
+
+    template<typename _Source>
+      __detail::_Path<_Source>&
+      operator=(_Source const& __source)
+      { return *this = path(__source); }
+
+    template<typename _Source>
+      __detail::_Path<_Source>&
+      assign(_Source const& __source)
+      { return *this = path(__source); }
+
+    template<typename _InputIterator>
+      __detail::_Path2<_InputIterator>&
+      assign(_InputIterator __first, _InputIterator __last)
+      { return *this = path(__first, __last); }
+
+
+
+    path& operator/=(const path& __p);
+
+    template<typename _Source>
+      __detail::_Path<_Source>&
+      operator/=(_Source const& __source)
+      {
+ _M_append(_S_convert(__detail::__effective_range(__source)));
+ return *this;
+      }
+
+    template<typename _Source>
+      __detail::_Path<_Source>&
+      append(_Source const& __source)
+      {
+ _M_append(_S_convert(__detail::__effective_range(__source)));
+ return *this;
+      }
+
+    template<typename _InputIterator>
+      __detail::_Path2<_InputIterator>&
+      append(_InputIterator __first, _InputIterator __last)
+      {
+ _M_append(_S_convert(__detail::__string_from_range(__first, __last)));
+ return *this;
+      }
+
+
+
+    path& operator+=(const path& __x);
+    path& operator+=(const string_type& __x);
+    path& operator+=(const value_type* __x);
+    path& operator+=(value_type __x);
+    path& operator+=(basic_string_view<value_type> __x);
+
+    template<typename _Source>
+      __detail::_Path<_Source>&
+      operator+=(_Source const& __x) { return concat(__x); }
+
+    template<typename _CharT>
+      __detail::_Path2<_CharT*>&
+      operator+=(_CharT __x);
+
+    template<typename _Source>
+      __detail::_Path<_Source>&
+      concat(_Source const& __x)
+      {
+ _M_concat(_S_convert(__detail::__effective_range(__x)));
+ return *this;
+      }
+
+    template<typename _InputIterator>
+      __detail::_Path2<_InputIterator>&
+      concat(_InputIterator __first, _InputIterator __last)
+      {
+ _M_concat(_S_convert(__detail::__string_from_range(__first, __last)));
+ return *this;
+      }
+
+
+
+    void clear() noexcept { _M_pathname.clear(); _M_split_cmpts(); }
+
+    path& make_preferred();
+    path& remove_filename();
+    path& replace_filename(const path& __replacement);
+    path& replace_extension(const path& __replacement = path());
+
+    void swap(path& __rhs) noexcept;
+
+
+
+    const string_type& native() const noexcept { return _M_pathname; }
+    const value_type* c_str() const noexcept { return _M_pathname.c_str(); }
+    operator string_type() const { return _M_pathname; }
+
+    template<typename _CharT, typename _Traits = std::char_traits<_CharT>,
+      typename _Allocator = std::allocator<_CharT>>
+      std::basic_string<_CharT, _Traits, _Allocator>
+      string(const _Allocator& __a = _Allocator()) const;
+
+    std::string string() const;
+
+    std::wstring wstring() const;
+
+
+    __attribute__((__abi_tag__("__u8")))
+    std::u8string u8string() const;
+
+
+
+    std::u16string u16string() const;
+    std::u32string u32string() const;
+
+
+    template<typename _CharT, typename _Traits = std::char_traits<_CharT>,
+      typename _Allocator = std::allocator<_CharT>>
+      std::basic_string<_CharT, _Traits, _Allocator>
+      generic_string(const _Allocator& __a = _Allocator()) const;
+
+    std::string generic_string() const;
+
+    std::wstring generic_wstring() const;
+
+
+    __attribute__((__abi_tag__("__u8")))
+    std::u8string generic_u8string() const;
+
+
+
+    std::u16string generic_u16string() const;
+    std::u32string generic_u32string() const;
+
+
+
+    int compare(const path& __p) const noexcept;
+    int compare(const string_type& __s) const noexcept;
+    int compare(const value_type* __s) const noexcept;
+    int compare(basic_string_view<value_type> __s) const noexcept;
+
+
+
+    path root_name() const;
+    path root_directory() const;
+    path root_path() const;
+    path relative_path() const;
+    path parent_path() const;
+    path filename() const;
+    path stem() const;
+    path extension() const;
+
+
+
+    [[nodiscard]] bool empty() const noexcept { return _M_pathname.empty(); }
+    bool has_root_name() const noexcept;
+    bool has_root_directory() const noexcept;
+    bool has_root_path() const noexcept;
+    bool has_relative_path() const noexcept;
+    bool has_parent_path() const noexcept;
+    bool has_filename() const noexcept;
+    bool has_stem() const noexcept;
+    bool has_extension() const noexcept;
+    bool is_absolute() const noexcept;
+    bool is_relative() const noexcept { return !is_absolute(); }
+
+
+    path lexically_normal() const;
+    path lexically_relative(const path& base) const;
+    path lexically_proximate(const path& base) const;
+
+
+    class iterator;
+    using const_iterator = iterator;
+
+    iterator begin() const noexcept;
+    iterator end() const noexcept;
+
+
+    template<typename _CharT, typename _Traits>
+      friend std::basic_ostream<_CharT, _Traits>&
+      operator<<(std::basic_ostream<_CharT, _Traits>& __os, const path& __p)
+      {
+ __os << std::quoted(__p.string<_CharT, _Traits>());
+ return __os;
+      }
+
+
+    template<typename _CharT, typename _Traits>
+      friend std::basic_istream<_CharT, _Traits>&
+      operator>>(std::basic_istream<_CharT, _Traits>& __is, path& __p)
+      {
+ std::basic_string<_CharT, _Traits> __tmp;
+ if (__is >> std::quoted(__tmp))
+   __p = std::move(__tmp);
+ return __is;
+      }
+
+
+
+
+    friend bool operator==(const path& __lhs, const path& __rhs) noexcept
+    { return path::_S_compare(__lhs, __rhs) == 0; }
+
+
+
+    friend strong_ordering
+    operator<=>(const path& __lhs, const path& __rhs) noexcept
+    { return path::_S_compare(__lhs, __rhs) <=> 0; }
+# 591 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+    friend path operator/(const path& __lhs, const path& __rhs)
+    {
+      path __result(__lhs);
+      __result /= __rhs;
+      return __result;
+    }
+
+  private:
+    enum class _Type : unsigned char {
+      _Multi = 0, _Root_name, _Root_dir, _Filename
+    };
+
+    path(basic_string_view<value_type> __str, _Type __type);
+
+    enum class _Split { _Stem, _Extension };
+
+    void _M_append(basic_string_view<value_type>);
+    void _M_concat(basic_string_view<value_type>);
+
+    pair<const string_type*, size_t> _M_find_extension() const noexcept;
+
+
+
+
+
+    template<typename _Tp>
+      static auto
+      _S_convert(_Tp __str)
+      noexcept(is_same_v<typename _Tp::value_type, value_type>)
+      {
+ if constexpr (is_same_v<typename _Tp::value_type, value_type>)
+   return __str;
+
+ else if constexpr (is_same_v<_Tp, std::u8string>)
+
+
+
+   return string_type(_S_convert(__str.data(),
+     __str.data() + __str.size()));
+
+ else
+   return _S_convert(__str.data(), __str.data() + __str.size());
+      }
+
+    template<typename _EcharT>
+      static auto
+      _S_convert(const _EcharT* __first, const _EcharT* __last);
+
+
+
+
+    static string_type
+    _S_convert_loc(const char* __first, const char* __last,
+     const std::locale& __loc);
+
+    template<typename _Iter>
+      static string_type
+      _S_convert_loc(_Iter __first, _Iter __last, const std::locale& __loc)
+      {
+ const auto __s = __detail::__string_from_range(__first, __last);
+ return _S_convert_loc(__s.data(), __s.data() + __s.size(), __loc);
+      }
+
+    template<typename _Tp>
+      static string_type
+      _S_convert_loc(const _Tp& __s, const std::locale& __loc)
+      {
+ return _S_convert_loc(__s.data(), __s.data() + __s.size(), __loc);
+      }
+
+    template<typename _CharT, typename _Traits, typename _Allocator>
+      static basic_string<_CharT, _Traits, _Allocator>
+      _S_str_convert(basic_string_view<value_type>, const _Allocator&);
+
+
+    __attribute__((__always_inline__))
+    static int
+    _S_compare(const path& __lhs, const path& __rhs) noexcept;
+
+    void _M_split_cmpts();
+
+    _Type _M_type() const noexcept { return _M_cmpts.type(); }
+
+    string_type _M_pathname;
+
+    struct _Cmpt;
+
+    struct _List
+    {
+      using value_type = _Cmpt;
+      using iterator = value_type*;
+      using const_iterator = const value_type*;
+
+      _List();
+      _List(const _List&);
+      _List(_List&&) = default;
+      _List& operator=(const _List&);
+      _List& operator=(_List&&) = default;
+      ~_List() = default;
+
+      _Type type() const noexcept
+      { return _Type(reinterpret_cast<uintptr_t>(_M_impl.get()) & 0x3); }
+
+      void type(_Type) noexcept;
+
+      int size() const noexcept;
+      bool empty() const noexcept;
+      void clear();
+      void swap(_List& __l) noexcept { _M_impl.swap(__l._M_impl); }
+      int capacity() const noexcept;
+      void reserve(int, bool);
+
+
+
+
+      iterator begin() noexcept;
+      iterator end() noexcept;
+      const_iterator begin() const noexcept;
+      const_iterator end() const noexcept;
+
+      value_type& front() noexcept;
+      value_type& back() noexcept;
+      const value_type& front() const noexcept;
+      const value_type& back() const noexcept;
+
+      void pop_back();
+      void _M_erase_from(const_iterator __pos);
+
+      struct _Impl;
+      struct _Impl_deleter
+      {
+ void operator()(_Impl*) const noexcept;
+      };
+      unique_ptr<_Impl, _Impl_deleter> _M_impl;
+    };
+    _List _M_cmpts;
+
+    struct _Parser;
+
+    template<typename _EcharT> struct _Codecvt;
+  };
+
+
+
+
+  inline void swap(path& __lhs, path& __rhs) noexcept { __lhs.swap(__rhs); }
+
+  size_t hash_value(const path& __p) noexcept;
+# 747 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  class filesystem_error : public std::system_error
+  {
+  public:
+    filesystem_error(const string& __what_arg, error_code __ec);
+
+    filesystem_error(const string& __what_arg, const path& __p1,
+       error_code __ec);
+
+    filesystem_error(const string& __what_arg, const path& __p1,
+       const path& __p2, error_code __ec);
+
+    filesystem_error(const filesystem_error&) = default;
+    filesystem_error& operator=(const filesystem_error&) = default;
+
+
+
+
+    ~filesystem_error();
+
+    const path& path1() const noexcept;
+    const path& path2() const noexcept;
+    const char* what() const noexcept;
+
+  private:
+    struct _Impl;
+    std::__shared_ptr<const _Impl> _M_impl;
+  };
+
+
+namespace __detail
+{
+  [[noreturn]] inline void
+  __throw_conversion_error()
+  {
+    (throw (filesystem_error( "Cannot convert character sequence", std::make_error_code(errc::illegal_byte_sequence))))
+
+                                                     ;
+  }
+# 802 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+}
+# 812 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  template<typename _InputIterator,
+    typename _Require = __detail::_Path2<_InputIterator>,
+    typename _CharT
+      = __detail::__value_type_is_char_or_char8_t<_InputIterator>>
+    __attribute__ ((__deprecated__ ("use '" "path(u8string(first, last))" "' instead")))
+    inline path
+    u8path(_InputIterator __first, _InputIterator __last)
+    {
+# 828 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+      return path{ __first, __last };
+
+    }
+
+
+
+
+
+
+
+  template<typename _Source,
+    typename _Require = __detail::_Path<_Source>,
+    typename _CharT = __detail::__value_type_is_char_or_char8_t<_Source>>
+    __attribute__ ((__deprecated__ ("use '" "path((const char8_t*)&*source)" "' instead")))
+    inline path
+    u8path(const _Source& __source)
+    {
+# 853 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+      return path{ __source };
+
+    }
+
+
+
+  struct path::_Cmpt : path
+  {
+    _Cmpt(basic_string_view<value_type> __s, _Type __t, size_t __pos);
+
+    _Cmpt() : _M_pos(-1) { }
+
+    size_t _M_pos;
+  };
+
+
+
+
+
+
+
+  template<typename _EcharT>
+    struct path::_Codecvt
+
+    : std::codecvt<_EcharT, char, mbstate_t>
+    { };
+# 887 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  template<>
+    struct path::_Codecvt<wchar_t>
+    : __conditional_t<sizeof(wchar_t) == sizeof(char32_t),
+        std::codecvt_utf8<wchar_t>,
+        std::codecvt_utf8_utf16<wchar_t>>
+    { };
+
+  template<typename _EcharT>
+    auto
+    path::_S_convert(const _EcharT* __f, const _EcharT* __l)
+    {
+      static_assert(__detail::__is_encoded_char<_EcharT>);
+
+
+
+
+
+
+
+      if constexpr (is_same_v<_EcharT, value_type>)
+ return basic_string_view<value_type>(__f, __l - __f);
+
+      else if constexpr (is_same_v<_EcharT, char8_t>)
+ {
+   string_view __str(reinterpret_cast<const char*>(__f), __l - __f);
+   return __str;
+ }
+# 924 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+      else
+ {
+   path::_Codecvt<_EcharT> __cvt;
+   std::string __str;
+   if (__str_codecvt_out_all(__f, __l, __str, __cvt))
+     return __str;
+ }
+      __detail::__throw_conversion_error();
+    }
+# 942 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  class path::iterator
+  {
+  public:
+    using difference_type = std::ptrdiff_t;
+    using value_type = path;
+    using reference = const path&;
+    using pointer = const path*;
+    using iterator_category = std::bidirectional_iterator_tag;
+
+    iterator() noexcept : _M_path(nullptr), _M_cur(), _M_at_end() { }
+
+    iterator(const iterator&) = default;
+    iterator& operator=(const iterator&) = default;
+
+    reference operator*() const noexcept;
+    pointer operator->() const noexcept { return std::__addressof(**this); }
+
+    iterator& operator++() noexcept;
+
+    iterator operator++(int) noexcept
+    { auto __tmp = *this; ++*this; return __tmp; }
+
+    iterator& operator--() noexcept;
+
+    iterator operator--(int) noexcept
+    { auto __tmp = *this; --*this; return __tmp; }
+
+    friend bool
+    operator==(const iterator& __lhs, const iterator& __rhs) noexcept
+    { return __lhs._M_equals(__rhs); }
+
+    friend bool
+    operator!=(const iterator& __lhs, const iterator& __rhs) noexcept
+    { return !__lhs._M_equals(__rhs); }
+
+  private:
+    friend class path;
+
+    bool
+    _M_is_multi() const noexcept
+    { return _M_path->_M_type() == _Type::_Multi; }
+
+    friend difference_type
+    __path_iter_distance(const iterator& __first, const iterator& __last)
+    noexcept
+    {
+      do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__first._M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
+      do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__first._M_path == __last._M_path), false)) std::__glibcxx_assert_fail(); } while (false);
+      if (__first._M_is_multi())
+ return std::distance(__first._M_cur, __last._M_cur);
+      else if (__first._M_at_end == __last._M_at_end)
+ return 0;
+      else
+ return __first._M_at_end ? -1 : 1;
+    }
+
+    friend void
+    __path_iter_advance(iterator& __i, difference_type __n) noexcept
+    {
+      if (__n == 1)
+ ++__i;
+      else if (__n == -1)
+ --__i;
+      else if (__n != 0)
+ {
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__i._M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
+   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__i._M_is_multi()), false)) std::__glibcxx_assert_fail(); } while (false);
+
+   __i._M_cur += __n;
+ }
+    }
+
+    iterator(const path* __path, path::_List::const_iterator __iter) noexcept
+    : _M_path(__path), _M_cur(__iter), _M_at_end()
+    { }
+
+    iterator(const path* __path, bool __at_end) noexcept
+    : _M_path(__path), _M_cur(), _M_at_end(__at_end)
+    { }
+
+    bool _M_equals(iterator) const noexcept;
+
+    const path* _M_path;
+    path::_List::const_iterator _M_cur;
+    bool _M_at_end;
+  };
+
+
+  inline path&
+  path::operator=(path&& __p) noexcept
+  {
+    if (&__p == this) [[__unlikely__]]
+      return *this;
+
+    _M_pathname = std::move(__p._M_pathname);
+    _M_cmpts = std::move(__p._M_cmpts);
+    __p.clear();
+    return *this;
+  }
+
+  inline path&
+  path::operator=(string_type&& __source)
+  { return *this = path(std::move(__source)); }
+
+  inline path&
+  path::assign(string_type&& __source)
+  { return *this = path(std::move(__source)); }
+
+  inline path&
+  path::operator+=(const string_type& __x)
+  {
+    _M_concat(__x);
+    return *this;
+  }
+
+  inline path&
+  path::operator+=(const value_type* __x)
+  {
+    _M_concat(__x);
+    return *this;
+  }
+
+  inline path&
+  path::operator+=(value_type __x)
+  {
+    _M_concat(basic_string_view<value_type>(&__x, 1));
+    return *this;
+  }
+
+  inline path&
+  path::operator+=(basic_string_view<value_type> __x)
+  {
+    _M_concat(__x);
+    return *this;
+  }
+
+  template<typename _CharT>
+    inline __detail::_Path2<_CharT*>&
+    path::operator+=(const _CharT __x)
+    {
+      _M_concat(_S_convert(&__x, &__x + 1));
+      return *this;
+    }
+
+  inline path&
+  path::make_preferred()
+  {
+# 1097 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+    return *this;
+  }
+
+  inline void path::swap(path& __rhs) noexcept
+  {
+    _M_pathname.swap(__rhs._M_pathname);
+    _M_cmpts.swap(__rhs._M_cmpts);
+  }
+
+
+  template<typename _CharT, typename _Traits, typename _Allocator>
+    std::basic_string<_CharT, _Traits, _Allocator>
+    path::_S_str_convert(basic_string_view<value_type> __str,
+    const _Allocator& __a)
+    {
+      static_assert(!is_same_v<_CharT, value_type>);
+
+      using _WString = basic_string<_CharT, _Traits, _Allocator>;
+
+      if (__str.size() == 0)
+ return _WString(__a);
+
+
+      string_view __u8str = __str;
+# 1137 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+ {
+   const char* __first = __u8str.data();
+   const char* __last = __first + __u8str.size();
+
+
+
+   if constexpr (is_same_v<_CharT, char8_t>)
+     return _WString(__first, __last, __a);
+   else
+
+     {
+
+       _WString __wstr(__a);
+       path::_Codecvt<_CharT> __cvt;
+       if (__str_codecvt_in_all(__first, __last, __wstr, __cvt))
+  return __wstr;
+     }
+ }
+      __detail::__throw_conversion_error();
+    }
+
+
+  template<typename _CharT, typename _Traits, typename _Allocator>
+    inline basic_string<_CharT, _Traits, _Allocator>
+    path::string(const _Allocator& __a) const
+    {
+      if constexpr (is_same_v<_CharT, value_type>)
+ return { _M_pathname.c_str(), _M_pathname.length(), __a };
+      else
+ return _S_str_convert<_CharT, _Traits>(_M_pathname, __a);
+    }
+
+  inline std::string
+  path::string() const { return string<char>(); }
+
+
+  inline std::wstring
+  path::wstring() const { return string<wchar_t>(); }
+
+
+
+  inline std::u8string
+  path::u8string() const { return string<char8_t>(); }
+# 1199 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
+  inline std::u16string
+  path::u16string() const { return string<char16_t>(); }
+
+  inline std::u32string
+  path::u32string() const { return string<char32_t>(); }
+
+  template<typename _CharT, typename _Traits, typename _Allocator>
+    inline std::basic_string<_CharT, _Traits, _Allocator>
+    path::generic_string(const _Allocator& __a) const
+    {
+
+
+
+      const value_type __slash = '/';
+
+      using _Alloc2 = typename allocator_traits<_Allocator>::template
+ rebind_alloc<value_type>;
+      basic_string<value_type, char_traits<value_type>, _Alloc2> __str(__a);
+
+      if (_M_type() == _Type::_Root_dir)
+ __str.assign(1, __slash);
+      else
+ {
+   __str.reserve(_M_pathname.size());
+   bool __add_slash = false;
+   for (auto& __elem : *this)
+     {
+
+
+
+
+
+
+
+       if (__add_slash)
+  __str += __slash;
+       __str += basic_string_view<value_type>(__elem._M_pathname);
+       __add_slash = __elem._M_type() == _Type::_Filename;
+     }
+ }
+
+      if constexpr (is_same_v<_CharT, value_type>)
+ return __str;
+      else
+ return _S_str_convert<_CharT, _Traits>(__str, __a);
+    }
+
+  inline std::string
+  path::generic_string() const
+  { return generic_string<char>(); }
+
+
+  inline std::wstring
+  path::generic_wstring() const
+  { return generic_string<wchar_t>(); }
+
+
+
+  inline std::u8string
+  path::generic_u8string() const
+  { return generic_string<char8_t>(); }
+
+
+
+
+
+
+  inline std::u16string
+  path::generic_u16string() const
+  { return generic_string<char16_t>(); }
+
+  inline std::u32string
+  path::generic_u32string() const
+  { return generic_string<char32_t>(); }
+
+  inline int
+  path::compare(const string_type& __s) const noexcept
+  { return compare(basic_string_view<value_type>(__s)); }
+
+  inline int
+  path::compare(const value_type* __s) const noexcept
+  { return compare(basic_string_view<value_type>(__s)); }
+
+  inline path
+  path::filename() const
+  {
+    if (empty())
+      return {};
+    else if (_M_type() == _Type::_Filename)
+      return *this;
+    else if (_M_type() == _Type::_Multi)
+      {
+ if (_M_pathname.back() == preferred_separator)
+   return {};
+ auto __last = --end();
+ if (__last->_M_type() == _Type::_Filename)
+   return *__last;
+      }
+    return {};
+  }
+
+  inline path
+  path::stem() const
+  {
+    auto ext = _M_find_extension();
+    if (ext.first && ext.second != 0)
+      return path{ext.first->substr(0, ext.second)};
+    return {};
+  }
+
+  inline path
+  path::extension() const
+  {
+    auto ext = _M_find_extension();
+    if (ext.first && ext.second != string_type::npos)
+      return path{ext.first->substr(ext.second)};
+    return {};
+  }
+
+  inline bool
+  path::has_stem() const noexcept
+  {
+    auto ext = _M_find_extension();
+    return ext.first && ext.second != 0;
+  }
+
+  inline bool
+  path::has_extension() const noexcept
+  {
+    auto ext = _M_find_extension();
+    return ext.first && ext.second != string_type::npos;
+  }
+
+  inline bool
+  path::is_absolute() const noexcept
+  {
+
+
+
+    return has_root_directory();
+
+  }
+
+  inline path::iterator
+  path::begin() const noexcept
+  {
+    if (_M_type() == _Type::_Multi)
+      return iterator(this, _M_cmpts.begin());
+    return iterator(this, empty());
+  }
+
+  inline path::iterator
+  path::end() const noexcept
+  {
+    if (_M_type() == _Type::_Multi)
+      return iterator(this, _M_cmpts.end());
+    return iterator(this, true);
+  }
+
+  inline path::iterator&
+  path::iterator::operator++() noexcept
+  {
+    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
+    if (_M_is_multi())
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_cur != _M_path->_M_cmpts.end()), false)) std::__glibcxx_assert_fail(); } while (false);
+ ++_M_cur;
+      }
+    else
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!_M_at_end), false)) std::__glibcxx_assert_fail(); } while (false);
+ _M_at_end = true;
+      }
+    return *this;
+  }
+
+  inline path::iterator&
+  path::iterator::operator--() noexcept
+  {
+    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
+    if (_M_is_multi())
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_cur != _M_path->_M_cmpts.begin()), false)) std::__glibcxx_assert_fail(); } while (false);
+ --_M_cur;
+      }
+    else
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_at_end), false)) std::__glibcxx_assert_fail(); } while (false);
+ _M_at_end = false;
+      }
+    return *this;
+  }
+
+  inline path::iterator::reference
+  path::iterator::operator*() const noexcept
+  {
+    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
+    if (_M_is_multi())
+      {
+ do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_cur != _M_path->_M_cmpts.end()), false)) std::__glibcxx_assert_fail(); } while (false);
+ return *_M_cur;
+      }
+    return *_M_path;
+  }
+
+  inline bool
+  path::iterator::_M_equals(iterator __rhs) const noexcept
+  {
+    if (_M_path != __rhs._M_path)
+      return false;
+    if (_M_path == nullptr)
+      return true;
+    if (_M_is_multi())
+      return _M_cur == __rhs._M_cur;
+    return _M_at_end == __rhs._M_at_end;
+  }
+
+
+
+
+
+  inline int
+  path::_S_compare(const path& __lhs, const path& __rhs) noexcept
+  { return __lhs.compare(__rhs); }
+
+
+}
+}
+
+
+
+inline ptrdiff_t
+distance(filesystem::path::iterator __first, filesystem::path::iterator __last)
+noexcept
+{ return __path_iter_distance(__first, __last); }
+
+template<typename _Distance>
+  inline void
+  advance(filesystem::path::iterator& __i, _Distance __n) noexcept
+  { __path_iter_advance(__i, static_cast<ptrdiff_t>(__n)); }
+
+extern template class __shared_ptr<const filesystem::filesystem_error::_Impl>;
+
+
+
+
+
+template<>
+  struct hash<filesystem::path>
+  {
+    size_t
+    operator()(const filesystem::path& __p) const noexcept
+    { return filesystem::hash_value(__p); }
+  };
+
+
+}
+# 53 "/usr/include/c++/14.2.1/filesystem" 2 3
+# 1 "/usr/include/c++/14.2.1/bits/fs_dir.h" 1 3
+# 44 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+namespace filesystem
+{
+# 59 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+  class file_status
+  {
+  public:
+
+    file_status() noexcept : file_status(file_type::none) {}
+
+    explicit
+    file_status(file_type __ft, perms __prms = perms::unknown) noexcept
+    : _M_type(__ft), _M_perms(__prms) { }
+
+    file_status(const file_status&) noexcept = default;
+    file_status(file_status&&) noexcept = default;
+    ~file_status() = default;
+
+    file_status& operator=(const file_status&) noexcept = default;
+    file_status& operator=(file_status&&) noexcept = default;
+
+
+    file_type type() const noexcept { return _M_type; }
+    perms permissions() const noexcept { return _M_perms; }
+
+
+    void type(file_type __ft) noexcept { _M_type = __ft; }
+    void permissions(perms __prms) noexcept { _M_perms = __prms; }
+
+
+    friend bool
+    operator==(const file_status&, const file_status&) noexcept = default;
+
+
+  private:
+    file_type _M_type;
+    perms _M_perms;
+  };
+
+namespace __cxx11 {
+
+  struct _Dir;
+  class directory_iterator;
+  class recursive_directory_iterator;
+
+
+
+
+
+
+  class directory_entry
+  {
+  public:
+
+    directory_entry() noexcept = default;
+    directory_entry(const directory_entry&) = default;
+    directory_entry(directory_entry&&) noexcept = default;
+
+    explicit
+    directory_entry(const filesystem::path& __p)
+    : _M_path(__p)
+    { refresh(); }
+
+    directory_entry(const filesystem::path& __p, error_code& __ec)
+    : _M_path(__p)
+    {
+      refresh(__ec);
+      if (__ec)
+ _M_path.clear();
+    }
+
+    ~directory_entry() = default;
+
+
+    directory_entry& operator=(const directory_entry&) = default;
+    directory_entry& operator=(directory_entry&&) noexcept = default;
+
+    void
+    assign(const filesystem::path& __p)
+    {
+      _M_path = __p;
+      refresh();
+    }
+
+    void
+    assign(const filesystem::path& __p, error_code& __ec)
+    {
+      _M_path = __p;
+      refresh(__ec);
+    }
+
+    void
+    replace_filename(const filesystem::path& __p)
+    {
+      _M_path.replace_filename(__p);
+      refresh();
+    }
+
+    void
+    replace_filename(const filesystem::path& __p, error_code& __ec)
+    {
+      _M_path.replace_filename(__p);
+      refresh(__ec);
+    }
+
+    void
+    refresh()
+    { _M_type = symlink_status().type(); }
+
+    void
+    refresh(error_code& __ec) noexcept
+    { _M_type = symlink_status(__ec).type(); }
+
+
+    const filesystem::path& path() const noexcept { return _M_path; }
+    operator const filesystem::path& () const noexcept { return _M_path; }
+
+    bool
+    exists() const
+    { return filesystem::exists(file_status{_M_file_type()}); }
+
+    bool
+    exists(error_code& __ec) const noexcept
+    { return filesystem::exists(file_status{_M_file_type(__ec)}); }
+
+    bool
+    is_block_file() const
+    { return _M_file_type() == file_type::block; }
+
+    bool
+    is_block_file(error_code& __ec) const noexcept
+    { return _M_file_type(__ec) == file_type::block; }
+
+    bool
+    is_character_file() const
+    { return _M_file_type() == file_type::character; }
+
+    bool
+    is_character_file(error_code& __ec) const noexcept
+    { return _M_file_type(__ec) == file_type::character; }
+
+    bool
+    is_directory() const
+    { return _M_file_type() == file_type::directory; }
+
+    bool
+    is_directory(error_code& __ec) const noexcept
+    { return _M_file_type(__ec) == file_type::directory; }
+
+    bool
+    is_fifo() const
+    { return _M_file_type() == file_type::fifo; }
+
+    bool
+    is_fifo(error_code& __ec) const noexcept
+    { return _M_file_type(__ec) == file_type::fifo; }
+
+    bool
+    is_other() const
+    { return filesystem::is_other(file_status{_M_file_type()}); }
+
+    bool
+    is_other(error_code& __ec) const noexcept
+    { return filesystem::is_other(file_status{_M_file_type(__ec)}); }
+
+    bool
+    is_regular_file() const
+    { return _M_file_type() == file_type::regular; }
+
+    bool
+    is_regular_file(error_code& __ec) const noexcept
+    { return _M_file_type(__ec) == file_type::regular; }
+
+    bool
+    is_socket() const
+    { return _M_file_type() == file_type::socket; }
+
+    bool
+    is_socket(error_code& __ec) const noexcept
+    { return _M_file_type(__ec) == file_type::socket; }
+
+    bool
+    is_symlink() const
+    {
+      if (_M_type != file_type::none)
+ return _M_type == file_type::symlink;
+      return symlink_status().type() == file_type::symlink;
+    }
+
+    bool
+    is_symlink(error_code& __ec) const noexcept
+    {
+      if (_M_type != file_type::none)
+ return _M_type == file_type::symlink;
+      return symlink_status(__ec).type() == file_type::symlink;
+    }
+
+    uintmax_t
+    file_size() const
+    { return filesystem::file_size(_M_path); }
+
+    uintmax_t
+    file_size(error_code& __ec) const noexcept
+    { return filesystem::file_size(_M_path, __ec); }
+
+    uintmax_t
+    hard_link_count() const
+    { return filesystem::hard_link_count(_M_path); }
+
+    uintmax_t
+    hard_link_count(error_code& __ec) const noexcept
+    { return filesystem::hard_link_count(_M_path, __ec); }
+
+    file_time_type
+    last_write_time() const
+    { return filesystem::last_write_time(_M_path); }
+
+
+    file_time_type
+    last_write_time(error_code& __ec) const noexcept
+    { return filesystem::last_write_time(_M_path, __ec); }
+
+    file_status
+    status() const
+    { return filesystem::status(_M_path); }
+
+    file_status
+    status(error_code& __ec) const noexcept
+    { return filesystem::status(_M_path, __ec); }
+
+    file_status
+    symlink_status() const
+    { return filesystem::symlink_status(_M_path); }
+
+    file_status
+    symlink_status(error_code& __ec) const noexcept
+    { return filesystem::symlink_status(_M_path, __ec); }
+
+    bool
+    operator==(const directory_entry& __rhs) const noexcept
+    { return _M_path == __rhs._M_path; }
+
+
+    strong_ordering
+    operator<=>(const directory_entry& __rhs) const noexcept
+    { return _M_path <=> __rhs._M_path; }
+# 323 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+  private:
+    friend struct _Dir;
+    friend class directory_iterator;
+    friend class recursive_directory_iterator;
+
+
+
+    template<typename _CharT, typename _Traits>
+      friend basic_ostream<_CharT, _Traits>&
+      operator<<(basic_ostream<_CharT, _Traits>& __os,
+   const directory_entry& __d)
+      { return __os << __d.path(); }
+
+    directory_entry(const filesystem::path& __p, file_type __t)
+    : _M_path(__p), _M_type(__t)
+    { }
+
+
+    file_type
+    _M_file_type() const
+    {
+      if (_M_type != file_type::none && _M_type != file_type::symlink)
+ return _M_type;
+      return status().type();
+    }
+
+
+    file_type
+    _M_file_type(error_code& __ec) const noexcept
+    {
+      if (_M_type != file_type::none && _M_type != file_type::symlink)
+ {
+   __ec.clear();
+   return _M_type;
+ }
+      return status(__ec).type();
+    }
+
+    filesystem::path _M_path;
+    file_type _M_type = file_type::none;
+  };
+# 372 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+  struct __directory_iterator_proxy
+  {
+    const directory_entry& operator*() const& noexcept { return _M_entry; }
+
+    directory_entry operator*() && noexcept { return std::move(_M_entry); }
+
+  private:
+    friend class directory_iterator;
+    friend class recursive_directory_iterator;
+
+    explicit
+    __directory_iterator_proxy(const directory_entry& __e) : _M_entry(__e) { }
+
+    directory_entry _M_entry;
+  };
+
+
+
+
+
+
+
+  class directory_iterator
+  {
+  public:
+    typedef directory_entry value_type;
+    typedef ptrdiff_t difference_type;
+    typedef const directory_entry* pointer;
+    typedef const directory_entry& reference;
+    typedef input_iterator_tag iterator_category;
+
+    directory_iterator() = default;
+
+    explicit
+    directory_iterator(const path& __p)
+    : directory_iterator(__p, directory_options::none, nullptr) { }
+
+    directory_iterator(const path& __p, directory_options __options)
+    : directory_iterator(__p, __options, nullptr) { }
+
+    directory_iterator(const path& __p, error_code& __ec)
+    : directory_iterator(__p, directory_options::none, __ec) { }
+
+    directory_iterator(const path& __p, directory_options __options,
+         error_code& __ec)
+    : directory_iterator(__p, __options, &__ec) { }
+
+    directory_iterator(const directory_iterator& __rhs) = default;
+
+    directory_iterator(directory_iterator&& __rhs) noexcept = default;
+
+    ~directory_iterator() = default;
+
+    directory_iterator&
+    operator=(const directory_iterator& __rhs) = default;
+
+    directory_iterator&
+    operator=(directory_iterator&& __rhs) noexcept = default;
+
+    const directory_entry& operator*() const noexcept;
+    const directory_entry* operator->() const noexcept { return &**this; }
+    directory_iterator& operator++();
+    directory_iterator& increment(error_code& __ec);
+
+    __directory_iterator_proxy operator++(int)
+    {
+      __directory_iterator_proxy __pr{**this};
+      ++*this;
+      return __pr;
+    }
+
+    friend bool
+    operator==(const directory_iterator& __lhs,
+               const directory_iterator& __rhs) noexcept
+    {
+      return !__rhs._M_dir.owner_before(__lhs._M_dir)
+ && !__lhs._M_dir.owner_before(__rhs._M_dir);
+    }
+
+
+
+
+    bool operator==(default_sentinel_t) const noexcept
+    { return !_M_dir; }
+# 465 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+  private:
+    directory_iterator(const path&, directory_options, error_code*);
+
+    friend class recursive_directory_iterator;
+
+    std::__shared_ptr<_Dir> _M_dir;
+  };
+# 483 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+  inline directory_iterator
+  begin(directory_iterator __iter) noexcept
+  { return __iter; }
+
+
+  inline directory_iterator
+  end(directory_iterator) noexcept
+  { return directory_iterator(); }
+
+
+
+
+
+
+
+  class recursive_directory_iterator
+  {
+  public:
+    typedef directory_entry value_type;
+    typedef ptrdiff_t difference_type;
+    typedef const directory_entry* pointer;
+    typedef const directory_entry& reference;
+    typedef input_iterator_tag iterator_category;
+
+    recursive_directory_iterator() = default;
+
+    explicit
+    recursive_directory_iterator(const path& __p)
+    : recursive_directory_iterator(__p, directory_options::none, nullptr) { }
+
+    recursive_directory_iterator(const path& __p, directory_options __options)
+    : recursive_directory_iterator(__p, __options, nullptr) { }
+
+    recursive_directory_iterator(const path& __p, directory_options __options,
+                                 error_code& __ec)
+    : recursive_directory_iterator(__p, __options, &__ec) { }
+
+    recursive_directory_iterator(const path& __p, error_code& __ec)
+    : recursive_directory_iterator(__p, directory_options::none, &__ec) { }
+
+    recursive_directory_iterator(
+        const recursive_directory_iterator&) = default;
+
+    recursive_directory_iterator(recursive_directory_iterator&&) = default;
+
+    ~recursive_directory_iterator();
+
+
+    directory_options options() const noexcept;
+    int depth() const noexcept;
+    bool recursion_pending() const noexcept;
+
+    const directory_entry& operator*() const noexcept;
+    const directory_entry* operator->() const noexcept { return &**this; }
+
+
+    recursive_directory_iterator&
+    operator=(const recursive_directory_iterator& __rhs) noexcept;
+    recursive_directory_iterator&
+    operator=(recursive_directory_iterator&& __rhs) noexcept;
+
+    recursive_directory_iterator& operator++();
+    recursive_directory_iterator& increment(error_code& __ec);
+
+    __directory_iterator_proxy operator++(int)
+    {
+      __directory_iterator_proxy __pr{**this};
+      ++*this;
+      return __pr;
+    }
+
+    void pop();
+    void pop(error_code&);
+
+    void disable_recursion_pending() noexcept;
+
+    friend bool
+    operator==(const recursive_directory_iterator& __lhs,
+               const recursive_directory_iterator& __rhs) noexcept
+    {
+      return !__rhs._M_dirs.owner_before(__lhs._M_dirs)
+ && !__lhs._M_dirs.owner_before(__rhs._M_dirs);
+    }
+
+
+
+
+    bool operator==(default_sentinel_t) const noexcept
+    { return !_M_dirs; }
+# 581 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+  private:
+    recursive_directory_iterator(const path&, directory_options, error_code*);
+
+    struct _Dir_stack;
+    std::__shared_ptr<_Dir_stack> _M_dirs;
+
+    recursive_directory_iterator&
+    __erase(error_code* = nullptr);
+
+    friend uintmax_t
+    filesystem::remove_all(const path&, error_code&);
+    friend uintmax_t
+    filesystem::remove_all(const path&);
+  };
+# 606 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
+  inline recursive_directory_iterator
+  begin(recursive_directory_iterator __iter) noexcept
+  { return __iter; }
+
+
+  inline recursive_directory_iterator
+  end(recursive_directory_iterator) noexcept
+  { return recursive_directory_iterator(); }
+
+
+}
+
+
+}
+
+
+
+
+  extern template class
+    __shared_ptr<filesystem::_Dir>;
+  extern template class
+    __shared_ptr<filesystem::recursive_directory_iterator::_Dir_stack>;
+
+
+}
+# 54 "/usr/include/c++/14.2.1/filesystem" 2 3
+# 1 "/usr/include/c++/14.2.1/bits/fs_ops.h" 1 3
+# 37 "/usr/include/c++/14.2.1/bits/fs_ops.h" 3
+namespace std __attribute__ ((__visibility__ ("default")))
+{
+
+
+namespace filesystem
+{
+
+
+
+
+  [[nodiscard]]
+  path absolute(const path& __p);
+
+  [[nodiscard]]
+  path absolute(const path& __p, error_code& __ec);
+
+  [[nodiscard]]
+  path canonical(const path& __p);
+
+  [[nodiscard]]
+  path canonical(const path& __p, error_code& __ec);
+
+  inline void
+  copy(const path& __from, const path& __to)
+  { copy(__from, __to, copy_options::none); }
+
+  inline void
+  copy(const path& __from, const path& __to, error_code& __ec)
+  { copy(__from, __to, copy_options::none, __ec); }
+
+  void copy(const path& __from, const path& __to, copy_options __options);
+  void copy(const path& __from, const path& __to, copy_options __options,
+     error_code& __ec);
+
+  inline bool
+  copy_file(const path& __from, const path& __to)
+  { return copy_file(__from, __to, copy_options::none); }
+
+  inline bool
+  copy_file(const path& __from, const path& __to, error_code& __ec)
+  { return copy_file(__from, __to, copy_options::none, __ec); }
+
+  bool copy_file(const path& __from, const path& __to, copy_options __option);
+  bool copy_file(const path& __from, const path& __to, copy_options __option,
+   error_code& __ec);
+
+  void copy_symlink(const path& __existing_symlink, const path& __new_symlink);
+  void copy_symlink(const path& __existing_symlink, const path& __new_symlink,
+      error_code& __ec) noexcept;
+
+  bool create_directories(const path& __p);
+  bool create_directories(const path& __p, error_code& __ec);
+
+  bool create_directory(const path& __p);
+  bool create_directory(const path& __p, error_code& __ec) noexcept;
+
+  bool create_directory(const path& __p, const path& __attributes);
+  bool create_directory(const path& __p, const path& __attributes,
+   error_code& __ec) noexcept;
+
+  void create_directory_symlink(const path& __to, const path& __new_symlink);
+  void create_directory_symlink(const path& __to, const path& __new_symlink,
+    error_code& __ec) noexcept;
+
+  void create_hard_link(const path& __to, const path& __new_hard_link);
+  void create_hard_link(const path& __to, const path& __new_hard_link,
+   error_code& __ec) noexcept;
+
+  void create_symlink(const path& __to, const path& __new_symlink);
+  void create_symlink(const path& __to, const path& __new_symlink,
+        error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  path current_path();
+
+  [[nodiscard]]
+  path current_path(error_code& __ec);
+
+  void current_path(const path& __p);
+  void current_path(const path& __p, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  bool
+  equivalent(const path& __p1, const path& __p2);
+
+  [[nodiscard]]
+  bool
+  equivalent(const path& __p1, const path& __p2, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  inline bool
+  exists(file_status __s) noexcept
+  { return status_known(__s) && __s.type() != file_type::not_found; }
+
+  [[nodiscard]]
+  inline bool
+  exists(const path& __p)
+  { return exists(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  exists(const path& __p, error_code& __ec) noexcept
+  {
+    auto __s = status(__p, __ec);
+    if (status_known(__s))
+      {
+ __ec.clear();
+ return __s.type() != file_type::not_found;
+      }
+    return false;
+  }
+
+  [[nodiscard]]
+  uintmax_t file_size(const path& __p);
+
+  [[nodiscard]]
+  uintmax_t file_size(const path& __p, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  uintmax_t hard_link_count(const path& __p);
+
+  [[nodiscard]]
+  uintmax_t hard_link_count(const path& __p, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  inline bool
+  is_block_file(file_status __s) noexcept
+  { return __s.type() == file_type::block; }
+
+  [[nodiscard]]
+  inline bool
+  is_block_file(const path& __p)
+  { return is_block_file(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_block_file(const path& __p, error_code& __ec) noexcept
+  { return is_block_file(status(__p, __ec)); }
+
+  [[nodiscard]]
+  inline bool
+  is_character_file(file_status __s) noexcept
+  { return __s.type() == file_type::character; }
+
+  [[nodiscard]]
+  inline bool
+  is_character_file(const path& __p)
+  { return is_character_file(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_character_file(const path& __p, error_code& __ec) noexcept
+  { return is_character_file(status(__p, __ec)); }
+
+  [[nodiscard]]
+  inline bool
+  is_directory(file_status __s) noexcept
+  { return __s.type() == file_type::directory; }
+
+  [[nodiscard]]
+  inline bool
+  is_directory(const path& __p)
+  { return is_directory(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_directory(const path& __p, error_code& __ec) noexcept
+  { return is_directory(status(__p, __ec)); }
+
+  [[nodiscard]]
+  bool is_empty(const path& __p);
+
+  [[nodiscard]]
+  bool is_empty(const path& __p, error_code& __ec);
+
+  [[nodiscard]]
+  inline bool
+  is_fifo(file_status __s) noexcept
+  { return __s.type() == file_type::fifo; }
+
+  [[nodiscard]]
+  inline bool
+  is_fifo(const path& __p)
+  { return is_fifo(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_fifo(const path& __p, error_code& __ec) noexcept
+  { return is_fifo(status(__p, __ec)); }
+
+  [[nodiscard]]
+  inline bool
+  is_other(file_status __s) noexcept
+  {
+    return exists(__s) && !is_regular_file(__s) && !is_directory(__s)
+      && !is_symlink(__s);
+  }
+
+  [[nodiscard]]
+  inline bool
+  is_other(const path& __p)
+  { return is_other(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_other(const path& __p, error_code& __ec) noexcept
+  { return is_other(status(__p, __ec)); }
+
+  [[nodiscard]]
+  inline bool
+  is_regular_file(file_status __s) noexcept
+  { return __s.type() == file_type::regular; }
+
+  [[nodiscard]]
+  inline bool
+  is_regular_file(const path& __p)
+  { return is_regular_file(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_regular_file(const path& __p, error_code& __ec) noexcept
+  { return is_regular_file(status(__p, __ec)); }
+
+  [[nodiscard]]
+  inline bool
+  is_socket(file_status __s) noexcept
+  { return __s.type() == file_type::socket; }
+
+  [[nodiscard]]
+  inline bool
+  is_socket(const path& __p)
+  { return is_socket(status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_socket(const path& __p, error_code& __ec) noexcept
+  { return is_socket(status(__p, __ec)); }
+
+  [[nodiscard]]
+  inline bool
+  is_symlink(file_status __s) noexcept
+  { return __s.type() == file_type::symlink; }
+
+  [[nodiscard]]
+  inline bool
+  is_symlink(const path& __p)
+  { return is_symlink(symlink_status(__p)); }
+
+  [[nodiscard]]
+  inline bool
+  is_symlink(const path& __p, error_code& __ec) noexcept
+  { return is_symlink(symlink_status(__p, __ec)); }
+
+  [[nodiscard]]
+  file_time_type last_write_time(const path& __p);
+
+  [[nodiscard]]
+  file_time_type last_write_time(const path& __p, error_code& __ec) noexcept;
+
+  void last_write_time(const path& __p, file_time_type __new_time);
+  void last_write_time(const path& __p, file_time_type __new_time,
+         error_code& __ec) noexcept;
+
+  void
+  permissions(const path& __p, perms __prms,
+       perm_options __opts = perm_options::replace);
+
+  inline void
+  permissions(const path& __p, perms __prms, error_code& __ec) noexcept
+  { permissions(__p, __prms, perm_options::replace, __ec); }
+
+  void
+  permissions(const path& __p, perms __prms, perm_options __opts,
+       error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  inline path proximate(const path& __p, error_code& __ec)
+  { return proximate(__p, current_path(), __ec); }
+
+  [[nodiscard]]
+  path proximate(const path& __p, const path& __base = current_path());
+
+  [[nodiscard]]
+  path proximate(const path& __p, const path& __base, error_code& __ec);
+
+  [[nodiscard]]
+  path read_symlink(const path& __p);
+
+  [[nodiscard]]
+  path read_symlink(const path& __p, error_code& __ec);
+
+  [[nodiscard]]
+  inline path relative(const path& __p, error_code& __ec)
+  { return relative(__p, current_path(), __ec); }
+
+  [[nodiscard]]
+  path relative(const path& __p, const path& __base = current_path());
+
+  [[nodiscard]]
+  path relative(const path& __p, const path& __base, error_code& __ec);
+
+  bool remove(const path& __p);
+  bool remove(const path& __p, error_code& __ec) noexcept;
+
+  uintmax_t remove_all(const path& __p);
+  uintmax_t remove_all(const path& __p, error_code& __ec);
+
+  void rename(const path& __from, const path& __to);
+  void rename(const path& __from, const path& __to, error_code& __ec) noexcept;
+
+  void resize_file(const path& __p, uintmax_t __size);
+  void resize_file(const path& __p, uintmax_t __size, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  space_info space(const path& __p);
+
+  [[nodiscard]]
+  space_info space(const path& __p, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  file_status status(const path& __p);
+
+  [[nodiscard]]
+  file_status status(const path& __p, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  inline bool status_known(file_status __s) noexcept
+  { return __s.type() != file_type::none; }
+
+  [[nodiscard]]
+  file_status symlink_status(const path& __p);
+
+  [[nodiscard]]
+  file_status symlink_status(const path& __p, error_code& __ec) noexcept;
+
+  [[nodiscard]]
+  path temp_directory_path();
+
+  [[nodiscard]]
+  path temp_directory_path(error_code& __ec);
+
+  [[nodiscard]]
+  path weakly_canonical(const path& __p);
+
+  [[nodiscard]]
+  path weakly_canonical(const path& __p, error_code& __ec);
+
+
+}
+
+
+}
+# 55 "/usr/include/c++/14.2.1/filesystem" 2 3
+# 11 "/home/leo/CLionProjects/films_distribution/src/main.cpp" 2
 # 1 "/usr/include/c++/14.2.1/algorithm" 1 3
 # 58 "/usr/include/c++/14.2.1/algorithm" 3
        
@@ -84720,8 +90477,9 @@ lexicographical_compare(_ExecutionPolicy&& __exec, _ForwardIterator1 __first1, _
 
 }
 # 87 "/usr/include/c++/14.2.1/algorithm" 2 3
-# 22 "/home/leo/CLionProjects/films_distribution/include/json.hpp" 2
-
+# 12 "/home/leo/CLionProjects/films_distribution/src/main.cpp" 2
+# 1 "/home/leo/CLionProjects/films_distribution/include/json.hpp" 1
+# 23 "/home/leo/CLionProjects/films_distribution/include/json.hpp"
 # 1 "/usr/include/c++/14.2.1/functional" 1 3
 # 46 "/usr/include/c++/14.2.1/functional" 3
        
@@ -93493,3233 +99251,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 
 }
 # 71 "/usr/include/c++/14.2.1/memory" 2 3
-
-
-
-# 1 "/usr/include/c++/14.2.1/bits/align.h" 1 3
-# 36 "/usr/include/c++/14.2.1/bits/align.h" 3
-# 1 "/usr/include/c++/14.2.1/bits/version.h" 1 3
-# 47 "/usr/include/c++/14.2.1/bits/version.h" 3
-       
-# 48 "/usr/include/c++/14.2.1/bits/version.h" 3
-# 37 "/usr/include/c++/14.2.1/bits/align.h" 2 3
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-# 60 "/usr/include/c++/14.2.1/bits/align.h" 3
-inline void*
-align(size_t __align, size_t __size, void*& __ptr, size_t& __space) noexcept
-{
-  if (__space < __size)
-    return nullptr;
-  const auto __intptr = reinterpret_cast<uintptr_t>(__ptr);
-  const auto __aligned = (__intptr - 1u + __align) & -__align;
-  const auto __diff = __aligned - __intptr;
-  if (__diff > (__space - __size))
-    return nullptr;
-  else
-    {
-      __space -= __diff;
-      return __ptr = reinterpret_cast<void*>(__aligned);
-    }
-}
-# 88 "/usr/include/c++/14.2.1/bits/align.h" 3
-  template<size_t _Align, class _Tp>
-    [[nodiscard,__gnu__::__always_inline__]]
-    constexpr _Tp*
-    assume_aligned(_Tp* __ptr) noexcept
-    {
-      static_assert(std::has_single_bit(_Align));
-      if (std::is_constant_evaluated())
- return __ptr;
-      else
- {
-
-
-   ;
-   return static_cast<_Tp*>(__builtin_assume_aligned(__ptr, _Align));
- }
-    }
-
-
-
-}
-# 75 "/usr/include/c++/14.2.1/memory" 2 3
-
-
-
-
-
-# 1 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 1 3
-# 53 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-# 1 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 1 3
-# 53 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-# 1 "/usr/include/c++/14.2.1/bits/allocated_ptr.h" 1 3
-# 40 "/usr/include/c++/14.2.1/bits/allocated_ptr.h" 3
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-
-
-  template<typename _Alloc>
-    struct __allocated_ptr
-    {
-      using pointer = typename allocator_traits<_Alloc>::pointer;
-      using value_type = typename allocator_traits<_Alloc>::value_type;
-
-
-      __allocated_ptr(_Alloc& __a, pointer __ptr) noexcept
-      : _M_alloc(std::__addressof(__a)), _M_ptr(__ptr)
-      { }
-
-
-      template<typename _Ptr,
-        typename _Req = _Require<is_same<_Ptr, value_type*>>>
-      __allocated_ptr(_Alloc& __a, _Ptr __ptr)
-      : _M_alloc(std::__addressof(__a)),
- _M_ptr(pointer_traits<pointer>::pointer_to(*__ptr))
-      { }
-
-
-      __allocated_ptr(__allocated_ptr&& __gd) noexcept
-      : _M_alloc(__gd._M_alloc), _M_ptr(__gd._M_ptr)
-      { __gd._M_ptr = nullptr; }
-
-
-      ~__allocated_ptr()
-      {
- if (_M_ptr != nullptr)
-   std::allocator_traits<_Alloc>::deallocate(*_M_alloc, _M_ptr, 1);
-      }
-
-
-      __allocated_ptr&
-      operator=(std::nullptr_t) noexcept
-      {
- _M_ptr = nullptr;
- return *this;
-      }
-
-
-      value_type* get() { return std::__to_address(_M_ptr); }
-
-    private:
-      _Alloc* _M_alloc;
-      pointer _M_ptr;
-    };
-
-
-  template<typename _Alloc>
-    __allocated_ptr<_Alloc>
-    __allocate_guarded(_Alloc& __a)
-    {
-      return { __a, std::allocator_traits<_Alloc>::allocate(__a, 1) };
-    }
-
-
-
-}
-# 54 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 2 3
-# 62 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-# 1 "/usr/include/c++/14.2.1/ext/concurrence.h" 1 3
-# 32 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
-       
-# 33 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
-
-
-
-
-
-
-
-namespace __gnu_cxx __attribute__ ((__visibility__ ("default")))
-{
-
-
-
-
-
-
-
-  enum _Lock_policy { _S_single, _S_mutex, _S_atomic };
-
-
-
-  inline const _Lock_policy __default_lock_policy =
-
-
-
-  _S_atomic;
-
-
-
-
-
-
-  class __concurrence_lock_error : public std::exception
-  {
-  public:
-    virtual char const*
-    what() const throw()
-    { return "__gnu_cxx::__concurrence_lock_error"; }
-  };
-
-  class __concurrence_unlock_error : public std::exception
-  {
-  public:
-    virtual char const*
-    what() const throw()
-    { return "__gnu_cxx::__concurrence_unlock_error"; }
-  };
-
-  class __concurrence_broadcast_error : public std::exception
-  {
-  public:
-    virtual char const*
-    what() const throw()
-    { return "__gnu_cxx::__concurrence_broadcast_error"; }
-  };
-
-  class __concurrence_wait_error : public std::exception
-  {
-  public:
-    virtual char const*
-    what() const throw()
-    { return "__gnu_cxx::__concurrence_wait_error"; }
-  };
-
-
-  inline void
-  __throw_concurrence_lock_error()
-  { (throw (__concurrence_lock_error())); }
-
-  inline void
-  __throw_concurrence_unlock_error()
-  { (throw (__concurrence_unlock_error())); }
-
-
-  inline void
-  __throw_concurrence_broadcast_error()
-  { (throw (__concurrence_broadcast_error())); }
-
-  inline void
-  __throw_concurrence_wait_error()
-  { (throw (__concurrence_wait_error())); }
-
-
-  class __mutex
-  {
-  private:
-
-    __gthread_mutex_t _M_mutex = { { 0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, 0, { 0, 0 } } };
-
-
-
-
-    __mutex(const __mutex&);
-    __mutex& operator=(const __mutex&);
-
-  public:
-    __mutex()
-    {
-
-
-
-
-    }
-# 144 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
-    void lock()
-    {
-
-      if (__gthread_active_p())
- {
-   if (__gthread_mutex_lock(&_M_mutex) != 0)
-     __throw_concurrence_lock_error();
- }
-
-    }
-
-    void unlock()
-    {
-
-      if (__gthread_active_p())
- {
-   if (__gthread_mutex_unlock(&_M_mutex) != 0)
-     __throw_concurrence_unlock_error();
- }
-
-    }
-
-    __gthread_mutex_t* gthread_mutex(void)
-      { return &_M_mutex; }
-  };
-
-  class __recursive_mutex
-  {
-  private:
-
-    __gthread_recursive_mutex_t _M_mutex = { { 0, 0, 0, 0, PTHREAD_MUTEX_RECURSIVE_NP, 0, 0, { 0, 0 } } };
-
-
-
-
-    __recursive_mutex(const __recursive_mutex&);
-    __recursive_mutex& operator=(const __recursive_mutex&);
-
-  public:
-    __recursive_mutex()
-    {
-
-
-
-
-    }
-# 199 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
-    void lock()
-    {
-
-      if (__gthread_active_p())
- {
-   if (__gthread_recursive_mutex_lock(&_M_mutex) != 0)
-     __throw_concurrence_lock_error();
- }
-
-    }
-
-    void unlock()
-    {
-
-      if (__gthread_active_p())
- {
-   if (__gthread_recursive_mutex_unlock(&_M_mutex) != 0)
-     __throw_concurrence_unlock_error();
- }
-
-    }
-
-    __gthread_recursive_mutex_t* gthread_recursive_mutex(void)
-    { return &_M_mutex; }
-  };
-
-
-
-
-  class __scoped_lock
-  {
-  public:
-    typedef __mutex __mutex_type;
-
-  private:
-    __mutex_type& _M_device;
-
-    __scoped_lock(const __scoped_lock&);
-    __scoped_lock& operator=(const __scoped_lock&);
-
-  public:
-    explicit __scoped_lock(__mutex_type& __name) : _M_device(__name)
-    { _M_device.lock(); }
-
-    ~__scoped_lock() throw()
-    { _M_device.unlock(); }
-  };
-
-
-  class __cond
-  {
-  private:
-
-    __gthread_cond_t _M_cond = { { {0}, {0}, {0, 0}, {0, 0}, 0, 0, {0, 0} } };
-
-
-
-
-    __cond(const __cond&);
-    __cond& operator=(const __cond&);
-
-  public:
-    __cond()
-    {
-
-
-
-
-    }
-# 277 "/usr/include/c++/14.2.1/ext/concurrence.h" 3
-    void broadcast()
-    {
-
-      if (__gthread_active_p())
- {
-   if (__gthread_cond_broadcast(&_M_cond) != 0)
-     __throw_concurrence_broadcast_error();
- }
-
-    }
-
-    void wait(__mutex *mutex)
-    {
-
-      {
-   if (__gthread_cond_wait(&_M_cond, mutex->gthread_mutex()) != 0)
-     __throw_concurrence_wait_error();
-      }
-
-    }
-
-    void wait_recursive(__recursive_mutex *mutex)
-    {
-
-      {
-   if (__gthread_cond_wait_recursive(&_M_cond,
-         mutex->gthread_recursive_mutex())
-       != 0)
-     __throw_concurrence_wait_error();
-      }
-
-    }
-  };
-
-
-
-}
-# 63 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 2 3
-
-
-
-
-
-
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-
- 
-# 75 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-  template<typename> class auto_ptr;
-#pragma GCC diagnostic pop
-
-
-
-
-
-
-  class bad_weak_ptr : public std::exception
-  {
-  public:
-    virtual char const* what() const noexcept;
-
-    virtual ~bad_weak_ptr() noexcept;
-  };
-
-
-  inline void
-  __throw_bad_weak_ptr()
-  { (throw (bad_weak_ptr())); }
-
-  using __gnu_cxx::_Lock_policy;
-  using __gnu_cxx::__default_lock_policy;
-  using __gnu_cxx::_S_single;
-  using __gnu_cxx::_S_mutex;
-  using __gnu_cxx::_S_atomic;
-
-
-  template<_Lock_policy _Lp>
-    class _Mutex_base
-    {
-    protected:
-
-      enum { _S_need_barriers = 0 };
-    };
-
-  template<>
-    class _Mutex_base<_S_mutex>
-    : public __gnu_cxx::__mutex
-    {
-    protected:
-
-
-
-      enum { _S_need_barriers = 1 };
-    };
-
-  template<_Lock_policy _Lp = __default_lock_policy>
-    class _Sp_counted_base
-    : public _Mutex_base<_Lp>
-    {
-    public:
-      _Sp_counted_base() noexcept
-      : _M_use_count(1), _M_weak_count(1) { }
-
-      virtual
-      ~_Sp_counted_base() noexcept
-      { }
-
-
-
-      virtual void
-      _M_dispose() noexcept = 0;
-
-
-      virtual void
-      _M_destroy() noexcept
-      { delete this; }
-
-      virtual void*
-      _M_get_deleter(const std::type_info&) noexcept = 0;
-
-
-      void
-      _M_add_ref_copy()
-      { __gnu_cxx::__atomic_add_dispatch(&_M_use_count, 1); }
-
-
-      void
-      _M_add_ref_lock()
-      {
- if (!_M_add_ref_lock_nothrow())
-   __throw_bad_weak_ptr();
-      }
-
-
-      bool
-      _M_add_ref_lock_nothrow() noexcept;
-
-
-      void
-      _M_release() noexcept;
-
-
-      void
-      _M_release_last_use() noexcept
-      {
- ;
- _M_dispose();
-
-
-
-
- if (_Mutex_base<_Lp>::_S_need_barriers)
-   {
-     __atomic_thread_fence (4);
-   }
-
-
- ;
- if (__gnu_cxx::__exchange_and_add_dispatch(&_M_weak_count,
-         -1) == 1)
-   {
-     ;
-     _M_destroy();
-   }
-      }
-
-
-      __attribute__((__noinline__))
-      void
-      _M_release_last_use_cold() noexcept
-      { _M_release_last_use(); }
-
-
-      void
-      _M_weak_add_ref() noexcept
-      { __gnu_cxx::__atomic_add_dispatch(&_M_weak_count, 1); }
-
-
-      void
-      _M_weak_release() noexcept
-      {
-
-        ;
- if (__gnu_cxx::__exchange_and_add_dispatch(&_M_weak_count, -1) == 1)
-   {
-            ;
-     if (_Mutex_base<_Lp>::_S_need_barriers)
-       {
-
-
-  __atomic_thread_fence (4);
-       }
-     _M_destroy();
-   }
-      }
-
-      long
-      _M_get_use_count() const noexcept
-      {
-
-
-        return __atomic_load_n(&_M_use_count, 0);
-      }
-
-    private:
-      _Sp_counted_base(_Sp_counted_base const&) = delete;
-      _Sp_counted_base& operator=(_Sp_counted_base const&) = delete;
-
-      _Atomic_word _M_use_count;
-      _Atomic_word _M_weak_count;
-    };
-
-  template<>
-    inline bool
-    _Sp_counted_base<_S_single>::
-    _M_add_ref_lock_nothrow() noexcept
-    {
-      if (_M_use_count == 0)
- return false;
-      ++_M_use_count;
-      return true;
-    }
-
-  template<>
-    inline bool
-    _Sp_counted_base<_S_mutex>::
-    _M_add_ref_lock_nothrow() noexcept
-    {
-      __gnu_cxx::__scoped_lock sentry(*this);
-      if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, 1) == 0)
- {
-   _M_use_count = 0;
-   return false;
- }
-      return true;
-    }
-
-  template<>
-    inline bool
-    _Sp_counted_base<_S_atomic>::
-    _M_add_ref_lock_nothrow() noexcept
-    {
-
-      _Atomic_word __count = _M_get_use_count();
-      do
- {
-   if (__count == 0)
-     return false;
-
-
- }
-      while (!__atomic_compare_exchange_n(&_M_use_count, &__count, __count + 1,
-       true, 4,
-       0));
-      return true;
-    }
-
-  template<>
-    inline void
-    _Sp_counted_base<_S_single>::_M_add_ref_copy()
-    { ++_M_use_count; }
-
-  template<>
-    inline void
-    _Sp_counted_base<_S_single>::_M_release() noexcept
-    {
-      if (--_M_use_count == 0)
-        {
-          _M_dispose();
-          if (--_M_weak_count == 0)
-            _M_destroy();
-        }
-    }
-
-  template<>
-    inline void
-    _Sp_counted_base<_S_mutex>::_M_release() noexcept
-    {
-
-      ;
-      if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1)
- {
-   _M_release_last_use();
- }
-    }
-
-  template<>
-    inline void
-    _Sp_counted_base<_S_atomic>::_M_release() noexcept
-    {
-      ;
-
-      constexpr bool __lock_free
- = __atomic_always_lock_free(sizeof(long long), 0)
- && __atomic_always_lock_free(sizeof(_Atomic_word), 0);
-      constexpr bool __double_word
- = sizeof(long long) == 2 * sizeof(_Atomic_word);
-
-
-      constexpr bool __aligned = __alignof(long long) <= alignof(void*);
-      if constexpr (__lock_free && __double_word && __aligned)
- {
-   constexpr int __wordbits = 8 * sizeof(_Atomic_word);
-   constexpr int __shiftbits = __double_word ? __wordbits : 0;
-   constexpr long long __unique_ref = 1LL + (1LL << __shiftbits);
-   auto __both_counts = reinterpret_cast<long long*>(&_M_use_count);
-
-   ;
-   if (__atomic_load_n(__both_counts, 2) == __unique_ref)
-     {
-
-
-
-
-       _M_weak_count = _M_use_count = 0;
-       ;
-       ;
-       _M_dispose();
-       _M_destroy();
-       return;
-     }
-   if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1)
-     [[__unlikely__]]
-     {
-       _M_release_last_use_cold();
-       return;
-     }
- }
-      else
-
-      if (__gnu_cxx::__exchange_and_add_dispatch(&_M_use_count, -1) == 1)
- {
-   _M_release_last_use();
- }
-    }
-
-  template<>
-    inline void
-    _Sp_counted_base<_S_single>::_M_weak_add_ref() noexcept
-    { ++_M_weak_count; }
-
-  template<>
-    inline void
-    _Sp_counted_base<_S_single>::_M_weak_release() noexcept
-    {
-      if (--_M_weak_count == 0)
-        _M_destroy();
-    }
-
-  template<>
-    inline long
-    _Sp_counted_base<_S_single>::_M_get_use_count() const noexcept
-    { return _M_use_count; }
-
-
-
-  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy>
-    class __shared_ptr;
-
-  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy>
-    class __weak_ptr;
-
-  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy>
-    class __enable_shared_from_this;
-
-  template<typename _Tp>
-    class shared_ptr;
-
-  template<typename _Tp>
-    class weak_ptr;
-
-  template<typename _Tp>
-    struct owner_less;
-
-  template<typename _Tp>
-    class enable_shared_from_this;
-
-  template<_Lock_policy _Lp = __default_lock_policy>
-    class __weak_count;
-
-  template<_Lock_policy _Lp = __default_lock_policy>
-    class __shared_count;
-
-
-  template<typename>
-    class _Sp_atomic;
-
-
-
-  template<typename _Ptr, _Lock_policy _Lp>
-    class _Sp_counted_ptr final : public _Sp_counted_base<_Lp>
-    {
-    public:
-      explicit
-      _Sp_counted_ptr(_Ptr __p) noexcept
-      : _M_ptr(__p) { }
-
-      virtual void
-      _M_dispose() noexcept
-      { delete _M_ptr; }
-
-      virtual void
-      _M_destroy() noexcept
-      { delete this; }
-
-      virtual void*
-      _M_get_deleter(const std::type_info&) noexcept
-      { return nullptr; }
-
-      _Sp_counted_ptr(const _Sp_counted_ptr&) = delete;
-      _Sp_counted_ptr& operator=(const _Sp_counted_ptr&) = delete;
-
-    private:
-      _Ptr _M_ptr;
-    };
-
-  template<>
-    inline void
-    _Sp_counted_ptr<nullptr_t, _S_single>::_M_dispose() noexcept { }
-
-  template<>
-    inline void
-    _Sp_counted_ptr<nullptr_t, _S_mutex>::_M_dispose() noexcept { }
-
-  template<>
-    inline void
-    _Sp_counted_ptr<nullptr_t, _S_atomic>::_M_dispose() noexcept { }
-
-
-
-
-
-
-  template<int _Nm, typename _Tp,
-    bool __use_ebo = !__is_final(_Tp) && __is_empty(_Tp)>
-    struct _Sp_ebo_helper;
-
-
-  template<int _Nm, typename _Tp>
-    struct _Sp_ebo_helper<_Nm, _Tp, true> : private _Tp
-    {
-      explicit _Sp_ebo_helper(const _Tp& __tp) : _Tp(__tp) { }
-      explicit _Sp_ebo_helper(_Tp&& __tp) : _Tp(std::move(__tp)) { }
-
-      static _Tp&
-      _S_get(_Sp_ebo_helper& __eboh) { return static_cast<_Tp&>(__eboh); }
-    };
-
-
-  template<int _Nm, typename _Tp>
-    struct _Sp_ebo_helper<_Nm, _Tp, false>
-    {
-      explicit _Sp_ebo_helper(const _Tp& __tp) : _M_tp(__tp) { }
-      explicit _Sp_ebo_helper(_Tp&& __tp) : _M_tp(std::move(__tp)) { }
-
-      static _Tp&
-      _S_get(_Sp_ebo_helper& __eboh)
-      { return __eboh._M_tp; }
-
-    private:
-      _Tp _M_tp;
-    };
-
-
-  template<typename _Ptr, typename _Deleter, typename _Alloc, _Lock_policy _Lp>
-    class _Sp_counted_deleter final : public _Sp_counted_base<_Lp>
-    {
-      class _Impl : _Sp_ebo_helper<0, _Deleter>, _Sp_ebo_helper<1, _Alloc>
-      {
- typedef _Sp_ebo_helper<0, _Deleter> _Del_base;
- typedef _Sp_ebo_helper<1, _Alloc> _Alloc_base;
-
-      public:
- _Impl(_Ptr __p, _Deleter __d, const _Alloc& __a) noexcept
- : _Del_base(std::move(__d)), _Alloc_base(__a), _M_ptr(__p)
- { }
-
- _Deleter& _M_del() noexcept { return _Del_base::_S_get(*this); }
- _Alloc& _M_alloc() noexcept { return _Alloc_base::_S_get(*this); }
-
- _Ptr _M_ptr;
-      };
-
-    public:
-      using __allocator_type = __alloc_rebind<_Alloc, _Sp_counted_deleter>;
-
-
-      _Sp_counted_deleter(_Ptr __p, _Deleter __d) noexcept
-      : _M_impl(__p, std::move(__d), _Alloc()) { }
-
-
-      _Sp_counted_deleter(_Ptr __p, _Deleter __d, const _Alloc& __a) noexcept
-      : _M_impl(__p, std::move(__d), __a) { }
-
-      ~_Sp_counted_deleter() noexcept { }
-
-      virtual void
-      _M_dispose() noexcept
-      { _M_impl._M_del()(_M_impl._M_ptr); }
-
-      virtual void
-      _M_destroy() noexcept
-      {
- __allocator_type __a(_M_impl._M_alloc());
- __allocated_ptr<__allocator_type> __guard_ptr{ __a, this };
- this->~_Sp_counted_deleter();
-      }
-
-      virtual void*
-      _M_get_deleter(const type_info& __ti [[__gnu__::__unused__]]) noexcept
-      {
-
-
-
-        return __ti == typeid(_Deleter)
-   ? std::__addressof(_M_impl._M_del())
-   : nullptr;
-
-
-
-      }
-
-    private:
-
-
-
-      _Impl _M_impl;
-    };
-
-
-
-  struct _Sp_make_shared_tag
-  {
-  private:
-    template<typename _Tp, typename _Alloc, _Lock_policy _Lp>
-      friend class _Sp_counted_ptr_inplace;
-
-    static const type_info&
-    _S_ti() noexcept __attribute__ ((__visibility__ ("default")))
-    {
-      alignas(type_info) static constexpr char __tag[sizeof(type_info)] = { };
-      return reinterpret_cast<const type_info&>(__tag);
-    }
-
-    static bool _S_eq(const type_info&) noexcept;
-  };
-
-  template<typename _Alloc>
-    struct _Sp_alloc_shared_tag
-    {
-      const _Alloc& _M_a;
-    };
-
-  template<typename _Tp, typename _Alloc, _Lock_policy _Lp>
-    class _Sp_counted_ptr_inplace final : public _Sp_counted_base<_Lp>
-    {
-      class _Impl : _Sp_ebo_helper<0, _Alloc>
-      {
- typedef _Sp_ebo_helper<0, _Alloc> _A_base;
-
-      public:
- explicit _Impl(_Alloc __a) noexcept : _A_base(__a) { }
-
- _Alloc& _M_alloc() noexcept { return _A_base::_S_get(*this); }
-
- __gnu_cxx::__aligned_buffer<_Tp> _M_storage;
-      };
-
-    public:
-      using __allocator_type = __alloc_rebind<_Alloc, _Sp_counted_ptr_inplace>;
-
-
-      template<typename... _Args>
- _Sp_counted_ptr_inplace(_Alloc __a, _Args&&... __args)
- : _M_impl(__a)
- {
-
-
-   allocator_traits<_Alloc>::construct(__a, _M_ptr(),
-       std::forward<_Args>(__args)...);
- }
-
-      ~_Sp_counted_ptr_inplace() noexcept { }
-
-      virtual void
-      _M_dispose() noexcept
-      {
- allocator_traits<_Alloc>::destroy(_M_impl._M_alloc(), _M_ptr());
-      }
-
-
-      virtual void
-      _M_destroy() noexcept
-      {
- __allocator_type __a(_M_impl._M_alloc());
- __allocated_ptr<__allocator_type> __guard_ptr{ __a, this };
- this->~_Sp_counted_ptr_inplace();
-      }
-
-    private:
-      friend class __shared_count<_Lp>;
-
-
-
-      virtual void*
-      _M_get_deleter(const std::type_info& __ti) noexcept override
-      {
- auto __ptr = const_cast<typename remove_cv<_Tp>::type*>(_M_ptr());
-
-
-
-
- if (&__ti == &_Sp_make_shared_tag::_S_ti()
-     ||
-
-     __ti == typeid(_Sp_make_shared_tag)
-
-
-
-    )
-   return __ptr;
- return nullptr;
-      }
-
-      _Tp* _M_ptr() noexcept { return _M_impl._M_storage._M_ptr(); }
-
-      _Impl _M_impl;
-    };
-
-
-  struct _Sp_overwrite_tag { };
-
-
-
-
-
-  template<typename _Tp, typename _Alloc, _Lock_policy _Lp>
-    requires is_same_v<typename _Alloc::value_type, _Sp_overwrite_tag>
-    class _Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp> final
-
-
-
-
-    : public _Sp_counted_base<_Lp>
-    {
-      [[no_unique_address]] _Alloc _M_alloc;
-
-      union {
- _Tp _M_obj;
- char _M_unused;
-      };
-
-      friend class __shared_count<_Lp>;
-
-      _Tp* _M_ptr() noexcept { return std::__addressof(_M_obj); }
-
-    public:
-      using __allocator_type = __alloc_rebind<_Alloc, _Sp_counted_ptr_inplace>;
-
-      _Sp_counted_ptr_inplace(const _Alloc& __a)
-      : _M_alloc(__a)
-      {
- ::new((void*)_M_ptr()) _Tp;
-      }
-
-      ~_Sp_counted_ptr_inplace() noexcept { }
-
-      virtual void
-      _M_dispose() noexcept
-      {
- _M_obj.~_Tp();
-      }
-
-
-      virtual void
-      _M_destroy() noexcept
-      {
- using pointer = typename allocator_traits<__allocator_type>::pointer;
- __allocator_type __a(_M_alloc);
- auto __p = pointer_traits<pointer>::pointer_to(*this);
- __allocated_ptr<__allocator_type> __guard_ptr{ __a, __p };
- this->~_Sp_counted_ptr_inplace();
-      }
-
-      void*
-      _M_get_deleter(const std::type_info&) noexcept override
-      { return nullptr; }
-    };
-
-
-
-  struct _Sp_overwrite_tag;
-
-
-  template<typename _Alloc>
-    struct _Sp_counted_array_base
-    {
-      [[no_unique_address]] _Alloc _M_alloc{};
-      size_t _M_n = 0;
-      bool _M_overwrite = false;
-
-      typename allocator_traits<_Alloc>::pointer
-      _M_alloc_array(size_t __tail)
-      {
- return allocator_traits<_Alloc>::allocate(_M_alloc, _M_n + __tail);
-      }
-
-      void
-      _M_dealloc_array(typename allocator_traits<_Alloc>::pointer __p,
-         size_t __tail)
-      {
- allocator_traits<_Alloc>::deallocate(_M_alloc, __p, _M_n + __tail);
-      }
-
-
-      template<typename _Init>
- void
- _M_init(typename allocator_traits<_Alloc>::value_type* __p,
-  _Init __init)
- {
-   using _Tp = remove_pointer_t<_Init>;
-   using _Up = typename allocator_traits<_Alloc>::value_type;
-
-   if constexpr (is_same_v<_Init, _Sp_overwrite_tag>)
-     {
-       std::uninitialized_default_construct_n(__p, _M_n);
-       _M_overwrite = true;
-     }
-   else if (__init == nullptr)
-     std::__uninitialized_default_n_a(__p, _M_n, _M_alloc);
-   else if constexpr (!is_array_v<_Tp>)
-     std::__uninitialized_fill_n_a(__p, _M_n, *__init, _M_alloc);
-   else
-     {
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-       struct _Iter
-       {
-  using value_type = _Up;
-  using difference_type = ptrdiff_t;
-  using pointer = const _Up*;
-  using reference = const _Up&;
-  using iterator_category = forward_iterator_tag;
-
-  const _Up* _M_p;
-  size_t _M_len;
-  size_t _M_pos;
-
-  _Iter& operator++() { ++_M_pos; return *this; }
-  _Iter operator++(int) { auto __i(*this); ++_M_pos; return __i; }
-
-  reference operator*() const { return _M_p[_M_pos % _M_len]; }
-  pointer operator->() const { return _M_p + (_M_pos % _M_len); }
-
-  bool operator==(const _Iter& __i) const
-  { return _M_pos == __i._M_pos; }
-       };
-#pragma GCC diagnostic pop
-
-       _Iter __first{_S_first_elem(__init), sizeof(_Tp) / sizeof(_Up)};
-       _Iter __last = __first;
-       __last._M_pos = _M_n;
-       std::__uninitialized_copy_a(__first, __last, __p, _M_alloc);
-     }
- }
-
-    protected:
-
-      void
-      _M_dispose_array(typename allocator_traits<_Alloc>::value_type* __p)
-      {
- if (_M_overwrite)
-   std::destroy_n(__p, _M_n);
- else
-   {
-     size_t __n = _M_n;
-     while (__n--)
-       allocator_traits<_Alloc>::destroy(_M_alloc, __p + __n);
-   }
-      }
-
-    private:
-      template<typename _Tp>
- static _Tp*
- _S_first_elem(_Tp* __p) { return __p; }
-
-      template<typename _Tp, size_t _Nm>
- static auto
- _S_first_elem(_Tp (*__p)[_Nm]) { return _S_first_elem(*__p); }
-    };
-
-
-
-  template<typename _Alloc, _Lock_policy _Lp>
-    class _Sp_counted_array final
-    : public _Sp_counted_base<_Lp>, _Sp_counted_array_base<_Alloc>
-    {
-      using pointer = typename allocator_traits<_Alloc>::pointer;
-
-      pointer _M_alloc_ptr;
-
-      auto _M_ptr() const noexcept { return std::to_address(_M_alloc_ptr); }
-
-      friend class __shared_count<_Lp>;
-
-    public:
-      _Sp_counted_array(const _Sp_counted_array_base<_Alloc>& __a,
-   pointer __p) noexcept
-      : _Sp_counted_array_base<_Alloc>(__a), _M_alloc_ptr(__p)
-      { }
-
-      ~_Sp_counted_array() = default;
-
-      virtual void
-      _M_dispose() noexcept
-      {
- if (this->_M_n)
-   this->_M_dispose_array(_M_ptr());
-      }
-
-
-      virtual void
-      _M_destroy() noexcept
-      {
- _Sp_counted_array_base<_Alloc> __a = *this;
- pointer __p = _M_alloc_ptr;
- this->~_Sp_counted_array();
- __a._M_dealloc_array(__p, _S_tail());
-      }
-
-
-
-      static constexpr size_t
-      _S_tail()
-      {
-
- using _Tp = typename allocator_traits<_Alloc>::value_type;
-
-
- size_t __bytes = sizeof(_Sp_counted_array);
-
-
- if constexpr (alignof(_Tp) < alignof(_Sp_counted_array))
-   __bytes += alignof(_Sp_counted_array) - alignof(_Tp);
-
- return (__bytes + sizeof(_Tp) - 1) / sizeof(_Tp);
-      }
-
-      void*
-      _M_get_deleter(const std::type_info&) noexcept override
-      { return nullptr; }
-    };
-
-
-
-  struct __sp_array_delete
-  {
-    template<typename _Yp>
-      void operator()(_Yp* __p) const { delete[] __p; }
-  };
-
-  template<_Lock_policy _Lp>
-    class __shared_count
-    {
-
-      template<typename _Tp>
- struct __not_alloc_shared_tag { using type = void; };
-
-      template<typename _Tp>
- struct __not_alloc_shared_tag<_Sp_alloc_shared_tag<_Tp>> { };
-
-
-      template<typename _Alloc>
- struct __not_alloc_shared_tag<_Sp_counted_array_base<_Alloc>> { };
-
-
-    public:
-      constexpr __shared_count() noexcept : _M_pi(0)
-      { }
-
-      template<typename _Ptr>
-        explicit
- __shared_count(_Ptr __p) : _M_pi(0)
- {
-   try
-     {
-       _M_pi = new _Sp_counted_ptr<_Ptr, _Lp>(__p);
-     }
-   catch(...)
-     {
-       delete __p;
-       throw;
-     }
- }
-
-      template<typename _Ptr>
- __shared_count(_Ptr __p, false_type)
- : __shared_count(__p)
- { }
-
-      template<typename _Ptr>
- __shared_count(_Ptr __p, true_type)
- : __shared_count(__p, __sp_array_delete{}, allocator<void>())
- { }
-
-      template<typename _Ptr, typename _Deleter,
-        typename = typename __not_alloc_shared_tag<_Deleter>::type>
- __shared_count(_Ptr __p, _Deleter __d)
- : __shared_count(__p, std::move(__d), allocator<void>())
- { }
-
-      template<typename _Ptr, typename _Deleter, typename _Alloc,
-        typename = typename __not_alloc_shared_tag<_Deleter>::type>
- __shared_count(_Ptr __p, _Deleter __d, _Alloc __a) : _M_pi(0)
- {
-   typedef _Sp_counted_deleter<_Ptr, _Deleter, _Alloc, _Lp> _Sp_cd_type;
-   try
-     {
-       typename _Sp_cd_type::__allocator_type __a2(__a);
-       auto __guard = std::__allocate_guarded(__a2);
-       _Sp_cd_type* __mem = __guard.get();
-       ::new (__mem) _Sp_cd_type(__p, std::move(__d), std::move(__a));
-       _M_pi = __mem;
-       __guard = nullptr;
-     }
-   catch(...)
-     {
-       __d(__p);
-       throw;
-     }
- }
-
-      template<typename _Tp, typename _Alloc, typename... _Args>
- __shared_count(_Tp*& __p, _Sp_alloc_shared_tag<_Alloc> __a,
-         _Args&&... __args)
- {
-   typedef _Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp> _Sp_cp_type;
-   typename _Sp_cp_type::__allocator_type __a2(__a._M_a);
-   auto __guard = std::__allocate_guarded(__a2);
-   _Sp_cp_type* __mem = __guard.get();
-   auto __pi = ::new (__mem)
-     _Sp_cp_type(__a._M_a, std::forward<_Args>(__args)...);
-   __guard = nullptr;
-   _M_pi = __pi;
-   __p = __pi->_M_ptr();
- }
-
-
-      template<typename _Tp, typename _Alloc, typename _Init>
- __shared_count(_Tp*& __p, const _Sp_counted_array_base<_Alloc>& __a,
-         _Init __init)
- {
-   using _Up = remove_all_extents_t<_Tp>;
-   static_assert(is_same_v<_Up, typename _Alloc::value_type>);
-
-   using _Sp_ca_type = _Sp_counted_array<_Alloc, _Lp>;
-   const size_t __tail = _Sp_ca_type::_S_tail();
-
-   struct _Guarded_ptr : _Sp_counted_array_base<_Alloc>
-   {
-     typename allocator_traits<_Alloc>::pointer _M_ptr;
-
-     _Guarded_ptr(_Sp_counted_array_base<_Alloc> __a)
-     : _Sp_counted_array_base<_Alloc>(__a),
-       _M_ptr(this->_M_alloc_array(_Sp_ca_type::_S_tail()))
-     { }
-
-     ~_Guarded_ptr()
-     {
-       if (_M_ptr)
-  this->_M_dealloc_array(_M_ptr, _Sp_ca_type::_S_tail());
-     }
-   };
-
-   _Guarded_ptr __guard{__a};
-   _Up* const __raw = std::to_address(__guard._M_ptr);
-   __guard._M_init(__raw, __init);
-
-   void* __c = __raw + __a._M_n;
-   if constexpr (alignof(_Up) < alignof(_Sp_ca_type))
-     {
-       size_t __space = sizeof(_Up) * __tail;
-       __c = std::align(alignof(_Sp_ca_type), sizeof(_Sp_ca_type),
-          __c, __space);
-     }
-   auto __pi = ::new(__c) _Sp_ca_type(__guard, __guard._M_ptr);
-   __guard._M_ptr = nullptr;
-   _M_pi = __pi;
-   __p = reinterpret_cast<_Tp*>(__raw);
- }
-
-
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-      template<typename _Tp>
-        explicit
- __shared_count(std::auto_ptr<_Tp>&& __r);
-#pragma GCC diagnostic pop
-
-
-
-      template<typename _Tp, typename _Del>
-        explicit
- __shared_count(std::unique_ptr<_Tp, _Del>&& __r) : _M_pi(0)
- {
-
-
-   if (__r.get() == nullptr)
-     return;
-
-   using _Ptr = typename unique_ptr<_Tp, _Del>::pointer;
-   using _Del2 = __conditional_t<is_reference<_Del>::value,
-       reference_wrapper<typename remove_reference<_Del>::type>,
-       _Del>;
-   using _Sp_cd_type
-     = _Sp_counted_deleter<_Ptr, _Del2, allocator<void>, _Lp>;
-   using _Alloc = allocator<_Sp_cd_type>;
-   using _Alloc_traits = allocator_traits<_Alloc>;
-   _Alloc __a;
-   _Sp_cd_type* __mem = _Alloc_traits::allocate(__a, 1);
-
-
-
-   _Alloc_traits::construct(__a, __mem, __r.release(),
-       std::forward<_Del>(__r.get_deleter()));
-   _M_pi = __mem;
- }
-
-
-      explicit __shared_count(const __weak_count<_Lp>& __r);
-
-
-      explicit
-      __shared_count(const __weak_count<_Lp>& __r, std::nothrow_t) noexcept;
-
-      ~__shared_count() noexcept
-      {
- if (_M_pi != nullptr)
-   _M_pi->_M_release();
-      }
-
-      __shared_count(const __shared_count& __r) noexcept
-      : _M_pi(__r._M_pi)
-      {
- if (_M_pi != nullptr)
-   _M_pi->_M_add_ref_copy();
-      }
-
-      __shared_count&
-      operator=(const __shared_count& __r) noexcept
-      {
- _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
- if (__tmp != _M_pi)
-   {
-     if (__tmp != nullptr)
-       __tmp->_M_add_ref_copy();
-     if (_M_pi != nullptr)
-       _M_pi->_M_release();
-     _M_pi = __tmp;
-   }
- return *this;
-      }
-
-      void
-      _M_swap(__shared_count& __r) noexcept
-      {
- _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
- __r._M_pi = _M_pi;
- _M_pi = __tmp;
-      }
-
-      long
-      _M_get_use_count() const noexcept
-      { return _M_pi ? _M_pi->_M_get_use_count() : 0; }
-
-      bool
-      _M_unique() const noexcept
-      { return this->_M_get_use_count() == 1; }
-
-      void*
-      _M_get_deleter(const std::type_info& __ti) const noexcept
-      { return _M_pi ? _M_pi->_M_get_deleter(__ti) : nullptr; }
-
-      bool
-      _M_less(const __shared_count& __rhs) const noexcept
-      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
-
-      bool
-      _M_less(const __weak_count<_Lp>& __rhs) const noexcept
-      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
-
-
-      friend inline bool
-      operator==(const __shared_count& __a, const __shared_count& __b) noexcept
-      { return __a._M_pi == __b._M_pi; }
-
-    private:
-      friend class __weak_count<_Lp>;
-
-      template<typename> friend class _Sp_atomic;
-
-
-
-
-
-      _Sp_counted_base<_Lp>* _M_pi;
-    };
-
-
-  template<_Lock_policy _Lp>
-    class __weak_count
-    {
-    public:
-      constexpr __weak_count() noexcept : _M_pi(nullptr)
-      { }
-
-      __weak_count(const __shared_count<_Lp>& __r) noexcept
-      : _M_pi(__r._M_pi)
-      {
- if (_M_pi != nullptr)
-   _M_pi->_M_weak_add_ref();
-      }
-
-      __weak_count(const __weak_count& __r) noexcept
-      : _M_pi(__r._M_pi)
-      {
- if (_M_pi != nullptr)
-   _M_pi->_M_weak_add_ref();
-      }
-
-      __weak_count(__weak_count&& __r) noexcept
-      : _M_pi(__r._M_pi)
-      { __r._M_pi = nullptr; }
-
-      ~__weak_count() noexcept
-      {
- if (_M_pi != nullptr)
-   _M_pi->_M_weak_release();
-      }
-
-      __weak_count&
-      operator=(const __shared_count<_Lp>& __r) noexcept
-      {
- _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
- if (__tmp != nullptr)
-   __tmp->_M_weak_add_ref();
- if (_M_pi != nullptr)
-   _M_pi->_M_weak_release();
- _M_pi = __tmp;
- return *this;
-      }
-
-      __weak_count&
-      operator=(const __weak_count& __r) noexcept
-      {
- _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
- if (__tmp != nullptr)
-   __tmp->_M_weak_add_ref();
- if (_M_pi != nullptr)
-   _M_pi->_M_weak_release();
- _M_pi = __tmp;
- return *this;
-      }
-
-      __weak_count&
-      operator=(__weak_count&& __r) noexcept
-      {
- if (_M_pi != nullptr)
-   _M_pi->_M_weak_release();
- _M_pi = __r._M_pi;
-        __r._M_pi = nullptr;
- return *this;
-      }
-
-      void
-      _M_swap(__weak_count& __r) noexcept
-      {
- _Sp_counted_base<_Lp>* __tmp = __r._M_pi;
- __r._M_pi = _M_pi;
- _M_pi = __tmp;
-      }
-
-      long
-      _M_get_use_count() const noexcept
-      { return _M_pi != nullptr ? _M_pi->_M_get_use_count() : 0; }
-
-      bool
-      _M_less(const __weak_count& __rhs) const noexcept
-      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
-
-      bool
-      _M_less(const __shared_count<_Lp>& __rhs) const noexcept
-      { return std::less<_Sp_counted_base<_Lp>*>()(this->_M_pi, __rhs._M_pi); }
-
-
-      friend inline bool
-      operator==(const __weak_count& __a, const __weak_count& __b) noexcept
-      { return __a._M_pi == __b._M_pi; }
-
-    private:
-      friend class __shared_count<_Lp>;
-
-      template<typename> friend class _Sp_atomic;
-
-
-      _Sp_counted_base<_Lp>* _M_pi;
-    };
-
-
-  template<_Lock_policy _Lp>
-    inline
-    __shared_count<_Lp>::__shared_count(const __weak_count<_Lp>& __r)
-    : _M_pi(__r._M_pi)
-    {
-      if (_M_pi == nullptr || !_M_pi->_M_add_ref_lock_nothrow())
- __throw_bad_weak_ptr();
-    }
-
-
-  template<_Lock_policy _Lp>
-    inline
-    __shared_count<_Lp>::
-    __shared_count(const __weak_count<_Lp>& __r, std::nothrow_t) noexcept
-    : _M_pi(__r._M_pi)
-    {
-      if (_M_pi && !_M_pi->_M_add_ref_lock_nothrow())
- _M_pi = nullptr;
-    }
-
-
-
-
-
-  template<typename _Yp_ptr, typename _Tp_ptr>
-    struct __sp_compatible_with
-    : false_type
-    { };
-
-  template<typename _Yp, typename _Tp>
-    struct __sp_compatible_with<_Yp*, _Tp*>
-    : is_convertible<_Yp*, _Tp*>::type
-    { };
-
-  template<typename _Up, size_t _Nm>
-    struct __sp_compatible_with<_Up(*)[_Nm], _Up(*)[]>
-    : true_type
-    { };
-
-  template<typename _Up, size_t _Nm>
-    struct __sp_compatible_with<_Up(*)[_Nm], const _Up(*)[]>
-    : true_type
-    { };
-
-  template<typename _Up, size_t _Nm>
-    struct __sp_compatible_with<_Up(*)[_Nm], volatile _Up(*)[]>
-    : true_type
-    { };
-
-  template<typename _Up, size_t _Nm>
-    struct __sp_compatible_with<_Up(*)[_Nm], const volatile _Up(*)[]>
-    : true_type
-    { };
-
-
-  template<typename _Up, size_t _Nm, typename _Yp, typename = void>
-    struct __sp_is_constructible_arrN
-    : false_type
-    { };
-
-  template<typename _Up, size_t _Nm, typename _Yp>
-    struct __sp_is_constructible_arrN<_Up, _Nm, _Yp, __void_t<_Yp[_Nm]>>
-    : is_convertible<_Yp(*)[_Nm], _Up(*)[_Nm]>::type
-    { };
-
-
-  template<typename _Up, typename _Yp, typename = void>
-    struct __sp_is_constructible_arr
-    : false_type
-    { };
-
-  template<typename _Up, typename _Yp>
-    struct __sp_is_constructible_arr<_Up, _Yp, __void_t<_Yp[]>>
-    : is_convertible<_Yp(*)[], _Up(*)[]>::type
-    { };
-
-
-  template<typename _Tp, typename _Yp>
-    struct __sp_is_constructible;
-
-
-  template<typename _Up, size_t _Nm, typename _Yp>
-    struct __sp_is_constructible<_Up[_Nm], _Yp>
-    : __sp_is_constructible_arrN<_Up, _Nm, _Yp>::type
-    { };
-
-
-  template<typename _Up, typename _Yp>
-    struct __sp_is_constructible<_Up[], _Yp>
-    : __sp_is_constructible_arr<_Up, _Yp>::type
-    { };
-
-
-  template<typename _Tp, typename _Yp>
-    struct __sp_is_constructible
-    : is_convertible<_Yp*, _Tp*>::type
-    { };
-
-
-
-  template<typename _Tp, _Lock_policy _Lp,
-    bool = is_array<_Tp>::value, bool = is_void<_Tp>::value>
-    class __shared_ptr_access
-    {
-    public:
-      using element_type = _Tp;
-
-      element_type&
-      operator*() const noexcept
-      {
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_get() != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
- return *_M_get();
-      }
-
-      element_type*
-      operator->() const noexcept
-      {
- ;
- return _M_get();
-      }
-
-    private:
-      element_type*
-      _M_get() const noexcept
-      { return static_cast<const __shared_ptr<_Tp, _Lp>*>(this)->get(); }
-    };
-
-
-  template<typename _Tp, _Lock_policy _Lp>
-    class __shared_ptr_access<_Tp, _Lp, false, true>
-    {
-    public:
-      using element_type = _Tp;
-
-      element_type*
-      operator->() const noexcept
-      {
- auto __ptr = static_cast<const __shared_ptr<_Tp, _Lp>*>(this)->get();
- ;
- return __ptr;
-      }
-    };
-
-
-  template<typename _Tp, _Lock_policy _Lp>
-    class __shared_ptr_access<_Tp, _Lp, true, false>
-    {
-    public:
-      using element_type = typename remove_extent<_Tp>::type;
-# 1408 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-      element_type&
-      operator[](ptrdiff_t __i) const noexcept
-      {
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_get() != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!extent<_Tp>::value || __i < extent<_Tp>::value), false)) std::__glibcxx_assert_fail(); } while (false);
- return _M_get()[__i];
-      }
-
-    private:
-      element_type*
-      _M_get() const noexcept
-      { return static_cast<const __shared_ptr<_Tp, _Lp>*>(this)->get(); }
-    };
-
-  template<typename _Tp, _Lock_policy _Lp>
-    class __shared_ptr
-    : public __shared_ptr_access<_Tp, _Lp>
-    {
-    public:
-      using element_type = typename remove_extent<_Tp>::type;
-
-    private:
-
-      template<typename _Yp>
- using _SafeConv
-   = typename enable_if<__sp_is_constructible<_Tp, _Yp>::value>::type;
-
-
-      template<typename _Yp, typename _Res = void>
- using _Compatible = typename
-   enable_if<__sp_compatible_with<_Yp*, _Tp*>::value, _Res>::type;
-
-
-      template<typename _Yp>
- using _Assignable = _Compatible<_Yp, __shared_ptr&>;
-
-
-      template<typename _Yp, typename _Del, typename _Res = void,
-        typename _Ptr = typename unique_ptr<_Yp, _Del>::pointer>
- using _UniqCompatible = __enable_if_t<__and_<
-   __sp_compatible_with<_Yp*, _Tp*>,
-   is_convertible<_Ptr, element_type*>,
-   is_move_constructible<_Del>
-   >::value, _Res>;
-
-
-      template<typename _Yp, typename _Del>
- using _UniqAssignable = _UniqCompatible<_Yp, _Del, __shared_ptr&>;
-
-    public:
-
-
-      using weak_type = __weak_ptr<_Tp, _Lp>;
-
-
-      constexpr __shared_ptr() noexcept
-      : _M_ptr(0), _M_refcount()
-      { }
-
-      template<typename _Yp, typename = _SafeConv<_Yp>>
- explicit
- __shared_ptr(_Yp* __p)
- : _M_ptr(__p), _M_refcount(__p, typename is_array<_Tp>::type())
- {
-   static_assert( !is_void<_Yp>::value, "incomplete type" );
-   static_assert( sizeof(_Yp) > 0, "incomplete type" );
-   _M_enable_shared_from_this_with(__p);
- }
-
-      template<typename _Yp, typename _Deleter, typename = _SafeConv<_Yp>>
- __shared_ptr(_Yp* __p, _Deleter __d)
- : _M_ptr(__p), _M_refcount(__p, std::move(__d))
- {
-   static_assert(__is_invocable<_Deleter&, _Yp*&>::value,
-       "deleter expression d(p) is well-formed");
-   _M_enable_shared_from_this_with(__p);
- }
-
-      template<typename _Yp, typename _Deleter, typename _Alloc,
-        typename = _SafeConv<_Yp>>
- __shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a)
- : _M_ptr(__p), _M_refcount(__p, std::move(__d), std::move(__a))
- {
-   static_assert(__is_invocable<_Deleter&, _Yp*&>::value,
-       "deleter expression d(p) is well-formed");
-   _M_enable_shared_from_this_with(__p);
- }
-
-      template<typename _Deleter>
- __shared_ptr(nullptr_t __p, _Deleter __d)
- : _M_ptr(0), _M_refcount(__p, std::move(__d))
- { }
-
-      template<typename _Deleter, typename _Alloc>
-        __shared_ptr(nullptr_t __p, _Deleter __d, _Alloc __a)
- : _M_ptr(0), _M_refcount(__p, std::move(__d), std::move(__a))
- { }
-
-
-      template<typename _Yp>
- __shared_ptr(const __shared_ptr<_Yp, _Lp>& __r,
-       element_type* __p) noexcept
- : _M_ptr(__p), _M_refcount(__r._M_refcount)
- { }
-
-
-      template<typename _Yp>
- __shared_ptr(__shared_ptr<_Yp, _Lp>&& __r,
-       element_type* __p) noexcept
- : _M_ptr(__p), _M_refcount()
- {
-   _M_refcount._M_swap(__r._M_refcount);
-   __r._M_ptr = nullptr;
- }
-
-      __shared_ptr(const __shared_ptr&) noexcept = default;
-      __shared_ptr& operator=(const __shared_ptr&) noexcept = default;
-      ~__shared_ptr() = default;
-
-      template<typename _Yp, typename = _Compatible<_Yp>>
- __shared_ptr(const __shared_ptr<_Yp, _Lp>& __r) noexcept
- : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount)
- { }
-
-      __shared_ptr(__shared_ptr&& __r) noexcept
-      : _M_ptr(__r._M_ptr), _M_refcount()
-      {
- _M_refcount._M_swap(__r._M_refcount);
- __r._M_ptr = nullptr;
-      }
-
-      template<typename _Yp, typename = _Compatible<_Yp>>
- __shared_ptr(__shared_ptr<_Yp, _Lp>&& __r) noexcept
- : _M_ptr(__r._M_ptr), _M_refcount()
- {
-   _M_refcount._M_swap(__r._M_refcount);
-   __r._M_ptr = nullptr;
- }
-
-      template<typename _Yp, typename = _Compatible<_Yp>>
- explicit __shared_ptr(const __weak_ptr<_Yp, _Lp>& __r)
- : _M_refcount(__r._M_refcount)
- {
-
-
-   _M_ptr = __r._M_ptr;
- }
-
-
-      template<typename _Yp, typename _Del,
-        typename = _UniqCompatible<_Yp, _Del>>
- __shared_ptr(unique_ptr<_Yp, _Del>&& __r)
- : _M_ptr(__r.get()), _M_refcount()
- {
-   auto __raw = __to_address(__r.get());
-   _M_refcount = __shared_count<_Lp>(std::move(__r));
-   _M_enable_shared_from_this_with(__raw);
- }
-# 1586 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-      template<typename _Yp, typename = _Compatible<_Yp>>
- __shared_ptr(auto_ptr<_Yp>&& __r);
-#pragma GCC diagnostic pop
-
-
-      constexpr __shared_ptr(nullptr_t) noexcept : __shared_ptr() { }
-
-      template<typename _Yp>
- _Assignable<_Yp>
- operator=(const __shared_ptr<_Yp, _Lp>& __r) noexcept
- {
-   _M_ptr = __r._M_ptr;
-   _M_refcount = __r._M_refcount;
-   return *this;
- }
-
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-      template<typename _Yp>
- _Assignable<_Yp>
- operator=(auto_ptr<_Yp>&& __r)
- {
-   __shared_ptr(std::move(__r)).swap(*this);
-   return *this;
- }
-#pragma GCC diagnostic pop
-
-
-      __shared_ptr&
-      operator=(__shared_ptr&& __r) noexcept
-      {
- __shared_ptr(std::move(__r)).swap(*this);
- return *this;
-      }
-
-      template<class _Yp>
- _Assignable<_Yp>
- operator=(__shared_ptr<_Yp, _Lp>&& __r) noexcept
- {
-   __shared_ptr(std::move(__r)).swap(*this);
-   return *this;
- }
-
-      template<typename _Yp, typename _Del>
- _UniqAssignable<_Yp, _Del>
- operator=(unique_ptr<_Yp, _Del>&& __r)
- {
-   __shared_ptr(std::move(__r)).swap(*this);
-   return *this;
- }
-
-      void
-      reset() noexcept
-      { __shared_ptr().swap(*this); }
-
-      template<typename _Yp>
- _SafeConv<_Yp>
- reset(_Yp* __p)
- {
-
-   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__p == nullptr || __p != _M_ptr), false)) std::__glibcxx_assert_fail(); } while (false);
-   __shared_ptr(__p).swap(*this);
- }
-
-      template<typename _Yp, typename _Deleter>
- _SafeConv<_Yp>
- reset(_Yp* __p, _Deleter __d)
- { __shared_ptr(__p, std::move(__d)).swap(*this); }
-
-      template<typename _Yp, typename _Deleter, typename _Alloc>
- _SafeConv<_Yp>
- reset(_Yp* __p, _Deleter __d, _Alloc __a)
-        { __shared_ptr(__p, std::move(__d), std::move(__a)).swap(*this); }
-
-
-      element_type*
-      get() const noexcept
-      { return _M_ptr; }
-
-
-      explicit operator bool() const noexcept
-      { return _M_ptr != nullptr; }
-
-
-      bool
-      unique() const noexcept
-      { return _M_refcount._M_unique(); }
-
-
-      long
-      use_count() const noexcept
-      { return _M_refcount._M_get_use_count(); }
-
-
-      void
-      swap(__shared_ptr<_Tp, _Lp>& __other) noexcept
-      {
- std::swap(_M_ptr, __other._M_ptr);
- _M_refcount._M_swap(__other._M_refcount);
-      }
-# 1698 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-      template<typename _Tp1>
- bool
- owner_before(__shared_ptr<_Tp1, _Lp> const& __rhs) const noexcept
- { return _M_refcount._M_less(__rhs._M_refcount); }
-
-      template<typename _Tp1>
- bool
- owner_before(__weak_ptr<_Tp1, _Lp> const& __rhs) const noexcept
- { return _M_refcount._M_less(__rhs._M_refcount); }
-
-
-    protected:
-
-      template<typename _Alloc, typename... _Args>
- __shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
- : _M_ptr(), _M_refcount(_M_ptr, __tag, std::forward<_Args>(__args)...)
- { _M_enable_shared_from_this_with(_M_ptr); }
-
-      template<typename _Tp1, _Lock_policy _Lp1, typename _Alloc,
-        typename... _Args>
- friend __shared_ptr<_Tp1, _Lp1>
- __allocate_shared(const _Alloc& __a, _Args&&... __args);
-
-
-
-      template<typename _Alloc, typename _Init = const remove_extent_t<_Tp>*>
- __shared_ptr(const _Sp_counted_array_base<_Alloc>& __a,
-       _Init __init = nullptr)
- : _M_ptr(), _M_refcount(_M_ptr, __a, __init)
- { }
-
-
-
-
-      __shared_ptr(const __weak_ptr<_Tp, _Lp>& __r, std::nothrow_t) noexcept
-      : _M_refcount(__r._M_refcount, std::nothrow)
-      {
- _M_ptr = _M_refcount._M_get_use_count() ? __r._M_ptr : nullptr;
-      }
-
-      friend class __weak_ptr<_Tp, _Lp>;
-
-    private:
-
-      template<typename _Yp>
- using __esft_base_t = decltype(__enable_shared_from_this_base(
-       std::declval<const __shared_count<_Lp>&>(),
-       std::declval<_Yp*>()));
-
-
-      template<typename _Yp, typename = void>
- struct __has_esft_base
- : false_type { };
-
-      template<typename _Yp>
- struct __has_esft_base<_Yp, __void_t<__esft_base_t<_Yp>>>
- : __not_<is_array<_Tp>> { };
-
-      template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
- typename enable_if<__has_esft_base<_Yp2>::value>::type
- _M_enable_shared_from_this_with(_Yp* __p) noexcept
- {
-   if (auto __base = __enable_shared_from_this_base(_M_refcount, __p))
-     __base->_M_weak_assign(const_cast<_Yp2*>(__p), _M_refcount);
- }
-
-      template<typename _Yp, typename _Yp2 = typename remove_cv<_Yp>::type>
- typename enable_if<!__has_esft_base<_Yp2>::value>::type
- _M_enable_shared_from_this_with(_Yp*) noexcept
- { }
-
-      void*
-      _M_get_deleter(const std::type_info& __ti) const noexcept
-      { return _M_refcount._M_get_deleter(__ti); }
-
-      template<typename _Tp1, _Lock_policy _Lp1> friend class __shared_ptr;
-      template<typename _Tp1, _Lock_policy _Lp1> friend class __weak_ptr;
-
-      template<typename _Del, typename _Tp1, _Lock_policy _Lp1>
- friend _Del* get_deleter(const __shared_ptr<_Tp1, _Lp1>&) noexcept;
-
-      template<typename _Del, typename _Tp1>
- friend _Del* get_deleter(const shared_ptr<_Tp1>&) noexcept;
-
-
-      friend _Sp_atomic<shared_ptr<_Tp>>;
-
-
-
-
-
-      element_type* _M_ptr;
-      __shared_count<_Lp> _M_refcount;
-    };
-
-
-
-  template<typename _Tp1, typename _Tp2, _Lock_policy _Lp>
-    inline bool
-    operator==(const __shared_ptr<_Tp1, _Lp>& __a,
-        const __shared_ptr<_Tp2, _Lp>& __b) noexcept
-    { return __a.get() == __b.get(); }
-
-  template<typename _Tp, _Lock_policy _Lp>
-    inline bool
-    operator==(const __shared_ptr<_Tp, _Lp>& __a, nullptr_t) noexcept
-    { return !__a; }
-
-
-  template<typename _Tp, typename _Up, _Lock_policy _Lp>
-    inline strong_ordering
-    operator<=>(const __shared_ptr<_Tp, _Lp>& __a,
-  const __shared_ptr<_Up, _Lp>& __b) noexcept
-    { return compare_three_way()(__a.get(), __b.get()); }
-
-  template<typename _Tp, _Lock_policy _Lp>
-    inline strong_ordering
-    operator<=>(const __shared_ptr<_Tp, _Lp>& __a, nullptr_t) noexcept
-    {
-      using pointer = typename __shared_ptr<_Tp, _Lp>::element_type*;
-      return compare_three_way()(__a.get(), static_cast<pointer>(nullptr));
-    }
-# 1919 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-  template<typename _Tp, _Lock_policy _Lp>
-    inline void
-    swap(__shared_ptr<_Tp, _Lp>& __a, __shared_ptr<_Tp, _Lp>& __b) noexcept
-    { __a.swap(__b); }
-# 1931 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
-    inline __shared_ptr<_Tp, _Lp>
-    static_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
-    {
-      using _Sp = __shared_ptr<_Tp, _Lp>;
-      return _Sp(__r, static_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-
-
-
-
-  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
-    inline __shared_ptr<_Tp, _Lp>
-    const_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
-    {
-      using _Sp = __shared_ptr<_Tp, _Lp>;
-      return _Sp(__r, const_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-
-
-
-
-  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
-    inline __shared_ptr<_Tp, _Lp>
-    dynamic_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
-    {
-      using _Sp = __shared_ptr<_Tp, _Lp>;
-      if (auto* __p = dynamic_cast<typename _Sp::element_type*>(__r.get()))
- return _Sp(__r, __p);
-      return _Sp();
-    }
-
-
-  template<typename _Tp, typename _Tp1, _Lock_policy _Lp>
-    inline __shared_ptr<_Tp, _Lp>
-    reinterpret_pointer_cast(const __shared_ptr<_Tp1, _Lp>& __r) noexcept
-    {
-      using _Sp = __shared_ptr<_Tp, _Lp>;
-      return _Sp(__r, reinterpret_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-  template<typename _Tp, _Lock_policy _Lp>
-    class __weak_ptr
-    {
-      template<typename _Yp, typename _Res = void>
- using _Compatible = typename
-   enable_if<__sp_compatible_with<_Yp*, _Tp*>::value, _Res>::type;
-
-
-      template<typename _Yp>
- using _Assignable = _Compatible<_Yp, __weak_ptr&>;
-
-    public:
-      using element_type = typename remove_extent<_Tp>::type;
-
-      constexpr __weak_ptr() noexcept
-      : _M_ptr(nullptr), _M_refcount()
-      { }
-
-      __weak_ptr(const __weak_ptr&) noexcept = default;
-
-      ~__weak_ptr() = default;
-# 2013 "/usr/include/c++/14.2.1/bits/shared_ptr_base.h" 3
-      template<typename _Yp, typename = _Compatible<_Yp>>
- __weak_ptr(const __weak_ptr<_Yp, _Lp>& __r) noexcept
- : _M_refcount(__r._M_refcount)
-        { _M_ptr = __r.lock().get(); }
-
-      template<typename _Yp, typename = _Compatible<_Yp>>
- __weak_ptr(const __shared_ptr<_Yp, _Lp>& __r) noexcept
- : _M_ptr(__r._M_ptr), _M_refcount(__r._M_refcount)
- { }
-
-      __weak_ptr(__weak_ptr&& __r) noexcept
-      : _M_ptr(__r._M_ptr), _M_refcount(std::move(__r._M_refcount))
-      { __r._M_ptr = nullptr; }
-
-      template<typename _Yp, typename = _Compatible<_Yp>>
- __weak_ptr(__weak_ptr<_Yp, _Lp>&& __r) noexcept
- : _M_ptr(__r.lock().get()), _M_refcount(std::move(__r._M_refcount))
-        { __r._M_ptr = nullptr; }
-
-      __weak_ptr&
-      operator=(const __weak_ptr& __r) noexcept = default;
-
-      template<typename _Yp>
- _Assignable<_Yp>
- operator=(const __weak_ptr<_Yp, _Lp>& __r) noexcept
- {
-   _M_ptr = __r.lock().get();
-   _M_refcount = __r._M_refcount;
-   return *this;
- }
-
-      template<typename _Yp>
- _Assignable<_Yp>
- operator=(const __shared_ptr<_Yp, _Lp>& __r) noexcept
- {
-   _M_ptr = __r._M_ptr;
-   _M_refcount = __r._M_refcount;
-   return *this;
- }
-
-      __weak_ptr&
-      operator=(__weak_ptr&& __r) noexcept
-      {
- __weak_ptr(std::move(__r)).swap(*this);
- return *this;
-      }
-
-      template<typename _Yp>
- _Assignable<_Yp>
- operator=(__weak_ptr<_Yp, _Lp>&& __r) noexcept
- {
-   _M_ptr = __r.lock().get();
-   _M_refcount = std::move(__r._M_refcount);
-   __r._M_ptr = nullptr;
-   return *this;
- }
-
-      __shared_ptr<_Tp, _Lp>
-      lock() const noexcept
-      { return __shared_ptr<element_type, _Lp>(*this, std::nothrow); }
-
-      long
-      use_count() const noexcept
-      { return _M_refcount._M_get_use_count(); }
-
-      bool
-      expired() const noexcept
-      { return _M_refcount._M_get_use_count() == 0; }
-
-      template<typename _Tp1>
- bool
- owner_before(const __shared_ptr<_Tp1, _Lp>& __rhs) const noexcept
- { return _M_refcount._M_less(__rhs._M_refcount); }
-
-      template<typename _Tp1>
- bool
- owner_before(const __weak_ptr<_Tp1, _Lp>& __rhs) const noexcept
- { return _M_refcount._M_less(__rhs._M_refcount); }
-
-      void
-      reset() noexcept
-      { __weak_ptr().swap(*this); }
-
-      void
-      swap(__weak_ptr& __s) noexcept
-      {
- std::swap(_M_ptr, __s._M_ptr);
- _M_refcount._M_swap(__s._M_refcount);
-      }
-
-    private:
-
-      void
-      _M_assign(_Tp* __ptr, const __shared_count<_Lp>& __refcount) noexcept
-      {
- if (use_count() == 0)
-   {
-     _M_ptr = __ptr;
-     _M_refcount = __refcount;
-   }
-      }
-
-      template<typename _Tp1, _Lock_policy _Lp1> friend class __shared_ptr;
-      template<typename _Tp1, _Lock_policy _Lp1> friend class __weak_ptr;
-      friend class __enable_shared_from_this<_Tp, _Lp>;
-      friend class enable_shared_from_this<_Tp>;
-
-      friend _Sp_atomic<weak_ptr<_Tp>>;
-
-
-      element_type* _M_ptr;
-      __weak_count<_Lp> _M_refcount;
-    };
-
-
-  template<typename _Tp, _Lock_policy _Lp>
-    inline void
-    swap(__weak_ptr<_Tp, _Lp>& __a, __weak_ptr<_Tp, _Lp>& __b) noexcept
-    { __a.swap(__b); }
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-  template<typename _Tp, typename _Tp1>
-    struct _Sp_owner_less : public binary_function<_Tp, _Tp, bool>
-    {
-      bool
-      operator()(const _Tp& __lhs, const _Tp& __rhs) const noexcept
-      { return __lhs.owner_before(__rhs); }
-
-      bool
-      operator()(const _Tp& __lhs, const _Tp1& __rhs) const noexcept
-      { return __lhs.owner_before(__rhs); }
-
-      bool
-      operator()(const _Tp1& __lhs, const _Tp& __rhs) const noexcept
-      { return __lhs.owner_before(__rhs); }
-    };
-#pragma GCC diagnostic pop
-
-  template<>
-    struct _Sp_owner_less<void, void>
-    {
-      template<typename _Tp, typename _Up>
- auto
- operator()(const _Tp& __lhs, const _Up& __rhs) const noexcept
- -> decltype(__lhs.owner_before(__rhs))
- { return __lhs.owner_before(__rhs); }
-
-      using is_transparent = void;
-    };
-
-  template<typename _Tp, _Lock_policy _Lp>
-    struct owner_less<__shared_ptr<_Tp, _Lp>>
-    : public _Sp_owner_less<__shared_ptr<_Tp, _Lp>, __weak_ptr<_Tp, _Lp>>
-    { };
-
-  template<typename _Tp, _Lock_policy _Lp>
-    struct owner_less<__weak_ptr<_Tp, _Lp>>
-    : public _Sp_owner_less<__weak_ptr<_Tp, _Lp>, __shared_ptr<_Tp, _Lp>>
-    { };
-
-
-  template<typename _Tp, _Lock_policy _Lp>
-    class __enable_shared_from_this
-    {
-    protected:
-      constexpr __enable_shared_from_this() noexcept { }
-
-      __enable_shared_from_this(const __enable_shared_from_this&) noexcept { }
-
-      __enable_shared_from_this&
-      operator=(const __enable_shared_from_this&) noexcept
-      { return *this; }
-
-      ~__enable_shared_from_this() { }
-
-    public:
-      __shared_ptr<_Tp, _Lp>
-      shared_from_this()
-      { return __shared_ptr<_Tp, _Lp>(this->_M_weak_this); }
-
-      __shared_ptr<const _Tp, _Lp>
-      shared_from_this() const
-      { return __shared_ptr<const _Tp, _Lp>(this->_M_weak_this); }
-
-
-      __weak_ptr<_Tp, _Lp>
-      weak_from_this() noexcept
-      { return this->_M_weak_this; }
-
-      __weak_ptr<const _Tp, _Lp>
-      weak_from_this() const noexcept
-      { return this->_M_weak_this; }
-
-
-    private:
-      template<typename _Tp1>
- void
- _M_weak_assign(_Tp1* __p, const __shared_count<_Lp>& __n) const noexcept
- { _M_weak_this._M_assign(__p, __n); }
-
-      friend const __enable_shared_from_this*
-      __enable_shared_from_this_base(const __shared_count<_Lp>&,
-         const __enable_shared_from_this* __p)
-      { return __p; }
-
-      template<typename, _Lock_policy>
- friend class __shared_ptr;
-
-      mutable __weak_ptr<_Tp, _Lp> _M_weak_this;
-    };
-
-  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy,
-    typename _Alloc, typename... _Args>
-    inline __shared_ptr<_Tp, _Lp>
-    __allocate_shared(const _Alloc& __a, _Args&&... __args)
-    {
-      static_assert(!is_array<_Tp>::value, "make_shared<T[]> not supported");
-
-      return __shared_ptr<_Tp, _Lp>(_Sp_alloc_shared_tag<_Alloc>{__a},
-        std::forward<_Args>(__args)...);
-    }
-
-  template<typename _Tp, _Lock_policy _Lp = __default_lock_policy,
-    typename... _Args>
-    inline __shared_ptr<_Tp, _Lp>
-    __make_shared(_Args&&... __args)
-    {
-      typedef typename std::remove_const<_Tp>::type _Tp_nc;
-      return std::__allocate_shared<_Tp, _Lp>(std::allocator<_Tp_nc>(),
-           std::forward<_Args>(__args)...);
-    }
-
-
-  template<typename _Tp, _Lock_policy _Lp>
-    struct hash<__shared_ptr<_Tp, _Lp>>
-    : public __hash_base<size_t, __shared_ptr<_Tp, _Lp>>
-    {
-      size_t
-      operator()(const __shared_ptr<_Tp, _Lp>& __s) const noexcept
-      {
- return hash<typename __shared_ptr<_Tp, _Lp>::element_type*>()(
-     __s.get());
-      }
-    };
-
-
-}
-# 54 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 2 3
-
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-# 68 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Ch, typename _Tr, typename _Tp, _Lock_policy _Lp>
-    inline std::basic_ostream<_Ch, _Tr>&
-    operator<<(std::basic_ostream<_Ch, _Tr>& __os,
-        const __shared_ptr<_Tp, _Lp>& __p)
-    {
-      __os << __p.get();
-      return __os;
-    }
-
-  template<typename _Del, typename _Tp, _Lock_policy _Lp>
-    inline _Del*
-    get_deleter(const __shared_ptr<_Tp, _Lp>& __p) noexcept
-    {
-
-      return static_cast<_Del*>(__p._M_get_deleter(typeid(_Del)));
-
-
-
-    }
-
-
-
-
-
-  template<typename _Del, typename _Tp>
-    inline _Del*
-    get_deleter(const shared_ptr<_Tp>& __p) noexcept
-    {
-
-      return static_cast<_Del*>(__p._M_get_deleter(typeid(_Del)));
-
-
-
-    }
-
-
-
-
-
-  template<typename _Tp>
-    requires (!is_array_v<_Tp>)
-    using _NonArray = _Tp;
-# 118 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp>
-    requires is_array_v<_Tp> && (extent_v<_Tp> == 0)
-    using _UnboundedArray = _Tp;
-# 129 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp>
-    requires (extent_v<_Tp> != 0)
-    using _BoundedArray = _Tp;
-# 141 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp>
-    requires (!is_array_v<_Tp>) || (extent_v<_Tp> != 0)
-    using _NotUnboundedArray = _Tp;
-# 174 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp>
-    class shared_ptr : public __shared_ptr<_Tp>
-    {
-      template<typename... _Args>
- using _Constructible = typename enable_if<
-   is_constructible<__shared_ptr<_Tp>, _Args...>::value
- >::type;
-
-      template<typename _Arg>
- using _Assignable = typename enable_if<
-   is_assignable<__shared_ptr<_Tp>&, _Arg>::value, shared_ptr&
- >::type;
-
-    public:
-
-
-      using element_type = typename __shared_ptr<_Tp>::element_type;
-
-
-
-
-      using weak_type = weak_ptr<_Tp>;
-
-
-
-
-
-      constexpr shared_ptr() noexcept : __shared_ptr<_Tp>() { }
-
-      shared_ptr(const shared_ptr&) noexcept = default;
-
-
-
-
-
-
-
-      template<typename _Yp, typename = _Constructible<_Yp*>>
- explicit
- shared_ptr(_Yp* __p) : __shared_ptr<_Tp>(__p) { }
-# 228 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Yp, typename _Deleter,
-        typename = _Constructible<_Yp*, _Deleter>>
- shared_ptr(_Yp* __p, _Deleter __d)
-        : __shared_ptr<_Tp>(__p, std::move(__d)) { }
-# 246 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Deleter>
- shared_ptr(nullptr_t __p, _Deleter __d)
-        : __shared_ptr<_Tp>(__p, std::move(__d)) { }
-# 265 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Yp, typename _Deleter, typename _Alloc,
-        typename = _Constructible<_Yp*, _Deleter, _Alloc>>
- shared_ptr(_Yp* __p, _Deleter __d, _Alloc __a)
- : __shared_ptr<_Tp>(__p, std::move(__d), std::move(__a)) { }
-# 285 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Deleter, typename _Alloc>
- shared_ptr(nullptr_t __p, _Deleter __d, _Alloc __a)
- : __shared_ptr<_Tp>(__p, std::move(__d), std::move(__a)) { }
-# 309 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Yp>
- shared_ptr(const shared_ptr<_Yp>& __r, element_type* __p) noexcept
- : __shared_ptr<_Tp>(__r, __p) { }
-# 337 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Yp>
- shared_ptr(shared_ptr<_Yp>&& __r, element_type* __p) noexcept
- : __shared_ptr<_Tp>(std::move(__r), __p) { }
-# 348 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Yp,
-        typename = _Constructible<const shared_ptr<_Yp>&>>
- shared_ptr(const shared_ptr<_Yp>& __r) noexcept
-        : __shared_ptr<_Tp>(__r) { }
-
-
-
-
-
-
-      shared_ptr(shared_ptr&& __r) noexcept
-      : __shared_ptr<_Tp>(std::move(__r)) { }
-
-
-
-
-
-
-      template<typename _Yp, typename = _Constructible<shared_ptr<_Yp>>>
- shared_ptr(shared_ptr<_Yp>&& __r) noexcept
- : __shared_ptr<_Tp>(std::move(__r)) { }
-# 378 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      template<typename _Yp, typename = _Constructible<const weak_ptr<_Yp>&>>
- explicit shared_ptr(const weak_ptr<_Yp>& __r)
- : __shared_ptr<_Tp>(__r) { }
-
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-      template<typename _Yp, typename = _Constructible<auto_ptr<_Yp>>>
- shared_ptr(auto_ptr<_Yp>&& __r);
-#pragma GCC diagnostic pop
-
-
-
-
-      template<typename _Yp, typename _Del,
-        typename = _Constructible<unique_ptr<_Yp, _Del>>>
- shared_ptr(unique_ptr<_Yp, _Del>&& __r)
- : __shared_ptr<_Tp>(std::move(__r)) { }
-# 411 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-      constexpr shared_ptr(nullptr_t) noexcept : shared_ptr() { }
-
-      shared_ptr& operator=(const shared_ptr&) noexcept = default;
-
-      template<typename _Yp>
- _Assignable<const shared_ptr<_Yp>&>
- operator=(const shared_ptr<_Yp>& __r) noexcept
- {
-   this->__shared_ptr<_Tp>::operator=(__r);
-   return *this;
- }
-
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-      template<typename _Yp>
- _Assignable<auto_ptr<_Yp>>
- operator=(auto_ptr<_Yp>&& __r)
- {
-   this->__shared_ptr<_Tp>::operator=(std::move(__r));
-   return *this;
- }
-#pragma GCC diagnostic pop
-
-
-      shared_ptr&
-      operator=(shared_ptr&& __r) noexcept
-      {
- this->__shared_ptr<_Tp>::operator=(std::move(__r));
- return *this;
-      }
-
-      template<class _Yp>
- _Assignable<shared_ptr<_Yp>>
- operator=(shared_ptr<_Yp>&& __r) noexcept
- {
-   this->__shared_ptr<_Tp>::operator=(std::move(__r));
-   return *this;
- }
-
-      template<typename _Yp, typename _Del>
- _Assignable<unique_ptr<_Yp, _Del>>
- operator=(unique_ptr<_Yp, _Del>&& __r)
- {
-   this->__shared_ptr<_Tp>::operator=(std::move(__r));
-   return *this;
- }
-
-    private:
-
-      template<typename _Alloc, typename... _Args>
- shared_ptr(_Sp_alloc_shared_tag<_Alloc> __tag, _Args&&... __args)
- : __shared_ptr<_Tp>(__tag, std::forward<_Args>(__args)...)
- { }
-
-      template<typename _Yp, typename _Alloc, typename... _Args>
- friend shared_ptr<_NonArray<_Yp>>
- allocate_shared(const _Alloc&, _Args&&...);
-
-      template<typename _Yp, typename... _Args>
- friend shared_ptr<_NonArray<_Yp>>
- make_shared(_Args&&...);
-
-
-
-      template<typename _Alloc, typename _Init = const remove_extent_t<_Tp>*>
- shared_ptr(const _Sp_counted_array_base<_Alloc>& __a,
-     _Init __init = nullptr)
- : __shared_ptr<_Tp>(__a, __init)
- { }
-
-      template<typename _Yp, typename _Alloc>
- friend shared_ptr<_UnboundedArray<_Yp>>
- allocate_shared(const _Alloc&, size_t);
-
-      template<typename _Yp>
- friend shared_ptr<_UnboundedArray<_Yp>>
- make_shared(size_t);
-
-      template<typename _Yp, typename _Alloc>
- friend shared_ptr<_UnboundedArray<_Yp>>
- allocate_shared(const _Alloc&, size_t, const remove_extent_t<_Yp>&);
-
-      template<typename _Yp>
- friend shared_ptr<_UnboundedArray<_Yp>>
- make_shared(size_t, const remove_extent_t<_Yp>&);
-
-      template<typename _Yp, typename _Alloc>
- friend shared_ptr<_BoundedArray<_Yp>>
- allocate_shared(const _Alloc&);
-
-      template<typename _Yp>
- friend shared_ptr<_BoundedArray<_Yp>>
- make_shared();
-
-      template<typename _Yp, typename _Alloc>
- friend shared_ptr<_BoundedArray<_Yp>>
- allocate_shared(const _Alloc&, const remove_extent_t<_Yp>&);
-
-      template<typename _Yp>
- friend shared_ptr<_BoundedArray<_Yp>>
- make_shared(const remove_extent_t<_Yp>&);
-
-
-      template<typename _Yp, typename _Alloc>
- friend shared_ptr<_NotUnboundedArray<_Yp>>
- allocate_shared_for_overwrite(const _Alloc&);
-
-      template<typename _Yp>
- friend shared_ptr<_NotUnboundedArray<_Yp>>
- make_shared_for_overwrite();
-
-      template<typename _Yp, typename _Alloc>
- friend shared_ptr<_UnboundedArray<_Yp>>
- allocate_shared_for_overwrite(const _Alloc&, size_t);
-
-      template<typename _Yp>
- friend shared_ptr<_UnboundedArray<_Yp>>
- make_shared_for_overwrite(size_t);
-
-
-
-
-      shared_ptr(const weak_ptr<_Tp>& __r, std::nothrow_t) noexcept
-      : __shared_ptr<_Tp>(__r, std::nothrow) { }
-
-      friend class weak_ptr<_Tp>;
-    };
-
-
-  template<typename _Tp>
-    shared_ptr(weak_ptr<_Tp>) -> shared_ptr<_Tp>;
-  template<typename _Tp, typename _Del>
-    shared_ptr(unique_ptr<_Tp, _Del>) -> shared_ptr<_Tp>;
-
-
-
-
-
-
-
-  template<typename _Tp, typename _Up>
-    [[__nodiscard__]] inline bool
-    operator==(const shared_ptr<_Tp>& __a, const shared_ptr<_Up>& __b) noexcept
-    { return __a.get() == __b.get(); }
-
-
-  template<typename _Tp>
-    [[__nodiscard__]] inline bool
-    operator==(const shared_ptr<_Tp>& __a, nullptr_t) noexcept
-    { return !__a; }
-
-
-  template<typename _Tp, typename _Up>
-    inline strong_ordering
-    operator<=>(const shared_ptr<_Tp>& __a,
-  const shared_ptr<_Up>& __b) noexcept
-    { return compare_three_way()(__a.get(), __b.get()); }
-
-  template<typename _Tp>
-    inline strong_ordering
-    operator<=>(const shared_ptr<_Tp>& __a, nullptr_t) noexcept
-    {
-      using pointer = typename shared_ptr<_Tp>::element_type*;
-      return compare_three_way()(__a.get(), static_cast<pointer>(nullptr));
-    }
-# 689 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp>
-    inline void
-    swap(shared_ptr<_Tp>& __a, shared_ptr<_Tp>& __b) noexcept
-    { __a.swap(__b); }
-
-
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    static_pointer_cast(const shared_ptr<_Up>& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      return _Sp(__r, static_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    const_pointer_cast(const shared_ptr<_Up>& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      return _Sp(__r, const_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    dynamic_pointer_cast(const shared_ptr<_Up>& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      if (auto* __p = dynamic_cast<typename _Sp::element_type*>(__r.get()))
- return _Sp(__r, __p);
-      return _Sp();
-    }
-
-
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    reinterpret_pointer_cast(const shared_ptr<_Up>& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      return _Sp(__r, reinterpret_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-
-
-
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    static_pointer_cast(shared_ptr<_Up>&& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      return _Sp(std::move(__r),
-   static_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    const_pointer_cast(shared_ptr<_Up>&& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      return _Sp(std::move(__r),
-   const_cast<typename _Sp::element_type*>(__r.get()));
-    }
-
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    dynamic_pointer_cast(shared_ptr<_Up>&& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      if (auto* __p = dynamic_cast<typename _Sp::element_type*>(__r.get()))
- return _Sp(std::move(__r), __p);
-      return _Sp();
-    }
-
-
-
-  template<typename _Tp, typename _Up>
-    inline shared_ptr<_Tp>
-    reinterpret_pointer_cast(shared_ptr<_Up>&& __r) noexcept
-    {
-      using _Sp = shared_ptr<_Tp>;
-      return _Sp(std::move(__r),
-   reinterpret_cast<typename _Sp::element_type*>(__r.get()));
-    }
-# 809 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp>
-    class weak_ptr : public __weak_ptr<_Tp>
-    {
-      template<typename _Arg>
- using _Constructible = typename enable_if<
-   is_constructible<__weak_ptr<_Tp>, _Arg>::value
- >::type;
-
-      template<typename _Arg>
- using _Assignable = typename enable_if<
-   is_assignable<__weak_ptr<_Tp>&, _Arg>::value, weak_ptr&
- >::type;
-
-    public:
-      constexpr weak_ptr() noexcept = default;
-
-      template<typename _Yp,
-        typename = _Constructible<const shared_ptr<_Yp>&>>
- weak_ptr(const shared_ptr<_Yp>& __r) noexcept
- : __weak_ptr<_Tp>(__r) { }
-
-      weak_ptr(const weak_ptr&) noexcept = default;
-
-      template<typename _Yp, typename = _Constructible<const weak_ptr<_Yp>&>>
- weak_ptr(const weak_ptr<_Yp>& __r) noexcept
- : __weak_ptr<_Tp>(__r) { }
-
-      weak_ptr(weak_ptr&&) noexcept = default;
-
-      template<typename _Yp, typename = _Constructible<weak_ptr<_Yp>>>
- weak_ptr(weak_ptr<_Yp>&& __r) noexcept
- : __weak_ptr<_Tp>(std::move(__r)) { }
-
-      weak_ptr&
-      operator=(const weak_ptr& __r) noexcept = default;
-
-      template<typename _Yp>
- _Assignable<const weak_ptr<_Yp>&>
- operator=(const weak_ptr<_Yp>& __r) noexcept
- {
-   this->__weak_ptr<_Tp>::operator=(__r);
-   return *this;
- }
-
-      template<typename _Yp>
- _Assignable<const shared_ptr<_Yp>&>
- operator=(const shared_ptr<_Yp>& __r) noexcept
- {
-   this->__weak_ptr<_Tp>::operator=(__r);
-   return *this;
- }
-
-      weak_ptr&
-      operator=(weak_ptr&& __r) noexcept = default;
-
-      template<typename _Yp>
- _Assignable<weak_ptr<_Yp>>
- operator=(weak_ptr<_Yp>&& __r) noexcept
- {
-   this->__weak_ptr<_Tp>::operator=(std::move(__r));
-   return *this;
- }
-
-      shared_ptr<_Tp>
-      lock() const noexcept
-      { return shared_ptr<_Tp>(*this, std::nothrow); }
-    };
-
-
-  template<typename _Tp>
-    weak_ptr(shared_ptr<_Tp>) -> weak_ptr<_Tp>;
-
-
-
-
-
-  template<typename _Tp>
-    inline void
-    swap(weak_ptr<_Tp>& __a, weak_ptr<_Tp>& __b) noexcept
-    { __a.swap(__b); }
-
-
-
-  template<typename _Tp = void>
-    struct owner_less;
-
-
-  template<>
-    struct owner_less<void> : _Sp_owner_less<void, void>
-    { };
-
-
-  template<typename _Tp>
-    struct owner_less<shared_ptr<_Tp>>
-    : public _Sp_owner_less<shared_ptr<_Tp>, weak_ptr<_Tp>>
-    { };
-
-
-  template<typename _Tp>
-    struct owner_less<weak_ptr<_Tp>>
-    : public _Sp_owner_less<weak_ptr<_Tp>, shared_ptr<_Tp>>
-    { };
-
-
-
-
-
-
-  template<typename _Tp>
-    class enable_shared_from_this
-    {
-    protected:
-      constexpr enable_shared_from_this() noexcept { }
-
-      enable_shared_from_this(const enable_shared_from_this&) noexcept { }
-
-      enable_shared_from_this&
-      operator=(const enable_shared_from_this&) noexcept
-      { return *this; }
-
-      ~enable_shared_from_this() { }
-
-    public:
-      shared_ptr<_Tp>
-      shared_from_this()
-      { return shared_ptr<_Tp>(this->_M_weak_this); }
-
-      shared_ptr<const _Tp>
-      shared_from_this() const
-      { return shared_ptr<const _Tp>(this->_M_weak_this); }
-
-
-
-
-
-
-      weak_ptr<_Tp>
-      weak_from_this() noexcept
-      { return this->_M_weak_this; }
-
-      weak_ptr<const _Tp>
-      weak_from_this() const noexcept
-      { return this->_M_weak_this; }
-
-
-
-    private:
-      template<typename _Tp1>
- void
- _M_weak_assign(_Tp1* __p, const __shared_count<>& __n) const noexcept
- { _M_weak_this._M_assign(__p, __n); }
-
-
-      friend const enable_shared_from_this*
-      __enable_shared_from_this_base(const __shared_count<>&,
-         const enable_shared_from_this* __p)
-      { return __p; }
-
-      template<typename, _Lock_policy>
- friend class __shared_ptr;
-
-      mutable weak_ptr<_Tp> _M_weak_this;
-    };
-# 986 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp, typename _Alloc, typename... _Args>
-    inline shared_ptr<_NonArray<_Tp>>
-    allocate_shared(const _Alloc& __a, _Args&&... __args)
-    {
-      return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{__a},
-        std::forward<_Args>(__args)...);
-    }
-# 1001 "/usr/include/c++/14.2.1/bits/shared_ptr.h" 3
-  template<typename _Tp, typename... _Args>
-    inline shared_ptr<_NonArray<_Tp>>
-    make_shared(_Args&&... __args)
-    {
-      using _Alloc = allocator<void>;
-      _Alloc __a;
-      return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{__a},
-        std::forward<_Args>(__args)...);
-    }
-
-
-
-  template<typename _Tp, typename _Alloc = allocator<void>>
-    auto
-    __make_shared_arr_tag(size_t __n, const _Alloc& __a = _Alloc()) noexcept
-    {
-      using _Up = remove_all_extents_t<_Tp>;
-      using _UpAlloc = __alloc_rebind<_Alloc, _Up>;
-      size_t __s = sizeof(remove_extent_t<_Tp>) / sizeof(_Up);
-      if (__builtin_mul_overflow(__s, __n, &__n))
- std::__throw_bad_array_new_length();
-      return _Sp_counted_array_base<_UpAlloc>{_UpAlloc(__a), __n};
-    }
-
-
-  template<typename _Tp, typename _Alloc>
-    inline shared_ptr<_UnboundedArray<_Tp>>
-    allocate_shared(const _Alloc& __a, size_t __n)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n, __a));
-    }
-
-  template<typename _Tp>
-    inline shared_ptr<_UnboundedArray<_Tp>>
-    make_shared(size_t __n)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n));
-    }
-
-  template<typename _Tp, typename _Alloc>
-    inline shared_ptr<_UnboundedArray<_Tp>>
-    allocate_shared(const _Alloc& __a, size_t __n,
-      const remove_extent_t<_Tp>& __u)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n, __a),
-        std::__addressof(__u));
-    }
-
-  template<typename _Tp>
-    inline shared_ptr<_UnboundedArray<_Tp>>
-    make_shared(size_t __n, const remove_extent_t<_Tp>& __u)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n),
-        std::__addressof(__u));
-    }
-
-
-  template<typename _Tp, typename _Alloc = allocator<void>>
-    auto
-    __make_shared_arrN_tag(const _Alloc& __a = _Alloc()) noexcept
-    {
-      using _Up = remove_all_extents_t<_Tp>;
-      using _UpAlloc = __alloc_rebind<_Alloc, _Up>;
-      size_t __n = sizeof(_Tp) / sizeof(_Up);
-      return _Sp_counted_array_base<_UpAlloc>{_UpAlloc(__a), __n};
-    }
-
-
-  template<typename _Tp, typename _Alloc>
-    inline shared_ptr<_BoundedArray<_Tp>>
-    allocate_shared(const _Alloc& __a)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(__a));
-    }
-
-  template<typename _Tp>
-    inline shared_ptr<_BoundedArray<_Tp>>
-    make_shared()
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>());
-    }
-
-  template<typename _Tp, typename _Alloc>
-    inline shared_ptr<_BoundedArray<_Tp>>
-    allocate_shared(const _Alloc& __a, const remove_extent_t<_Tp>& __u)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(__a),
-        std::__addressof(__u));
-    }
-
-  template<typename _Tp>
-    inline shared_ptr<_BoundedArray<_Tp>>
-    make_shared(const remove_extent_t<_Tp>& __u)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(),
-        std::__addressof(__u));
-    }
-
-
-  template<typename _Tp, typename _Alloc>
-    inline shared_ptr<_NotUnboundedArray<_Tp>>
-    allocate_shared_for_overwrite(const _Alloc& __a)
-    {
-      if constexpr (is_array_v<_Tp>)
- return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(__a),
-          _Sp_overwrite_tag{});
-      else
- {
-
-
-   using _Alloc2 = __alloc_rebind<_Alloc, _Sp_overwrite_tag>;
-   _Alloc2 __a2 = __a;
-   return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc2>{__a2});
- }
-    }
-
-  template<typename _Tp>
-    inline shared_ptr<_NotUnboundedArray<_Tp>>
-    make_shared_for_overwrite()
-    {
-      if constexpr (is_array_v<_Tp>)
- return shared_ptr<_Tp>(std::__make_shared_arrN_tag<_Tp>(),
-          _Sp_overwrite_tag{});
-      else
- {
-   using _Alloc = allocator<_Sp_overwrite_tag>;
-   return shared_ptr<_Tp>(_Sp_alloc_shared_tag<_Alloc>{{}});
- }
-    }
-
-  template<typename _Tp, typename _Alloc>
-    inline shared_ptr<_UnboundedArray<_Tp>>
-    allocate_shared_for_overwrite(const _Alloc& __a, size_t __n)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n, __a),
-        _Sp_overwrite_tag{});
-    }
-
-  template<typename _Tp>
-    inline shared_ptr<_UnboundedArray<_Tp>>
-    make_shared_for_overwrite(size_t __n)
-    {
-      return shared_ptr<_Tp>(std::__make_shared_arr_tag<_Tp>(__n),
-        _Sp_overwrite_tag{});
-    }
-
-
-
-
-  template<typename _Tp>
-    struct hash<shared_ptr<_Tp>>
-    : public __hash_base<size_t, shared_ptr<_Tp>>
-    {
-      size_t
-      operator()(const shared_ptr<_Tp>& __s) const noexcept
-      {
- return std::hash<typename shared_ptr<_Tp>::element_type*>()(__s.get());
-      }
-    };
-
-
-  template<typename _Tp>
-    static constexpr bool __is_shared_ptr = false;
-  template<typename _Tp>
-    static constexpr bool __is_shared_ptr<shared_ptr<_Tp>> = true;
-
-
-
-
-
-
-  namespace __detail::__variant
-  {
-    template<typename> struct _Never_valueless_alt;
-
-
-
-    template<typename _Tp>
-      struct _Never_valueless_alt<std::shared_ptr<_Tp>>
-      : std::true_type
-      { };
-
-
-
-    template<typename _Tp>
-      struct _Never_valueless_alt<std::weak_ptr<_Tp>>
-      : std::true_type
-      { };
-  }
-
-
-
-}
-# 81 "/usr/include/c++/14.2.1/memory" 2 3
+# 81 "/usr/include/c++/14.2.1/memory" 3
 # 1 "/usr/include/c++/14.2.1/bits/shared_ptr_atomic.h" 1 3
 # 62 "/usr/include/c++/14.2.1/bits/shared_ptr_atomic.h" 3
 namespace std __attribute__ ((__visibility__ ("default")))
@@ -114397,2549 +116929,6 @@ template <class T> struct identity_tag {};
 
 }
 } }
-# 4693 "/home/leo/CLionProjects/films_distribution/include/json.hpp"
-# 1 "/usr/include/c++/14.2.1/filesystem" 1 3
-# 33 "/usr/include/c++/14.2.1/filesystem" 3
-       
-# 34 "/usr/include/c++/14.2.1/filesystem" 3
-
-
-
-
-# 1 "/usr/include/c++/14.2.1/bits/version.h" 1 3
-# 47 "/usr/include/c++/14.2.1/bits/version.h" 3
-       
-# 48 "/usr/include/c++/14.2.1/bits/version.h" 3
-# 39 "/usr/include/c++/14.2.1/filesystem" 2 3
-# 51 "/usr/include/c++/14.2.1/filesystem" 3
-# 1 "/usr/include/c++/14.2.1/bits/fs_fwd.h" 1 3
-# 39 "/usr/include/c++/14.2.1/bits/fs_fwd.h" 3
-
-# 39 "/usr/include/c++/14.2.1/bits/fs_fwd.h" 3
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-
-namespace filesystem
-{
-
-
-inline namespace __cxx11 __attribute__((__abi_tag__ ("cxx11"))) { }
-
-
-
-
-
-
-
-  class file_status;
-namespace __cxx11 {
-  class path;
-  class filesystem_error;
-  class directory_entry;
-  class directory_iterator;
-  class recursive_directory_iterator;
-}
-
-
-  struct space_info
-  {
-    uintmax_t capacity;
-    uintmax_t free;
-    uintmax_t available;
-
-
-    friend bool operator==(const space_info&, const space_info&) = default;
-
-  };
-
-
-  enum class file_type : signed char {
-      none = 0, not_found = -1, regular = 1, directory = 2, symlink = 3,
-      block = 4, character = 5, fifo = 6, socket = 7, unknown = 8
-  };
-
-
-  enum class copy_options : unsigned short {
-      none = 0,
-      skip_existing = 1, overwrite_existing = 2, update_existing = 4,
-      recursive = 8,
-      copy_symlinks = 16, skip_symlinks = 32,
-      directories_only = 64, create_symlinks = 128, create_hard_links = 256
-  };
-
-
-
-  [[nodiscard]]
-  constexpr copy_options
-  operator&(copy_options __x, copy_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<copy_options>::type;
-    return static_cast<copy_options>(
- static_cast<__utype>(__x) & static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr copy_options
-  operator|(copy_options __x, copy_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<copy_options>::type;
-    return static_cast<copy_options>(
- static_cast<__utype>(__x) | static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr copy_options
-  operator^(copy_options __x, copy_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<copy_options>::type;
-    return static_cast<copy_options>(
- static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr copy_options
-  operator~(copy_options __x) noexcept
-  {
-    using __utype = typename std::underlying_type<copy_options>::type;
-    return static_cast<copy_options>(~static_cast<__utype>(__x));
-  }
-
-  inline copy_options&
-  operator&=(copy_options& __x, copy_options __y) noexcept
-  { return __x = __x & __y; }
-
-  inline copy_options&
-  operator|=(copy_options& __x, copy_options __y) noexcept
-  { return __x = __x | __y; }
-
-  inline copy_options&
-  operator^=(copy_options& __x, copy_options __y) noexcept
-  { return __x = __x ^ __y; }
-
-
-
-
-  enum class perms : unsigned {
-      none = 0,
-      owner_read = 0400,
-      owner_write = 0200,
-      owner_exec = 0100,
-      owner_all = 0700,
-      group_read = 040,
-      group_write = 020,
-      group_exec = 010,
-      group_all = 070,
-      others_read = 04,
-      others_write = 02,
-      others_exec = 01,
-      others_all = 07,
-      all = 0777,
-      set_uid = 04000,
-      set_gid = 02000,
-      sticky_bit = 01000,
-      mask = 07777,
-      unknown = 0xFFFF,
-  };
-
-
-
-  [[nodiscard]]
-  constexpr perms
-  operator&(perms __x, perms __y) noexcept
-  {
-    using __utype = typename std::underlying_type<perms>::type;
-    return static_cast<perms>(
- static_cast<__utype>(__x) & static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr perms
-  operator|(perms __x, perms __y) noexcept
-  {
-    using __utype = typename std::underlying_type<perms>::type;
-    return static_cast<perms>(
- static_cast<__utype>(__x) | static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr perms
-  operator^(perms __x, perms __y) noexcept
-  {
-    using __utype = typename std::underlying_type<perms>::type;
-    return static_cast<perms>(
- static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr perms
-  operator~(perms __x) noexcept
-  {
-    using __utype = typename std::underlying_type<perms>::type;
-    return static_cast<perms>(~static_cast<__utype>(__x));
-  }
-
-  inline perms&
-  operator&=(perms& __x, perms __y) noexcept
-  { return __x = __x & __y; }
-
-  inline perms&
-  operator|=(perms& __x, perms __y) noexcept
-  { return __x = __x | __y; }
-
-  inline perms&
-  operator^=(perms& __x, perms __y) noexcept
-  { return __x = __x ^ __y; }
-
-
-
-  enum class perm_options : unsigned {
-      replace = 0x1,
-      add = 0x2,
-      remove = 0x4,
-      nofollow = 0x8
-  };
-
-
-
-  [[nodiscard]]
-  constexpr perm_options
-  operator&(perm_options __x, perm_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<perm_options>::type;
-    return static_cast<perm_options>(
- static_cast<__utype>(__x) & static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr perm_options
-  operator|(perm_options __x, perm_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<perm_options>::type;
-    return static_cast<perm_options>(
- static_cast<__utype>(__x) | static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr perm_options
-  operator^(perm_options __x, perm_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<perm_options>::type;
-    return static_cast<perm_options>(
- static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr perm_options
-  operator~(perm_options __x) noexcept
-  {
-    using __utype = typename std::underlying_type<perm_options>::type;
-    return static_cast<perm_options>(~static_cast<__utype>(__x));
-  }
-
-  inline perm_options&
-  operator&=(perm_options& __x, perm_options __y) noexcept
-  { return __x = __x & __y; }
-
-  inline perm_options&
-  operator|=(perm_options& __x, perm_options __y) noexcept
-  { return __x = __x | __y; }
-
-  inline perm_options&
-  operator^=(perm_options& __x, perm_options __y) noexcept
-  { return __x = __x ^ __y; }
-
-
-
-  enum class directory_options : unsigned char {
-      none = 0, follow_directory_symlink = 1, skip_permission_denied = 2
-  };
-
-
-
-  [[nodiscard]]
-  constexpr directory_options
-  operator&(directory_options __x, directory_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<directory_options>::type;
-    return static_cast<directory_options>(
- static_cast<__utype>(__x) & static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr directory_options
-  operator|(directory_options __x, directory_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<directory_options>::type;
-    return static_cast<directory_options>(
- static_cast<__utype>(__x) | static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr directory_options
-  operator^(directory_options __x, directory_options __y) noexcept
-  {
-    using __utype = typename std::underlying_type<directory_options>::type;
-    return static_cast<directory_options>(
- static_cast<__utype>(__x) ^ static_cast<__utype>(__y));
-  }
-
-  [[nodiscard]]
-  constexpr directory_options
-  operator~(directory_options __x) noexcept
-  {
-    using __utype = typename std::underlying_type<directory_options>::type;
-    return static_cast<directory_options>(~static_cast<__utype>(__x));
-  }
-
-  inline directory_options&
-  operator&=(directory_options& __x, directory_options __y) noexcept
-  { return __x = __x & __y; }
-
-  inline directory_options&
-  operator|=(directory_options& __x, directory_options __y) noexcept
-  { return __x = __x | __y; }
-
-  inline directory_options&
-  operator^=(directory_options& __x, directory_options __y) noexcept
-  { return __x = __x ^ __y; }
-
-
-
-  using file_time_type = __file_clock::time_point;
-
-
-
-  void copy(const path& __from, const path& __to, copy_options __options);
-  void copy(const path& __from, const path& __to, copy_options __options,
-     error_code&);
-
-  bool copy_file(const path& __from, const path& __to, copy_options __option);
-  bool copy_file(const path& __from, const path& __to, copy_options __option,
-   error_code&);
-
-  path current_path();
-
-  bool exists(file_status) noexcept;
-
-  bool is_other(file_status) noexcept;
-
-  uintmax_t file_size(const path&);
-  uintmax_t file_size(const path&, error_code&) noexcept;
-  uintmax_t hard_link_count(const path&);
-  uintmax_t hard_link_count(const path&, error_code&) noexcept;
-  file_time_type last_write_time(const path&);
-  file_time_type last_write_time(const path&, error_code&) noexcept;
-
-  void permissions(const path&, perms, perm_options, error_code&) noexcept;
-
-  path proximate(const path& __p, const path& __base, error_code& __ec);
-  path proximate(const path& __p, const path& __base, error_code& __ec);
-
-  path relative(const path& __p, const path& __base, error_code& __ec);
-
-  file_status status(const path&);
-  file_status status(const path&, error_code&) noexcept;
-
-  bool status_known(file_status) noexcept;
-
-  file_status symlink_status(const path&);
-  file_status symlink_status(const path&, error_code&) noexcept;
-
-  bool is_regular_file(file_status) noexcept;
-  bool is_symlink(file_status) noexcept;
-
-  bool remove(const path&, error_code&) noexcept;
-  uintmax_t remove_all(const path&);
-  uintmax_t remove_all(const path&, error_code&);
-
-
-}
-
-}
-# 52 "/usr/include/c++/14.2.1/filesystem" 2 3
-# 1 "/usr/include/c++/14.2.1/bits/fs_path.h" 1 3
-# 39 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-# 1 "/usr/include/c++/14.2.1/codecvt" 1 3
-# 34 "/usr/include/c++/14.2.1/codecvt" 3
-       
-# 35 "/usr/include/c++/14.2.1/codecvt" 3
-# 43 "/usr/include/c++/14.2.1/codecvt" 3
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-  enum codecvt_mode
-  {
-    consume_header = 4,
-    generate_header = 2,
-    little_endian = 1
-  };
-
-  template<typename _Elem, unsigned long _Maxcode = 0x10ffff,
-    codecvt_mode _Mode = (codecvt_mode)0>
-    class codecvt_utf8 : public codecvt<_Elem, char, mbstate_t>
-    {
-    public:
-      explicit
-      codecvt_utf8(size_t __refs = 0);
-
-      ~codecvt_utf8();
-    };
-
-  template<typename _Elem, unsigned long _Maxcode = 0x10ffff,
-    codecvt_mode _Mode = (codecvt_mode)0>
-    class codecvt_utf16 : public codecvt<_Elem, char, mbstate_t>
-    {
-    public:
-      explicit
-      codecvt_utf16(size_t __refs = 0);
-
-      ~codecvt_utf16();
-    };
-
-  template<typename _Elem, unsigned long _Maxcode = 0x10ffff,
-    codecvt_mode _Mode = (codecvt_mode)0>
-    class codecvt_utf8_utf16 : public codecvt<_Elem, char, mbstate_t>
-    {
-    public:
-      explicit
-      codecvt_utf8_utf16(size_t __refs = 0);
-
-      ~codecvt_utf8_utf16();
-    };
-# 154 "/usr/include/c++/14.2.1/codecvt" 3
-  template<typename _Elem> class __codecvt_utf8_base;
-  template<typename _Elem> class __codecvt_utf16_base;
-  template<typename _Elem> class __codecvt_utf8_utf16_base;
-
-  template<> class __codecvt_utf8_base<char16_t> : public codecvt<char16_t, char, mbstate_t> { public: typedef char16_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8<char16_t, _Maxcode, _Mode> : public __codecvt_utf8_base<char16_t> { public: explicit codecvt_utf8(size_t __refs = 0) : __codecvt_utf8_base<char16_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-  template<> class __codecvt_utf16_base<char16_t> : public codecvt<char16_t, char, mbstate_t> { public: typedef char16_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf16<char16_t, _Maxcode, _Mode> : public __codecvt_utf16_base<char16_t> { public: explicit codecvt_utf16(size_t __refs = 0) : __codecvt_utf16_base<char16_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-  template<> class __codecvt_utf8_utf16_base<char16_t> : public codecvt<char16_t, char, mbstate_t> { public: typedef char16_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8_utf16<char16_t, _Maxcode, _Mode> : public __codecvt_utf8_utf16_base<char16_t> { public: explicit codecvt_utf8_utf16(size_t __refs = 0) : __codecvt_utf8_utf16_base<char16_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-
-  template<> class __codecvt_utf8_base<char32_t> : public codecvt<char32_t, char, mbstate_t> { public: typedef char32_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8<char32_t, _Maxcode, _Mode> : public __codecvt_utf8_base<char32_t> { public: explicit codecvt_utf8(size_t __refs = 0) : __codecvt_utf8_base<char32_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-  template<> class __codecvt_utf16_base<char32_t> : public codecvt<char32_t, char, mbstate_t> { public: typedef char32_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf16<char32_t, _Maxcode, _Mode> : public __codecvt_utf16_base<char32_t> { public: explicit codecvt_utf16(size_t __refs = 0) : __codecvt_utf16_base<char32_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-  template<> class __codecvt_utf8_utf16_base<char32_t> : public codecvt<char32_t, char, mbstate_t> { public: typedef char32_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8_utf16<char32_t, _Maxcode, _Mode> : public __codecvt_utf8_utf16_base<char32_t> { public: explicit codecvt_utf8_utf16(size_t __refs = 0) : __codecvt_utf8_utf16_base<char32_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-
-
-  template<> class __codecvt_utf8_base<wchar_t> : public codecvt<wchar_t, char, mbstate_t> { public: typedef wchar_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8<wchar_t, _Maxcode, _Mode> : public __codecvt_utf8_base<wchar_t> { public: explicit codecvt_utf8(size_t __refs = 0) : __codecvt_utf8_base<wchar_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-  template<> class __codecvt_utf16_base<wchar_t> : public codecvt<wchar_t, char, mbstate_t> { public: typedef wchar_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf16<wchar_t, _Maxcode, _Mode> : public __codecvt_utf16_base<wchar_t> { public: explicit codecvt_utf16(size_t __refs = 0) : __codecvt_utf16_base<wchar_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-  template<> class __codecvt_utf8_utf16_base<wchar_t> : public codecvt<wchar_t, char, mbstate_t> { public: typedef wchar_t intern_type; typedef char extern_type; typedef mbstate_t state_type; protected: __codecvt_utf8_utf16_base(unsigned long __maxcode, codecvt_mode __mode, size_t __refs) : codecvt(__refs), _M_maxcode(__maxcode), _M_mode(__mode) { } virtual ~__codecvt_utf8_utf16_base(); virtual result do_out(state_type& __state, const intern_type* __from, const intern_type* __from_end, const intern_type*& __from_next, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_unshift(state_type& __state, extern_type* __to, extern_type* __to_end, extern_type*& __to_next) const; virtual result do_in(state_type& __state, const extern_type* __from, const extern_type* __from_end, const extern_type*& __from_next, intern_type* __to, intern_type* __to_end, intern_type*& __to_next) const; virtual int do_encoding() const throw(); virtual bool do_always_noconv() const throw(); virtual int do_length(state_type&, const extern_type* __from, const extern_type* __end, size_t __max) const; virtual int do_max_length() const throw(); private: unsigned long _M_maxcode; codecvt_mode _M_mode; }; template<unsigned long _Maxcode, codecvt_mode _Mode> class codecvt_utf8_utf16<wchar_t, _Maxcode, _Mode> : public __codecvt_utf8_utf16_base<wchar_t> { public: explicit codecvt_utf8_utf16(size_t __refs = 0) : __codecvt_utf8_utf16_base<wchar_t>(std::min(_Maxcode, 0x10fffful), _Mode, __refs) { } };
-
-
-
-}
-# 40 "/usr/include/c++/14.2.1/bits/fs_path.h" 2 3
-# 57 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-namespace filesystem
-{
-namespace __cxx11 {
-
-  class path;
-
-
-namespace __detail
-{
-
-
-  template<typename _CharT>
-    inline constexpr bool __is_encoded_char = false;
-  template<>
-    inline constexpr bool __is_encoded_char<char> = true;
-
-  template<>
-    inline constexpr bool __is_encoded_char<char8_t> = true;
-
-
-  template<>
-    inline constexpr bool __is_encoded_char<wchar_t> = true;
-
-  template<>
-    inline constexpr bool __is_encoded_char<char16_t> = true;
-  template<>
-    inline constexpr bool __is_encoded_char<char32_t> = true;
-
-
-  template<typename _Iter>
-    using __safe_iterator_traits = std::iterator_traits<_Iter>;
-# 104 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  template<typename _Iter_traits, typename = void>
-    inline constexpr bool __is_path_iter_src = false;
-
-  template<typename _Iter_traits>
-    inline constexpr bool
-    __is_path_iter_src<_Iter_traits, void_t<typename _Iter_traits::value_type>>
-      = __is_encoded_char<typename _Iter_traits::value_type>;
-
-  template<typename _Source>
-    inline constexpr bool __is_path_src
-      = __is_path_iter_src<iterator_traits<decay_t<_Source>>>;
-
-  template<>
-    inline constexpr bool __is_path_src<path> = false;
-
-  template<>
-    inline constexpr bool __is_path_src<volatile path> = false;
-
-  template<>
-    inline constexpr bool __is_path_src<void*> = false;
-
-  template<>
-    inline constexpr bool __is_path_src<const void*> = false;
-
-  template<>
-    inline constexpr bool __is_path_src<volatile void*> = false;
-
-  template<>
-    inline constexpr bool __is_path_src<const volatile void*> = false;
-
-  template<typename _CharT, typename _Traits, typename _Alloc>
-    inline constexpr bool
-      __is_path_src<basic_string<_CharT, _Traits, _Alloc>>
- = __is_encoded_char<_CharT>;
-
-  template<typename _CharT, typename _Traits>
-    inline constexpr bool
-      __is_path_src<basic_string_view<_CharT, _Traits>>
- = __is_encoded_char<_CharT>;
-
-
-  template<typename _Tp>
-    using _Path = enable_if_t<__is_path_src<_Tp>, path>;
-
-
-  template<typename _Iter, typename _Tr = __safe_iterator_traits<_Iter>>
-    using _Path2 = enable_if_t<__is_path_iter_src<_Tr>, path>;
-
-
-  template<typename _Iter>
-    constexpr bool __is_contiguous = std::contiguous_iterator<_Iter>;
-
-
-
-
-
-  template<typename _Tp>
-    constexpr bool __is_contiguous<_Tp*> = true;
-
-  template<typename _Tp, typename _Seq>
-    constexpr bool
-    __is_contiguous<__gnu_cxx::__normal_iterator<_Tp*, _Seq>> = true;
-
-
-
-  template<typename _EcharT>
-    using __unified_u8_t
-      = __conditional_t<is_same_v<_EcharT, char8_t>, char, _EcharT>;
-# 181 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  template<typename _CharT, typename _Traits, typename _Alloc>
-    inline basic_string_view<_CharT>
-    __effective_range(const basic_string<_CharT, _Traits, _Alloc>& __source)
-    noexcept
-    { return __source; }
-
-  template<typename _CharT, typename _Traits>
-    inline basic_string_view<_CharT>
-    __effective_range(const basic_string_view<_CharT, _Traits>& __source)
-    noexcept
-    { return __source; }
-
-
-  template<typename _Source>
-    auto
-    __effective_range(const _Source& __source)
-    {
-
-      using _Iter = decltype(std::__niter_base(__source));
-      using value_type = typename iterator_traits<_Iter>::value_type;
-
-      if constexpr (__is_contiguous<_Iter>)
- return basic_string_view<value_type>{&*__source};
-      else
- {
-
-
-   basic_string<__unified_u8_t<value_type>> __str;
-   _Source __it = __source;
-   for (value_type __ch = *__it; __ch != value_type(); __ch = *++__it)
-     __str.push_back(__ch);
-   return __str;
- }
-    }
-
-
-  template<typename _Source>
-    struct __source_value_type_impl
-    {
-      using type
- = typename __safe_iterator_traits<decay_t<_Source>>::value_type;
-    };
-
-  template<typename _CharT, typename _Traits, typename _Alloc>
-    struct __source_value_type_impl<basic_string<_CharT, _Traits, _Alloc>>
-    {
-      using type = _CharT;
-    };
-
-  template<typename _CharT, typename _Traits>
-    struct __source_value_type_impl<basic_string_view<_CharT, _Traits>>
-    {
-      using type = _CharT;
-    };
-
-
-  template<typename _Source>
-    using __source_value_t = typename __source_value_type_impl<_Source>::type;
-
-
-
-
-  template<typename _Tp, typename _Val = __source_value_t<_Tp>>
-    using __value_type_is_char
-      = std::enable_if_t<std::is_same_v<_Val, char>, _Val>;
-
-
-
-  template<typename _Tp, typename _Val = __source_value_t<_Tp>>
-    using __value_type_is_char_or_char8_t
-      = std::enable_if_t<std::is_same_v<_Val, char>
-
-    || std::is_same_v<_Val, char8_t>
-
-    , _Val>;
-
-
-  template<typename _InputIterator>
-    inline auto
-    __string_from_range(_InputIterator __first, _InputIterator __last)
-    {
-      using _EcharT
- = typename std::iterator_traits<_InputIterator>::value_type;
-      static_assert(__is_encoded_char<_EcharT>);
-
-      if constexpr (__is_contiguous<_InputIterator>)
- {
-
-   if (auto __len = __last - __first) [[__likely__]]
-     return basic_string_view<_EcharT>(&*__first, __len);
-   return basic_string_view<_EcharT>();
- }
-      else
- {
-
-   return basic_string<__unified_u8_t<_EcharT>>(__first, __last);
- }
-    }
-
-
-}
-# 293 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  class path
-  {
-  public:
-# 304 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-    using value_type = char;
-
-    static constexpr value_type preferred_separator = '/';
-
-    using string_type = std::basic_string<value_type>;
-
-
-    enum format : unsigned char { native_format, generic_format, auto_format };
-
-
-
-    path() noexcept { }
-
-    path(const path& __p) = default;
-
-    path(path&& __p) noexcept
-    : _M_pathname(std::move(__p._M_pathname)),
-      _M_cmpts(std::move(__p._M_cmpts))
-    { __p.clear(); }
-
-    path(string_type&& __source, format = auto_format)
-    : _M_pathname(std::move(__source))
-    { _M_split_cmpts(); }
-
-    template<typename _Source,
-      typename _Require = __detail::_Path<_Source>>
-      path(_Source const& __source, format = auto_format)
-      : _M_pathname(_S_convert(__detail::__effective_range(__source)))
-      { _M_split_cmpts(); }
-
-    template<typename _InputIterator,
-      typename _Require = __detail::_Path2<_InputIterator>>
-      path(_InputIterator __first, _InputIterator __last, format = auto_format)
-      : _M_pathname(_S_convert(__detail::__string_from_range(__first, __last)))
-      { _M_split_cmpts(); }
-
-    template<typename _Source,
-      typename _Require = __detail::_Path<_Source>,
-      typename _Require2 = __detail::__value_type_is_char<_Source>>
-      path(_Source const& __src, const locale& __loc, format = auto_format)
-      : _M_pathname(_S_convert_loc(__detail::__effective_range(__src), __loc))
-      { _M_split_cmpts(); }
-
-    template<typename _InputIterator,
-      typename _Require = __detail::_Path2<_InputIterator>,
-      typename _Req2 = __detail::__value_type_is_char<_InputIterator>>
-      path(_InputIterator __first, _InputIterator __last, const locale& __loc,
-    format = auto_format)
-      : _M_pathname(_S_convert_loc(__first, __last, __loc))
-      { _M_split_cmpts(); }
-
-    ~path() = default;
-
-
-
-    path& operator=(const path&);
-    path& operator=(path&&) noexcept;
-    path& operator=(string_type&& __source);
-    path& assign(string_type&& __source);
-
-    template<typename _Source>
-      __detail::_Path<_Source>&
-      operator=(_Source const& __source)
-      { return *this = path(__source); }
-
-    template<typename _Source>
-      __detail::_Path<_Source>&
-      assign(_Source const& __source)
-      { return *this = path(__source); }
-
-    template<typename _InputIterator>
-      __detail::_Path2<_InputIterator>&
-      assign(_InputIterator __first, _InputIterator __last)
-      { return *this = path(__first, __last); }
-
-
-
-    path& operator/=(const path& __p);
-
-    template<typename _Source>
-      __detail::_Path<_Source>&
-      operator/=(_Source const& __source)
-      {
- _M_append(_S_convert(__detail::__effective_range(__source)));
- return *this;
-      }
-
-    template<typename _Source>
-      __detail::_Path<_Source>&
-      append(_Source const& __source)
-      {
- _M_append(_S_convert(__detail::__effective_range(__source)));
- return *this;
-      }
-
-    template<typename _InputIterator>
-      __detail::_Path2<_InputIterator>&
-      append(_InputIterator __first, _InputIterator __last)
-      {
- _M_append(_S_convert(__detail::__string_from_range(__first, __last)));
- return *this;
-      }
-
-
-
-    path& operator+=(const path& __x);
-    path& operator+=(const string_type& __x);
-    path& operator+=(const value_type* __x);
-    path& operator+=(value_type __x);
-    path& operator+=(basic_string_view<value_type> __x);
-
-    template<typename _Source>
-      __detail::_Path<_Source>&
-      operator+=(_Source const& __x) { return concat(__x); }
-
-    template<typename _CharT>
-      __detail::_Path2<_CharT*>&
-      operator+=(_CharT __x);
-
-    template<typename _Source>
-      __detail::_Path<_Source>&
-      concat(_Source const& __x)
-      {
- _M_concat(_S_convert(__detail::__effective_range(__x)));
- return *this;
-      }
-
-    template<typename _InputIterator>
-      __detail::_Path2<_InputIterator>&
-      concat(_InputIterator __first, _InputIterator __last)
-      {
- _M_concat(_S_convert(__detail::__string_from_range(__first, __last)));
- return *this;
-      }
-
-
-
-    void clear() noexcept { _M_pathname.clear(); _M_split_cmpts(); }
-
-    path& make_preferred();
-    path& remove_filename();
-    path& replace_filename(const path& __replacement);
-    path& replace_extension(const path& __replacement = path());
-
-    void swap(path& __rhs) noexcept;
-
-
-
-    const string_type& native() const noexcept { return _M_pathname; }
-    const value_type* c_str() const noexcept { return _M_pathname.c_str(); }
-    operator string_type() const { return _M_pathname; }
-
-    template<typename _CharT, typename _Traits = std::char_traits<_CharT>,
-      typename _Allocator = std::allocator<_CharT>>
-      std::basic_string<_CharT, _Traits, _Allocator>
-      string(const _Allocator& __a = _Allocator()) const;
-
-    std::string string() const;
-
-    std::wstring wstring() const;
-
-
-    __attribute__((__abi_tag__("__u8")))
-    std::u8string u8string() const;
-
-
-
-    std::u16string u16string() const;
-    std::u32string u32string() const;
-
-
-    template<typename _CharT, typename _Traits = std::char_traits<_CharT>,
-      typename _Allocator = std::allocator<_CharT>>
-      std::basic_string<_CharT, _Traits, _Allocator>
-      generic_string(const _Allocator& __a = _Allocator()) const;
-
-    std::string generic_string() const;
-
-    std::wstring generic_wstring() const;
-
-
-    __attribute__((__abi_tag__("__u8")))
-    std::u8string generic_u8string() const;
-
-
-
-    std::u16string generic_u16string() const;
-    std::u32string generic_u32string() const;
-
-
-
-    int compare(const path& __p) const noexcept;
-    int compare(const string_type& __s) const noexcept;
-    int compare(const value_type* __s) const noexcept;
-    int compare(basic_string_view<value_type> __s) const noexcept;
-
-
-
-    path root_name() const;
-    path root_directory() const;
-    path root_path() const;
-    path relative_path() const;
-    path parent_path() const;
-    path filename() const;
-    path stem() const;
-    path extension() const;
-
-
-
-    [[nodiscard]] bool empty() const noexcept { return _M_pathname.empty(); }
-    bool has_root_name() const noexcept;
-    bool has_root_directory() const noexcept;
-    bool has_root_path() const noexcept;
-    bool has_relative_path() const noexcept;
-    bool has_parent_path() const noexcept;
-    bool has_filename() const noexcept;
-    bool has_stem() const noexcept;
-    bool has_extension() const noexcept;
-    bool is_absolute() const noexcept;
-    bool is_relative() const noexcept { return !is_absolute(); }
-
-
-    path lexically_normal() const;
-    path lexically_relative(const path& base) const;
-    path lexically_proximate(const path& base) const;
-
-
-    class iterator;
-    using const_iterator = iterator;
-
-    iterator begin() const noexcept;
-    iterator end() const noexcept;
-
-
-    template<typename _CharT, typename _Traits>
-      friend std::basic_ostream<_CharT, _Traits>&
-      operator<<(std::basic_ostream<_CharT, _Traits>& __os, const path& __p)
-      {
- __os << std::quoted(__p.string<_CharT, _Traits>());
- return __os;
-      }
-
-
-    template<typename _CharT, typename _Traits>
-      friend std::basic_istream<_CharT, _Traits>&
-      operator>>(std::basic_istream<_CharT, _Traits>& __is, path& __p)
-      {
- std::basic_string<_CharT, _Traits> __tmp;
- if (__is >> std::quoted(__tmp))
-   __p = std::move(__tmp);
- return __is;
-      }
-
-
-
-
-    friend bool operator==(const path& __lhs, const path& __rhs) noexcept
-    { return path::_S_compare(__lhs, __rhs) == 0; }
-
-
-
-    friend strong_ordering
-    operator<=>(const path& __lhs, const path& __rhs) noexcept
-    { return path::_S_compare(__lhs, __rhs) <=> 0; }
-# 591 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-    friend path operator/(const path& __lhs, const path& __rhs)
-    {
-      path __result(__lhs);
-      __result /= __rhs;
-      return __result;
-    }
-
-  private:
-    enum class _Type : unsigned char {
-      _Multi = 0, _Root_name, _Root_dir, _Filename
-    };
-
-    path(basic_string_view<value_type> __str, _Type __type);
-
-    enum class _Split { _Stem, _Extension };
-
-    void _M_append(basic_string_view<value_type>);
-    void _M_concat(basic_string_view<value_type>);
-
-    pair<const string_type*, size_t> _M_find_extension() const noexcept;
-
-
-
-
-
-    template<typename _Tp>
-      static auto
-      _S_convert(_Tp __str)
-      noexcept(is_same_v<typename _Tp::value_type, value_type>)
-      {
- if constexpr (is_same_v<typename _Tp::value_type, value_type>)
-   return __str;
-
- else if constexpr (is_same_v<_Tp, std::u8string>)
-
-
-
-   return string_type(_S_convert(__str.data(),
-     __str.data() + __str.size()));
-
- else
-   return _S_convert(__str.data(), __str.data() + __str.size());
-      }
-
-    template<typename _EcharT>
-      static auto
-      _S_convert(const _EcharT* __first, const _EcharT* __last);
-
-
-
-
-    static string_type
-    _S_convert_loc(const char* __first, const char* __last,
-     const std::locale& __loc);
-
-    template<typename _Iter>
-      static string_type
-      _S_convert_loc(_Iter __first, _Iter __last, const std::locale& __loc)
-      {
- const auto __s = __detail::__string_from_range(__first, __last);
- return _S_convert_loc(__s.data(), __s.data() + __s.size(), __loc);
-      }
-
-    template<typename _Tp>
-      static string_type
-      _S_convert_loc(const _Tp& __s, const std::locale& __loc)
-      {
- return _S_convert_loc(__s.data(), __s.data() + __s.size(), __loc);
-      }
-
-    template<typename _CharT, typename _Traits, typename _Allocator>
-      static basic_string<_CharT, _Traits, _Allocator>
-      _S_str_convert(basic_string_view<value_type>, const _Allocator&);
-
-
-    __attribute__((__always_inline__))
-    static int
-    _S_compare(const path& __lhs, const path& __rhs) noexcept;
-
-    void _M_split_cmpts();
-
-    _Type _M_type() const noexcept { return _M_cmpts.type(); }
-
-    string_type _M_pathname;
-
-    struct _Cmpt;
-
-    struct _List
-    {
-      using value_type = _Cmpt;
-      using iterator = value_type*;
-      using const_iterator = const value_type*;
-
-      _List();
-      _List(const _List&);
-      _List(_List&&) = default;
-      _List& operator=(const _List&);
-      _List& operator=(_List&&) = default;
-      ~_List() = default;
-
-      _Type type() const noexcept
-      { return _Type(reinterpret_cast<uintptr_t>(_M_impl.get()) & 0x3); }
-
-      void type(_Type) noexcept;
-
-      int size() const noexcept;
-      bool empty() const noexcept;
-      void clear();
-      void swap(_List& __l) noexcept { _M_impl.swap(__l._M_impl); }
-      int capacity() const noexcept;
-      void reserve(int, bool);
-
-
-
-
-      iterator begin() noexcept;
-      iterator end() noexcept;
-      const_iterator begin() const noexcept;
-      const_iterator end() const noexcept;
-
-      value_type& front() noexcept;
-      value_type& back() noexcept;
-      const value_type& front() const noexcept;
-      const value_type& back() const noexcept;
-
-      void pop_back();
-      void _M_erase_from(const_iterator __pos);
-
-      struct _Impl;
-      struct _Impl_deleter
-      {
- void operator()(_Impl*) const noexcept;
-      };
-      unique_ptr<_Impl, _Impl_deleter> _M_impl;
-    };
-    _List _M_cmpts;
-
-    struct _Parser;
-
-    template<typename _EcharT> struct _Codecvt;
-  };
-
-
-
-
-  inline void swap(path& __lhs, path& __rhs) noexcept { __lhs.swap(__rhs); }
-
-  size_t hash_value(const path& __p) noexcept;
-# 747 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  class filesystem_error : public std::system_error
-  {
-  public:
-    filesystem_error(const string& __what_arg, error_code __ec);
-
-    filesystem_error(const string& __what_arg, const path& __p1,
-       error_code __ec);
-
-    filesystem_error(const string& __what_arg, const path& __p1,
-       const path& __p2, error_code __ec);
-
-    filesystem_error(const filesystem_error&) = default;
-    filesystem_error& operator=(const filesystem_error&) = default;
-
-
-
-
-    ~filesystem_error();
-
-    const path& path1() const noexcept;
-    const path& path2() const noexcept;
-    const char* what() const noexcept;
-
-  private:
-    struct _Impl;
-    std::__shared_ptr<const _Impl> _M_impl;
-  };
-
-
-namespace __detail
-{
-  [[noreturn]] inline void
-  __throw_conversion_error()
-  {
-    (throw (filesystem_error( "Cannot convert character sequence", std::make_error_code(errc::illegal_byte_sequence))))
-
-                                                     ;
-  }
-# 802 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-}
-# 812 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  template<typename _InputIterator,
-    typename _Require = __detail::_Path2<_InputIterator>,
-    typename _CharT
-      = __detail::__value_type_is_char_or_char8_t<_InputIterator>>
-    __attribute__ ((__deprecated__ ("use '" "path(u8string(first, last))" "' instead")))
-    inline path
-    u8path(_InputIterator __first, _InputIterator __last)
-    {
-# 828 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-      return path{ __first, __last };
-
-    }
-
-
-
-
-
-
-
-  template<typename _Source,
-    typename _Require = __detail::_Path<_Source>,
-    typename _CharT = __detail::__value_type_is_char_or_char8_t<_Source>>
-    __attribute__ ((__deprecated__ ("use '" "path((const char8_t*)&*source)" "' instead")))
-    inline path
-    u8path(const _Source& __source)
-    {
-# 853 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-      return path{ __source };
-
-    }
-
-
-
-  struct path::_Cmpt : path
-  {
-    _Cmpt(basic_string_view<value_type> __s, _Type __t, size_t __pos);
-
-    _Cmpt() : _M_pos(-1) { }
-
-    size_t _M_pos;
-  };
-
-
-
-
-
-
-
-  template<typename _EcharT>
-    struct path::_Codecvt
-
-    : std::codecvt<_EcharT, char, mbstate_t>
-    { };
-# 887 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  template<>
-    struct path::_Codecvt<wchar_t>
-    : __conditional_t<sizeof(wchar_t) == sizeof(char32_t),
-        std::codecvt_utf8<wchar_t>,
-        std::codecvt_utf8_utf16<wchar_t>>
-    { };
-
-  template<typename _EcharT>
-    auto
-    path::_S_convert(const _EcharT* __f, const _EcharT* __l)
-    {
-      static_assert(__detail::__is_encoded_char<_EcharT>);
-
-
-
-
-
-
-
-      if constexpr (is_same_v<_EcharT, value_type>)
- return basic_string_view<value_type>(__f, __l - __f);
-
-      else if constexpr (is_same_v<_EcharT, char8_t>)
- {
-   string_view __str(reinterpret_cast<const char*>(__f), __l - __f);
-   return __str;
- }
-# 924 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-      else
- {
-   path::_Codecvt<_EcharT> __cvt;
-   std::string __str;
-   if (__str_codecvt_out_all(__f, __l, __str, __cvt))
-     return __str;
- }
-      __detail::__throw_conversion_error();
-    }
-# 942 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  class path::iterator
-  {
-  public:
-    using difference_type = std::ptrdiff_t;
-    using value_type = path;
-    using reference = const path&;
-    using pointer = const path*;
-    using iterator_category = std::bidirectional_iterator_tag;
-
-    iterator() noexcept : _M_path(nullptr), _M_cur(), _M_at_end() { }
-
-    iterator(const iterator&) = default;
-    iterator& operator=(const iterator&) = default;
-
-    reference operator*() const noexcept;
-    pointer operator->() const noexcept { return std::__addressof(**this); }
-
-    iterator& operator++() noexcept;
-
-    iterator operator++(int) noexcept
-    { auto __tmp = *this; ++*this; return __tmp; }
-
-    iterator& operator--() noexcept;
-
-    iterator operator--(int) noexcept
-    { auto __tmp = *this; --*this; return __tmp; }
-
-    friend bool
-    operator==(const iterator& __lhs, const iterator& __rhs) noexcept
-    { return __lhs._M_equals(__rhs); }
-
-    friend bool
-    operator!=(const iterator& __lhs, const iterator& __rhs) noexcept
-    { return !__lhs._M_equals(__rhs); }
-
-  private:
-    friend class path;
-
-    bool
-    _M_is_multi() const noexcept
-    { return _M_path->_M_type() == _Type::_Multi; }
-
-    friend difference_type
-    __path_iter_distance(const iterator& __first, const iterator& __last)
-    noexcept
-    {
-      do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__first._M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
-      do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__first._M_path == __last._M_path), false)) std::__glibcxx_assert_fail(); } while (false);
-      if (__first._M_is_multi())
- return std::distance(__first._M_cur, __last._M_cur);
-      else if (__first._M_at_end == __last._M_at_end)
- return 0;
-      else
- return __first._M_at_end ? -1 : 1;
-    }
-
-    friend void
-    __path_iter_advance(iterator& __i, difference_type __n) noexcept
-    {
-      if (__n == 1)
- ++__i;
-      else if (__n == -1)
- --__i;
-      else if (__n != 0)
- {
-   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__i._M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
-   do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(__i._M_is_multi()), false)) std::__glibcxx_assert_fail(); } while (false);
-
-   __i._M_cur += __n;
- }
-    }
-
-    iterator(const path* __path, path::_List::const_iterator __iter) noexcept
-    : _M_path(__path), _M_cur(__iter), _M_at_end()
-    { }
-
-    iterator(const path* __path, bool __at_end) noexcept
-    : _M_path(__path), _M_cur(), _M_at_end(__at_end)
-    { }
-
-    bool _M_equals(iterator) const noexcept;
-
-    const path* _M_path;
-    path::_List::const_iterator _M_cur;
-    bool _M_at_end;
-  };
-
-
-  inline path&
-  path::operator=(path&& __p) noexcept
-  {
-    if (&__p == this) [[__unlikely__]]
-      return *this;
-
-    _M_pathname = std::move(__p._M_pathname);
-    _M_cmpts = std::move(__p._M_cmpts);
-    __p.clear();
-    return *this;
-  }
-
-  inline path&
-  path::operator=(string_type&& __source)
-  { return *this = path(std::move(__source)); }
-
-  inline path&
-  path::assign(string_type&& __source)
-  { return *this = path(std::move(__source)); }
-
-  inline path&
-  path::operator+=(const string_type& __x)
-  {
-    _M_concat(__x);
-    return *this;
-  }
-
-  inline path&
-  path::operator+=(const value_type* __x)
-  {
-    _M_concat(__x);
-    return *this;
-  }
-
-  inline path&
-  path::operator+=(value_type __x)
-  {
-    _M_concat(basic_string_view<value_type>(&__x, 1));
-    return *this;
-  }
-
-  inline path&
-  path::operator+=(basic_string_view<value_type> __x)
-  {
-    _M_concat(__x);
-    return *this;
-  }
-
-  template<typename _CharT>
-    inline __detail::_Path2<_CharT*>&
-    path::operator+=(const _CharT __x)
-    {
-      _M_concat(_S_convert(&__x, &__x + 1));
-      return *this;
-    }
-
-  inline path&
-  path::make_preferred()
-  {
-# 1097 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-    return *this;
-  }
-
-  inline void path::swap(path& __rhs) noexcept
-  {
-    _M_pathname.swap(__rhs._M_pathname);
-    _M_cmpts.swap(__rhs._M_cmpts);
-  }
-
-
-  template<typename _CharT, typename _Traits, typename _Allocator>
-    std::basic_string<_CharT, _Traits, _Allocator>
-    path::_S_str_convert(basic_string_view<value_type> __str,
-    const _Allocator& __a)
-    {
-      static_assert(!is_same_v<_CharT, value_type>);
-
-      using _WString = basic_string<_CharT, _Traits, _Allocator>;
-
-      if (__str.size() == 0)
- return _WString(__a);
-
-
-      string_view __u8str = __str;
-# 1137 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
- {
-   const char* __first = __u8str.data();
-   const char* __last = __first + __u8str.size();
-
-
-
-   if constexpr (is_same_v<_CharT, char8_t>)
-     return _WString(__first, __last, __a);
-   else
-
-     {
-
-       _WString __wstr(__a);
-       path::_Codecvt<_CharT> __cvt;
-       if (__str_codecvt_in_all(__first, __last, __wstr, __cvt))
-  return __wstr;
-     }
- }
-      __detail::__throw_conversion_error();
-    }
-
-
-  template<typename _CharT, typename _Traits, typename _Allocator>
-    inline basic_string<_CharT, _Traits, _Allocator>
-    path::string(const _Allocator& __a) const
-    {
-      if constexpr (is_same_v<_CharT, value_type>)
- return { _M_pathname.c_str(), _M_pathname.length(), __a };
-      else
- return _S_str_convert<_CharT, _Traits>(_M_pathname, __a);
-    }
-
-  inline std::string
-  path::string() const { return string<char>(); }
-
-
-  inline std::wstring
-  path::wstring() const { return string<wchar_t>(); }
-
-
-
-  inline std::u8string
-  path::u8string() const { return string<char8_t>(); }
-# 1199 "/usr/include/c++/14.2.1/bits/fs_path.h" 3
-  inline std::u16string
-  path::u16string() const { return string<char16_t>(); }
-
-  inline std::u32string
-  path::u32string() const { return string<char32_t>(); }
-
-  template<typename _CharT, typename _Traits, typename _Allocator>
-    inline std::basic_string<_CharT, _Traits, _Allocator>
-    path::generic_string(const _Allocator& __a) const
-    {
-
-
-
-      const value_type __slash = '/';
-
-      using _Alloc2 = typename allocator_traits<_Allocator>::template
- rebind_alloc<value_type>;
-      basic_string<value_type, char_traits<value_type>, _Alloc2> __str(__a);
-
-      if (_M_type() == _Type::_Root_dir)
- __str.assign(1, __slash);
-      else
- {
-   __str.reserve(_M_pathname.size());
-   bool __add_slash = false;
-   for (auto& __elem : *this)
-     {
-
-
-
-
-
-
-
-       if (__add_slash)
-  __str += __slash;
-       __str += basic_string_view<value_type>(__elem._M_pathname);
-       __add_slash = __elem._M_type() == _Type::_Filename;
-     }
- }
-
-      if constexpr (is_same_v<_CharT, value_type>)
- return __str;
-      else
- return _S_str_convert<_CharT, _Traits>(__str, __a);
-    }
-
-  inline std::string
-  path::generic_string() const
-  { return generic_string<char>(); }
-
-
-  inline std::wstring
-  path::generic_wstring() const
-  { return generic_string<wchar_t>(); }
-
-
-
-  inline std::u8string
-  path::generic_u8string() const
-  { return generic_string<char8_t>(); }
-
-
-
-
-
-
-  inline std::u16string
-  path::generic_u16string() const
-  { return generic_string<char16_t>(); }
-
-  inline std::u32string
-  path::generic_u32string() const
-  { return generic_string<char32_t>(); }
-
-  inline int
-  path::compare(const string_type& __s) const noexcept
-  { return compare(basic_string_view<value_type>(__s)); }
-
-  inline int
-  path::compare(const value_type* __s) const noexcept
-  { return compare(basic_string_view<value_type>(__s)); }
-
-  inline path
-  path::filename() const
-  {
-    if (empty())
-      return {};
-    else if (_M_type() == _Type::_Filename)
-      return *this;
-    else if (_M_type() == _Type::_Multi)
-      {
- if (_M_pathname.back() == preferred_separator)
-   return {};
- auto __last = --end();
- if (__last->_M_type() == _Type::_Filename)
-   return *__last;
-      }
-    return {};
-  }
-
-  inline path
-  path::stem() const
-  {
-    auto ext = _M_find_extension();
-    if (ext.first && ext.second != 0)
-      return path{ext.first->substr(0, ext.second)};
-    return {};
-  }
-
-  inline path
-  path::extension() const
-  {
-    auto ext = _M_find_extension();
-    if (ext.first && ext.second != string_type::npos)
-      return path{ext.first->substr(ext.second)};
-    return {};
-  }
-
-  inline bool
-  path::has_stem() const noexcept
-  {
-    auto ext = _M_find_extension();
-    return ext.first && ext.second != 0;
-  }
-
-  inline bool
-  path::has_extension() const noexcept
-  {
-    auto ext = _M_find_extension();
-    return ext.first && ext.second != string_type::npos;
-  }
-
-  inline bool
-  path::is_absolute() const noexcept
-  {
-
-
-
-    return has_root_directory();
-
-  }
-
-  inline path::iterator
-  path::begin() const noexcept
-  {
-    if (_M_type() == _Type::_Multi)
-      return iterator(this, _M_cmpts.begin());
-    return iterator(this, empty());
-  }
-
-  inline path::iterator
-  path::end() const noexcept
-  {
-    if (_M_type() == _Type::_Multi)
-      return iterator(this, _M_cmpts.end());
-    return iterator(this, true);
-  }
-
-  inline path::iterator&
-  path::iterator::operator++() noexcept
-  {
-    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
-    if (_M_is_multi())
-      {
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_cur != _M_path->_M_cmpts.end()), false)) std::__glibcxx_assert_fail(); } while (false);
- ++_M_cur;
-      }
-    else
-      {
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(!_M_at_end), false)) std::__glibcxx_assert_fail(); } while (false);
- _M_at_end = true;
-      }
-    return *this;
-  }
-
-  inline path::iterator&
-  path::iterator::operator--() noexcept
-  {
-    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
-    if (_M_is_multi())
-      {
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_cur != _M_path->_M_cmpts.begin()), false)) std::__glibcxx_assert_fail(); } while (false);
- --_M_cur;
-      }
-    else
-      {
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_at_end), false)) std::__glibcxx_assert_fail(); } while (false);
- _M_at_end = false;
-      }
-    return *this;
-  }
-
-  inline path::iterator::reference
-  path::iterator::operator*() const noexcept
-  {
-    do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_path != nullptr), false)) std::__glibcxx_assert_fail(); } while (false);
-    if (_M_is_multi())
-      {
- do { if (std::__is_constant_evaluated()) if (__builtin_expect(!bool(_M_cur != _M_path->_M_cmpts.end()), false)) std::__glibcxx_assert_fail(); } while (false);
- return *_M_cur;
-      }
-    return *_M_path;
-  }
-
-  inline bool
-  path::iterator::_M_equals(iterator __rhs) const noexcept
-  {
-    if (_M_path != __rhs._M_path)
-      return false;
-    if (_M_path == nullptr)
-      return true;
-    if (_M_is_multi())
-      return _M_cur == __rhs._M_cur;
-    return _M_at_end == __rhs._M_at_end;
-  }
-
-
-
-
-
-  inline int
-  path::_S_compare(const path& __lhs, const path& __rhs) noexcept
-  { return __lhs.compare(__rhs); }
-
-
-}
-}
-
-
-
-inline ptrdiff_t
-distance(filesystem::path::iterator __first, filesystem::path::iterator __last)
-noexcept
-{ return __path_iter_distance(__first, __last); }
-
-template<typename _Distance>
-  inline void
-  advance(filesystem::path::iterator& __i, _Distance __n) noexcept
-  { __path_iter_advance(__i, static_cast<ptrdiff_t>(__n)); }
-
-extern template class __shared_ptr<const filesystem::filesystem_error::_Impl>;
-
-
-
-
-
-template<>
-  struct hash<filesystem::path>
-  {
-    size_t
-    operator()(const filesystem::path& __p) const noexcept
-    { return filesystem::hash_value(__p); }
-  };
-
-
-}
-# 53 "/usr/include/c++/14.2.1/filesystem" 2 3
-# 1 "/usr/include/c++/14.2.1/bits/fs_dir.h" 1 3
-# 44 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-namespace filesystem
-{
-# 59 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-  class file_status
-  {
-  public:
-
-    file_status() noexcept : file_status(file_type::none) {}
-
-    explicit
-    file_status(file_type __ft, perms __prms = perms::unknown) noexcept
-    : _M_type(__ft), _M_perms(__prms) { }
-
-    file_status(const file_status&) noexcept = default;
-    file_status(file_status&&) noexcept = default;
-    ~file_status() = default;
-
-    file_status& operator=(const file_status&) noexcept = default;
-    file_status& operator=(file_status&&) noexcept = default;
-
-
-    file_type type() const noexcept { return _M_type; }
-    perms permissions() const noexcept { return _M_perms; }
-
-
-    void type(file_type __ft) noexcept { _M_type = __ft; }
-    void permissions(perms __prms) noexcept { _M_perms = __prms; }
-
-
-    friend bool
-    operator==(const file_status&, const file_status&) noexcept = default;
-
-
-  private:
-    file_type _M_type;
-    perms _M_perms;
-  };
-
-namespace __cxx11 {
-
-  struct _Dir;
-  class directory_iterator;
-  class recursive_directory_iterator;
-
-
-
-
-
-
-  class directory_entry
-  {
-  public:
-
-    directory_entry() noexcept = default;
-    directory_entry(const directory_entry&) = default;
-    directory_entry(directory_entry&&) noexcept = default;
-
-    explicit
-    directory_entry(const filesystem::path& __p)
-    : _M_path(__p)
-    { refresh(); }
-
-    directory_entry(const filesystem::path& __p, error_code& __ec)
-    : _M_path(__p)
-    {
-      refresh(__ec);
-      if (__ec)
- _M_path.clear();
-    }
-
-    ~directory_entry() = default;
-
-
-    directory_entry& operator=(const directory_entry&) = default;
-    directory_entry& operator=(directory_entry&&) noexcept = default;
-
-    void
-    assign(const filesystem::path& __p)
-    {
-      _M_path = __p;
-      refresh();
-    }
-
-    void
-    assign(const filesystem::path& __p, error_code& __ec)
-    {
-      _M_path = __p;
-      refresh(__ec);
-    }
-
-    void
-    replace_filename(const filesystem::path& __p)
-    {
-      _M_path.replace_filename(__p);
-      refresh();
-    }
-
-    void
-    replace_filename(const filesystem::path& __p, error_code& __ec)
-    {
-      _M_path.replace_filename(__p);
-      refresh(__ec);
-    }
-
-    void
-    refresh()
-    { _M_type = symlink_status().type(); }
-
-    void
-    refresh(error_code& __ec) noexcept
-    { _M_type = symlink_status(__ec).type(); }
-
-
-    const filesystem::path& path() const noexcept { return _M_path; }
-    operator const filesystem::path& () const noexcept { return _M_path; }
-
-    bool
-    exists() const
-    { return filesystem::exists(file_status{_M_file_type()}); }
-
-    bool
-    exists(error_code& __ec) const noexcept
-    { return filesystem::exists(file_status{_M_file_type(__ec)}); }
-
-    bool
-    is_block_file() const
-    { return _M_file_type() == file_type::block; }
-
-    bool
-    is_block_file(error_code& __ec) const noexcept
-    { return _M_file_type(__ec) == file_type::block; }
-
-    bool
-    is_character_file() const
-    { return _M_file_type() == file_type::character; }
-
-    bool
-    is_character_file(error_code& __ec) const noexcept
-    { return _M_file_type(__ec) == file_type::character; }
-
-    bool
-    is_directory() const
-    { return _M_file_type() == file_type::directory; }
-
-    bool
-    is_directory(error_code& __ec) const noexcept
-    { return _M_file_type(__ec) == file_type::directory; }
-
-    bool
-    is_fifo() const
-    { return _M_file_type() == file_type::fifo; }
-
-    bool
-    is_fifo(error_code& __ec) const noexcept
-    { return _M_file_type(__ec) == file_type::fifo; }
-
-    bool
-    is_other() const
-    { return filesystem::is_other(file_status{_M_file_type()}); }
-
-    bool
-    is_other(error_code& __ec) const noexcept
-    { return filesystem::is_other(file_status{_M_file_type(__ec)}); }
-
-    bool
-    is_regular_file() const
-    { return _M_file_type() == file_type::regular; }
-
-    bool
-    is_regular_file(error_code& __ec) const noexcept
-    { return _M_file_type(__ec) == file_type::regular; }
-
-    bool
-    is_socket() const
-    { return _M_file_type() == file_type::socket; }
-
-    bool
-    is_socket(error_code& __ec) const noexcept
-    { return _M_file_type(__ec) == file_type::socket; }
-
-    bool
-    is_symlink() const
-    {
-      if (_M_type != file_type::none)
- return _M_type == file_type::symlink;
-      return symlink_status().type() == file_type::symlink;
-    }
-
-    bool
-    is_symlink(error_code& __ec) const noexcept
-    {
-      if (_M_type != file_type::none)
- return _M_type == file_type::symlink;
-      return symlink_status(__ec).type() == file_type::symlink;
-    }
-
-    uintmax_t
-    file_size() const
-    { return filesystem::file_size(_M_path); }
-
-    uintmax_t
-    file_size(error_code& __ec) const noexcept
-    { return filesystem::file_size(_M_path, __ec); }
-
-    uintmax_t
-    hard_link_count() const
-    { return filesystem::hard_link_count(_M_path); }
-
-    uintmax_t
-    hard_link_count(error_code& __ec) const noexcept
-    { return filesystem::hard_link_count(_M_path, __ec); }
-
-    file_time_type
-    last_write_time() const
-    { return filesystem::last_write_time(_M_path); }
-
-
-    file_time_type
-    last_write_time(error_code& __ec) const noexcept
-    { return filesystem::last_write_time(_M_path, __ec); }
-
-    file_status
-    status() const
-    { return filesystem::status(_M_path); }
-
-    file_status
-    status(error_code& __ec) const noexcept
-    { return filesystem::status(_M_path, __ec); }
-
-    file_status
-    symlink_status() const
-    { return filesystem::symlink_status(_M_path); }
-
-    file_status
-    symlink_status(error_code& __ec) const noexcept
-    { return filesystem::symlink_status(_M_path, __ec); }
-
-    bool
-    operator==(const directory_entry& __rhs) const noexcept
-    { return _M_path == __rhs._M_path; }
-
-
-    strong_ordering
-    operator<=>(const directory_entry& __rhs) const noexcept
-    { return _M_path <=> __rhs._M_path; }
-# 323 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-  private:
-    friend struct _Dir;
-    friend class directory_iterator;
-    friend class recursive_directory_iterator;
-
-
-
-    template<typename _CharT, typename _Traits>
-      friend basic_ostream<_CharT, _Traits>&
-      operator<<(basic_ostream<_CharT, _Traits>& __os,
-   const directory_entry& __d)
-      { return __os << __d.path(); }
-
-    directory_entry(const filesystem::path& __p, file_type __t)
-    : _M_path(__p), _M_type(__t)
-    { }
-
-
-    file_type
-    _M_file_type() const
-    {
-      if (_M_type != file_type::none && _M_type != file_type::symlink)
- return _M_type;
-      return status().type();
-    }
-
-
-    file_type
-    _M_file_type(error_code& __ec) const noexcept
-    {
-      if (_M_type != file_type::none && _M_type != file_type::symlink)
- {
-   __ec.clear();
-   return _M_type;
- }
-      return status(__ec).type();
-    }
-
-    filesystem::path _M_path;
-    file_type _M_type = file_type::none;
-  };
-# 372 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-  struct __directory_iterator_proxy
-  {
-    const directory_entry& operator*() const& noexcept { return _M_entry; }
-
-    directory_entry operator*() && noexcept { return std::move(_M_entry); }
-
-  private:
-    friend class directory_iterator;
-    friend class recursive_directory_iterator;
-
-    explicit
-    __directory_iterator_proxy(const directory_entry& __e) : _M_entry(__e) { }
-
-    directory_entry _M_entry;
-  };
-
-
-
-
-
-
-
-  class directory_iterator
-  {
-  public:
-    typedef directory_entry value_type;
-    typedef ptrdiff_t difference_type;
-    typedef const directory_entry* pointer;
-    typedef const directory_entry& reference;
-    typedef input_iterator_tag iterator_category;
-
-    directory_iterator() = default;
-
-    explicit
-    directory_iterator(const path& __p)
-    : directory_iterator(__p, directory_options::none, nullptr) { }
-
-    directory_iterator(const path& __p, directory_options __options)
-    : directory_iterator(__p, __options, nullptr) { }
-
-    directory_iterator(const path& __p, error_code& __ec)
-    : directory_iterator(__p, directory_options::none, __ec) { }
-
-    directory_iterator(const path& __p, directory_options __options,
-         error_code& __ec)
-    : directory_iterator(__p, __options, &__ec) { }
-
-    directory_iterator(const directory_iterator& __rhs) = default;
-
-    directory_iterator(directory_iterator&& __rhs) noexcept = default;
-
-    ~directory_iterator() = default;
-
-    directory_iterator&
-    operator=(const directory_iterator& __rhs) = default;
-
-    directory_iterator&
-    operator=(directory_iterator&& __rhs) noexcept = default;
-
-    const directory_entry& operator*() const noexcept;
-    const directory_entry* operator->() const noexcept { return &**this; }
-    directory_iterator& operator++();
-    directory_iterator& increment(error_code& __ec);
-
-    __directory_iterator_proxy operator++(int)
-    {
-      __directory_iterator_proxy __pr{**this};
-      ++*this;
-      return __pr;
-    }
-
-    friend bool
-    operator==(const directory_iterator& __lhs,
-               const directory_iterator& __rhs) noexcept
-    {
-      return !__rhs._M_dir.owner_before(__lhs._M_dir)
- && !__lhs._M_dir.owner_before(__rhs._M_dir);
-    }
-
-
-
-
-    bool operator==(default_sentinel_t) const noexcept
-    { return !_M_dir; }
-# 465 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-  private:
-    directory_iterator(const path&, directory_options, error_code*);
-
-    friend class recursive_directory_iterator;
-
-    std::__shared_ptr<_Dir> _M_dir;
-  };
-# 483 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-  inline directory_iterator
-  begin(directory_iterator __iter) noexcept
-  { return __iter; }
-
-
-  inline directory_iterator
-  end(directory_iterator) noexcept
-  { return directory_iterator(); }
-
-
-
-
-
-
-
-  class recursive_directory_iterator
-  {
-  public:
-    typedef directory_entry value_type;
-    typedef ptrdiff_t difference_type;
-    typedef const directory_entry* pointer;
-    typedef const directory_entry& reference;
-    typedef input_iterator_tag iterator_category;
-
-    recursive_directory_iterator() = default;
-
-    explicit
-    recursive_directory_iterator(const path& __p)
-    : recursive_directory_iterator(__p, directory_options::none, nullptr) { }
-
-    recursive_directory_iterator(const path& __p, directory_options __options)
-    : recursive_directory_iterator(__p, __options, nullptr) { }
-
-    recursive_directory_iterator(const path& __p, directory_options __options,
-                                 error_code& __ec)
-    : recursive_directory_iterator(__p, __options, &__ec) { }
-
-    recursive_directory_iterator(const path& __p, error_code& __ec)
-    : recursive_directory_iterator(__p, directory_options::none, &__ec) { }
-
-    recursive_directory_iterator(
-        const recursive_directory_iterator&) = default;
-
-    recursive_directory_iterator(recursive_directory_iterator&&) = default;
-
-    ~recursive_directory_iterator();
-
-
-    directory_options options() const noexcept;
-    int depth() const noexcept;
-    bool recursion_pending() const noexcept;
-
-    const directory_entry& operator*() const noexcept;
-    const directory_entry* operator->() const noexcept { return &**this; }
-
-
-    recursive_directory_iterator&
-    operator=(const recursive_directory_iterator& __rhs) noexcept;
-    recursive_directory_iterator&
-    operator=(recursive_directory_iterator&& __rhs) noexcept;
-
-    recursive_directory_iterator& operator++();
-    recursive_directory_iterator& increment(error_code& __ec);
-
-    __directory_iterator_proxy operator++(int)
-    {
-      __directory_iterator_proxy __pr{**this};
-      ++*this;
-      return __pr;
-    }
-
-    void pop();
-    void pop(error_code&);
-
-    void disable_recursion_pending() noexcept;
-
-    friend bool
-    operator==(const recursive_directory_iterator& __lhs,
-               const recursive_directory_iterator& __rhs) noexcept
-    {
-      return !__rhs._M_dirs.owner_before(__lhs._M_dirs)
- && !__lhs._M_dirs.owner_before(__rhs._M_dirs);
-    }
-
-
-
-
-    bool operator==(default_sentinel_t) const noexcept
-    { return !_M_dirs; }
-# 581 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-  private:
-    recursive_directory_iterator(const path&, directory_options, error_code*);
-
-    struct _Dir_stack;
-    std::__shared_ptr<_Dir_stack> _M_dirs;
-
-    recursive_directory_iterator&
-    __erase(error_code* = nullptr);
-
-    friend uintmax_t
-    filesystem::remove_all(const path&, error_code&);
-    friend uintmax_t
-    filesystem::remove_all(const path&);
-  };
-# 606 "/usr/include/c++/14.2.1/bits/fs_dir.h" 3
-  inline recursive_directory_iterator
-  begin(recursive_directory_iterator __iter) noexcept
-  { return __iter; }
-
-
-  inline recursive_directory_iterator
-  end(recursive_directory_iterator) noexcept
-  { return recursive_directory_iterator(); }
-
-
-}
-
-
-}
-
-
-
-
-  extern template class
-    __shared_ptr<filesystem::_Dir>;
-  extern template class
-    __shared_ptr<filesystem::recursive_directory_iterator::_Dir_stack>;
-
-
-}
-# 54 "/usr/include/c++/14.2.1/filesystem" 2 3
-# 1 "/usr/include/c++/14.2.1/bits/fs_ops.h" 1 3
-# 37 "/usr/include/c++/14.2.1/bits/fs_ops.h" 3
-namespace std __attribute__ ((__visibility__ ("default")))
-{
-
-
-namespace filesystem
-{
-
-
-
-
-  [[nodiscard]]
-  path absolute(const path& __p);
-
-  [[nodiscard]]
-  path absolute(const path& __p, error_code& __ec);
-
-  [[nodiscard]]
-  path canonical(const path& __p);
-
-  [[nodiscard]]
-  path canonical(const path& __p, error_code& __ec);
-
-  inline void
-  copy(const path& __from, const path& __to)
-  { copy(__from, __to, copy_options::none); }
-
-  inline void
-  copy(const path& __from, const path& __to, error_code& __ec)
-  { copy(__from, __to, copy_options::none, __ec); }
-
-  void copy(const path& __from, const path& __to, copy_options __options);
-  void copy(const path& __from, const path& __to, copy_options __options,
-     error_code& __ec);
-
-  inline bool
-  copy_file(const path& __from, const path& __to)
-  { return copy_file(__from, __to, copy_options::none); }
-
-  inline bool
-  copy_file(const path& __from, const path& __to, error_code& __ec)
-  { return copy_file(__from, __to, copy_options::none, __ec); }
-
-  bool copy_file(const path& __from, const path& __to, copy_options __option);
-  bool copy_file(const path& __from, const path& __to, copy_options __option,
-   error_code& __ec);
-
-  void copy_symlink(const path& __existing_symlink, const path& __new_symlink);
-  void copy_symlink(const path& __existing_symlink, const path& __new_symlink,
-      error_code& __ec) noexcept;
-
-  bool create_directories(const path& __p);
-  bool create_directories(const path& __p, error_code& __ec);
-
-  bool create_directory(const path& __p);
-  bool create_directory(const path& __p, error_code& __ec) noexcept;
-
-  bool create_directory(const path& __p, const path& __attributes);
-  bool create_directory(const path& __p, const path& __attributes,
-   error_code& __ec) noexcept;
-
-  void create_directory_symlink(const path& __to, const path& __new_symlink);
-  void create_directory_symlink(const path& __to, const path& __new_symlink,
-    error_code& __ec) noexcept;
-
-  void create_hard_link(const path& __to, const path& __new_hard_link);
-  void create_hard_link(const path& __to, const path& __new_hard_link,
-   error_code& __ec) noexcept;
-
-  void create_symlink(const path& __to, const path& __new_symlink);
-  void create_symlink(const path& __to, const path& __new_symlink,
-        error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  path current_path();
-
-  [[nodiscard]]
-  path current_path(error_code& __ec);
-
-  void current_path(const path& __p);
-  void current_path(const path& __p, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  bool
-  equivalent(const path& __p1, const path& __p2);
-
-  [[nodiscard]]
-  bool
-  equivalent(const path& __p1, const path& __p2, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  inline bool
-  exists(file_status __s) noexcept
-  { return status_known(__s) && __s.type() != file_type::not_found; }
-
-  [[nodiscard]]
-  inline bool
-  exists(const path& __p)
-  { return exists(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  exists(const path& __p, error_code& __ec) noexcept
-  {
-    auto __s = status(__p, __ec);
-    if (status_known(__s))
-      {
- __ec.clear();
- return __s.type() != file_type::not_found;
-      }
-    return false;
-  }
-
-  [[nodiscard]]
-  uintmax_t file_size(const path& __p);
-
-  [[nodiscard]]
-  uintmax_t file_size(const path& __p, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  uintmax_t hard_link_count(const path& __p);
-
-  [[nodiscard]]
-  uintmax_t hard_link_count(const path& __p, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  inline bool
-  is_block_file(file_status __s) noexcept
-  { return __s.type() == file_type::block; }
-
-  [[nodiscard]]
-  inline bool
-  is_block_file(const path& __p)
-  { return is_block_file(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_block_file(const path& __p, error_code& __ec) noexcept
-  { return is_block_file(status(__p, __ec)); }
-
-  [[nodiscard]]
-  inline bool
-  is_character_file(file_status __s) noexcept
-  { return __s.type() == file_type::character; }
-
-  [[nodiscard]]
-  inline bool
-  is_character_file(const path& __p)
-  { return is_character_file(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_character_file(const path& __p, error_code& __ec) noexcept
-  { return is_character_file(status(__p, __ec)); }
-
-  [[nodiscard]]
-  inline bool
-  is_directory(file_status __s) noexcept
-  { return __s.type() == file_type::directory; }
-
-  [[nodiscard]]
-  inline bool
-  is_directory(const path& __p)
-  { return is_directory(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_directory(const path& __p, error_code& __ec) noexcept
-  { return is_directory(status(__p, __ec)); }
-
-  [[nodiscard]]
-  bool is_empty(const path& __p);
-
-  [[nodiscard]]
-  bool is_empty(const path& __p, error_code& __ec);
-
-  [[nodiscard]]
-  inline bool
-  is_fifo(file_status __s) noexcept
-  { return __s.type() == file_type::fifo; }
-
-  [[nodiscard]]
-  inline bool
-  is_fifo(const path& __p)
-  { return is_fifo(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_fifo(const path& __p, error_code& __ec) noexcept
-  { return is_fifo(status(__p, __ec)); }
-
-  [[nodiscard]]
-  inline bool
-  is_other(file_status __s) noexcept
-  {
-    return exists(__s) && !is_regular_file(__s) && !is_directory(__s)
-      && !is_symlink(__s);
-  }
-
-  [[nodiscard]]
-  inline bool
-  is_other(const path& __p)
-  { return is_other(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_other(const path& __p, error_code& __ec) noexcept
-  { return is_other(status(__p, __ec)); }
-
-  [[nodiscard]]
-  inline bool
-  is_regular_file(file_status __s) noexcept
-  { return __s.type() == file_type::regular; }
-
-  [[nodiscard]]
-  inline bool
-  is_regular_file(const path& __p)
-  { return is_regular_file(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_regular_file(const path& __p, error_code& __ec) noexcept
-  { return is_regular_file(status(__p, __ec)); }
-
-  [[nodiscard]]
-  inline bool
-  is_socket(file_status __s) noexcept
-  { return __s.type() == file_type::socket; }
-
-  [[nodiscard]]
-  inline bool
-  is_socket(const path& __p)
-  { return is_socket(status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_socket(const path& __p, error_code& __ec) noexcept
-  { return is_socket(status(__p, __ec)); }
-
-  [[nodiscard]]
-  inline bool
-  is_symlink(file_status __s) noexcept
-  { return __s.type() == file_type::symlink; }
-
-  [[nodiscard]]
-  inline bool
-  is_symlink(const path& __p)
-  { return is_symlink(symlink_status(__p)); }
-
-  [[nodiscard]]
-  inline bool
-  is_symlink(const path& __p, error_code& __ec) noexcept
-  { return is_symlink(symlink_status(__p, __ec)); }
-
-  [[nodiscard]]
-  file_time_type last_write_time(const path& __p);
-
-  [[nodiscard]]
-  file_time_type last_write_time(const path& __p, error_code& __ec) noexcept;
-
-  void last_write_time(const path& __p, file_time_type __new_time);
-  void last_write_time(const path& __p, file_time_type __new_time,
-         error_code& __ec) noexcept;
-
-  void
-  permissions(const path& __p, perms __prms,
-       perm_options __opts = perm_options::replace);
-
-  inline void
-  permissions(const path& __p, perms __prms, error_code& __ec) noexcept
-  { permissions(__p, __prms, perm_options::replace, __ec); }
-
-  void
-  permissions(const path& __p, perms __prms, perm_options __opts,
-       error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  inline path proximate(const path& __p, error_code& __ec)
-  { return proximate(__p, current_path(), __ec); }
-
-  [[nodiscard]]
-  path proximate(const path& __p, const path& __base = current_path());
-
-  [[nodiscard]]
-  path proximate(const path& __p, const path& __base, error_code& __ec);
-
-  [[nodiscard]]
-  path read_symlink(const path& __p);
-
-  [[nodiscard]]
-  path read_symlink(const path& __p, error_code& __ec);
-
-  [[nodiscard]]
-  inline path relative(const path& __p, error_code& __ec)
-  { return relative(__p, current_path(), __ec); }
-
-  [[nodiscard]]
-  path relative(const path& __p, const path& __base = current_path());
-
-  [[nodiscard]]
-  path relative(const path& __p, const path& __base, error_code& __ec);
-
-  bool remove(const path& __p);
-  bool remove(const path& __p, error_code& __ec) noexcept;
-
-  uintmax_t remove_all(const path& __p);
-  uintmax_t remove_all(const path& __p, error_code& __ec);
-
-  void rename(const path& __from, const path& __to);
-  void rename(const path& __from, const path& __to, error_code& __ec) noexcept;
-
-  void resize_file(const path& __p, uintmax_t __size);
-  void resize_file(const path& __p, uintmax_t __size, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  space_info space(const path& __p);
-
-  [[nodiscard]]
-  space_info space(const path& __p, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  file_status status(const path& __p);
-
-  [[nodiscard]]
-  file_status status(const path& __p, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  inline bool status_known(file_status __s) noexcept
-  { return __s.type() != file_type::none; }
-
-  [[nodiscard]]
-  file_status symlink_status(const path& __p);
-
-  [[nodiscard]]
-  file_status symlink_status(const path& __p, error_code& __ec) noexcept;
-
-  [[nodiscard]]
-  path temp_directory_path();
-
-  [[nodiscard]]
-  path temp_directory_path(error_code& __ec);
-
-  [[nodiscard]]
-  path weakly_canonical(const path& __p);
-
-  [[nodiscard]]
-  path weakly_canonical(const path& __p, error_code& __ec);
-
-
-}
-
-
-}
-# 55 "/usr/include/c++/14.2.1/filesystem" 2 3
-# 4694 "/home/leo/CLionProjects/films_distribution/include/json.hpp" 2
-
 # 4694 "/home/leo/CLionProjects/films_distribution/include/json.hpp"
 namespace nlohmann { inline namespace json_abi_v3_11_3 {
 namespace detail
@@ -143481,7 +143470,7 @@ struct less< ::nlohmann::detail::value_t>
 
         using nlohmann::literals::json_literals::operator ""_json;
         using nlohmann::literals::json_literals::operator ""_json_pointer;
-# 11 "/home/leo/CLionProjects/films_distribution/src/main.cpp" 2
+# 13 "/home/leo/CLionProjects/films_distribution/src/main.cpp" 2
 
 using json = nlohmann::json;
 using namespace std;
@@ -143526,7 +143515,8 @@ void processGenre(const string& genre) {
     }
 
 
-    ofstream jsonFile(genre + "_rating_distribution.json");
+    string outputDir = "output/";
+    ofstream jsonFile(outputDir + genre + "_rating_distribution.json");
     if (!jsonFile.is_open()) {
         cerr << "Ошибка: Не удалось создать файл для жанра " << genre << endl;
         return;
@@ -143550,8 +143540,15 @@ vector<Movie> readMovies(const string& filename) {
 
     vector<Movie> movies;
     string line;
+    int lineNumber = 0;
 
     while (getline(file, line)) {
+        lineNumber++;
+        if (line.empty()) {
+
+            continue;
+        }
+
         istringstream iss(line);
         Movie movie;
 
@@ -143564,10 +143561,12 @@ vector<Movie> readMovies(const string& filename) {
                 movie.rating = stod(ratingStr);
                 movies.push_back(movie);
             } catch (const invalid_argument&) {
-                cerr << "Некорректный формат рейтинга: \"" << ratingStr << "\". Пропуск." << endl;
+                cerr << "Некорректный формат рейтинга: \"" << ratingStr << "\". Пропуск строки: \"" << line << "\"." << endl;
             }
         } else {
-            cerr << "Ошибка чтения строки: \"" << line << "\". Пропуск." << endl;
+            cerr << "Некорректный формат строки на строке " << lineNumber
+                 << ": \"" << line << "\". Ожидалось 3 поля, получено "
+                 << count(line.begin(), line.end(), '|') + 1 << ". Пропуск." << endl;
         }
     }
 
@@ -143577,11 +143576,22 @@ vector<Movie> readMovies(const string& filename) {
     return movies;
 }
 
+
+map<string, vector<Movie>> populateLocalGenreMap(const vector<Movie>& movies, size_t start, size_t end) {
+    map<string, vector<Movie>> localMap;
+    for (size_t i = start; i < end; ++i) {
+        const auto& movie = movies[i];
+        localMap[movie.genre].push_back(movie);
+    }
+    return localMap;
+}
+
 int main() {
 
     cout << "Текущая рабочая директория: " << filesystem::current_path() << endl;
-    string inputFile = "dataset/movies_cleaned.csv";
 
+    string inputFile = "dataset/movies_cleaned.csv";
+    cout << "Путь к входному файлу: " << inputFile << endl;
 
     vector<Movie> movies = readMovies(inputFile);
     if (movies.empty()) {
@@ -143590,23 +143600,49 @@ int main() {
     }
 
 
+    unsigned int numThreads = thread::hardware_concurrency();
+    if (numThreads == 0) numThreads = 2;
+
+    size_t totalMovies = movies.size();
+    size_t chunkSize = totalMovies / numThreads;
+    vector<thread> threadsPopulate;
+    vector<map<string, vector<Movie>>> localMaps(numThreads);
+
+
+    for (unsigned int i = 0; i < numThreads; ++i) {
+        size_t start = i * chunkSize;
+        size_t end = (i == numThreads - 1) ? totalMovies : start + chunkSize;
+        threadsPopulate.emplace_back([&movies, &localMaps, i, start, end]() {
+            localMaps[i] = populateLocalGenreMap(movies, start, end);
+        });
+    }
+
+
+    for (auto& t : threadsPopulate) {
+        t.join();
+    }
+
+
     {
         lock_guard<mutex> lock(mutexGenre);
-        for (const auto& movie : movies) {
-            genreMap[movie.genre].push_back(movie);
+        for (const auto& localMap : localMaps) {
+            for (const auto& [genre, moviesVec] : localMap) {
+                genreMap[genre].insert(genreMap[genre].end(), moviesVec.begin(), moviesVec.end());
+            }
         }
     }
 
 
-    vector<thread> threads;
+    vector<thread> threadsProcess;
     for (const auto& [genre, _] : genreMap) {
-        threads.emplace_back(processGenre, genre);
+        threadsProcess.emplace_back(processGenre, genre);
     }
 
 
-    for (auto& thread : threads) {
-        thread.join();
+    for (auto& t : threadsProcess) {
+        t.join();
     }
+
     cout << "Фильмы успешно обработаны!" << endl;
 
     return 0;
