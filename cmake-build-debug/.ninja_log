@@ -1,8 +1,14 @@
 # ninja log v6
-2	50	1733387054358244430	build.ninja	420b59a6f9409819
+2	50	1733388814125893939	build.ninja	420b59a6f9409819
+223	1261	1733387054598162666	CMakeFiles/films_distribution.dir/src/main.cpp.o	2bc959397de69bd6
 1	202	1733387054374905418	CMakeFiles/films_distribution.dir/src/main.cpp.o.ddi	f77d56299a80ad65
 202	223	1733387054594830469	CMakeFiles/films_distribution.dir/CXX.dd	b6153a1a2c2c6177
 202	223	1733387054594830469	/home/leo/CLionProjects/films_distribution/cmake-build-debug/CMakeFiles/films_distribution.dir/CXXModules.json	b6153a1a2c2c6177
 202	223	1733387054594830469	CMakeFiles/films_distribution.dir/src/main.cpp.o.modmap	b6153a1a2c2c6177
-223	1261	1733387054598162666	CMakeFiles/films_distribution.dir/src/main.cpp.o	2bc959397de69bd6
 1262	1371	1733387055634476440	films_distribution	e5a7577b3c2365d2
+15	304	1733388815609261814	CMakeFiles/films_distribution.dir/src/main.cpp.o.ddi	f77d56299a80ad65
+304	312	1733388815905935388	CMakeFiles/films_distribution.dir/CXX.dd	b6153a1a2c2c6177
+304	312	1733388815905935388	/home/leo/CLionProjects/films_distribution/cmake-build-debug/CMakeFiles/films_distribution.dir/CXXModules.json	b6153a1a2c2c6177
+304	312	1733388815905935388	CMakeFiles/films_distribution.dir/src/main.cpp.o.modmap	b6153a1a2c2c6177
+312	1587	1733388815905935388	CMakeFiles/films_distribution.dir/src/main.cpp.o	2bc959397de69bd6
+1588	1826	1733388817182631764	films_distribution	e5a7577b3c2365d2

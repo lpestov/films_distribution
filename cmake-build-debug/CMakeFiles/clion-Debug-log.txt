@@ -1,4 +1,4 @@
-/home/leo/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/leo/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -G Ninja -S /home/leo/CLionProjects/films_distribution -B /home/leo/CLionProjects/films_distribution/cmake-build-debug
+/home/leo/.local/share/JetBrains/Toolbox/apps/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/home/leo/.local/share/JetBrains/Toolbox/apps/clion/bin/ninja/linux/x64/ninja -G Ninja -DPython_EXECUTABLE=/home/leo/CLionProjects/films_distribution/.venv/bin/python -DPython3_EXECUTABLE=/home/leo/CLionProjects/films_distribution/.venv/bin/python -S /home/leo/CLionProjects/films_distribution -B /home/leo/CLionProjects/films_distribution/cmake-build-debug
 -- The C compiler identification is GNU 14.2.1
 -- The CXX compiler identification is GNU 14.2.1
 -- Detecting C compiler ABI info
@@ -11,6 +11,13 @@
 -- Check for working CXX compiler: /usr/bin/c++ - skipped
 -- Detecting CXX compile features
 -- Detecting CXX compile features - done
--- Configuring done (0.9s)
+-- Configuring done (2.7s)
 -- Generating done (0.0s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    Python3_EXECUTABLE
+    Python_EXECUTABLE
+
+
 -- Build files have been written to: /home/leo/CLionProjects/films_distribution/cmake-build-debug
