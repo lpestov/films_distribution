@@ -12,7 +12,7 @@ int main() {
 
     // Чтение фильмов из файла
     std::vector<Movie> movies = readMovies(inputFile);
-    if (movies.empty()) {
+    if (movies.empty() ) {
         std::cerr << "Нет фильмов для обработки." << std::endl;
         return -1;
     }
@@ -35,7 +35,7 @@ int main() {
         });
     }
 
-    // Ожидание завершения всех потоков
+    // Ожидание завершения всех потоков, блокируем главный поток пока все потоки не завершатся
     for (auto& t : threadsPopulate) {
         t.join();
     }
