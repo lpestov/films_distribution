@@ -4,7 +4,6 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <thread>
 #include <iomanip>
 #include <filesystem>
 #include <algorithm>
@@ -34,11 +33,11 @@ std::string getRatingCategory(double rating) {
 void processGenre(const std::string& genre) {
     std::vector<Movie> genreMovies;
     {
-        // Защита доступа к общей карте жанров
+        // Защита доступа к общей мапе жанров
         std::lock_guard<std::mutex> lock(mutexGenre);
         auto it = genreMap.find(genre);
         if (it != genreMap.end()) {
-            genreMovies = it->second;
+            genreMovies = it->second; // Копирование фильмов одного жанра
         }
     }
 
@@ -77,7 +76,7 @@ void processGenre(const std::string& genre) {
 std::vector<Movie> readMovies(const std::string& filename) {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Ошибка: Не удалось открыть файл " << filename << std::endl;
+        std::cerr << "Ошибка: Не удалось открыть датасет " << filename << std::endl;
         return {};
     }
 
@@ -101,7 +100,7 @@ std::vector<Movie> readMovies(const std::string& filename) {
             std::getline(iss, movie.genre, '|') &&
             std::getline(iss, ratingStr)) {
             try {
-                movie.rating = std::stod(ratingStr);
+                movie.rating = std::stod(ratingStr); // Преобразование sting в double
                 movies.push_back(movie);
             } catch (const std::invalid_argument&) {
                 std::cerr << "Некорректный формат рейтинга: \"" << ratingStr << "\". Пропуск строки: \"" << line << "\"." << std::endl;
@@ -114,7 +113,7 @@ std::vector<Movie> readMovies(const std::string& filename) {
     }
 
     if (movies.empty()) {
-        std::cerr << "Ошибка: Файл пуст или не удалось распарсить данные." << std::endl;
+        std::cerr << "Ошибка: Датасет пуст или не удалось распарсить данные." << std::endl;
     }
     return movies;
 }

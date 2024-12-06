@@ -12,12 +12,12 @@
 struct Movie {
     std::string title;
     std::string genre;
-    double rating; // Рейтинг с плавающей запятой
+    double rating;
 };
 
 // Глобальные переменные
 extern std::map<std::string, std::vector<Movie>> genreMap; // Фильмы по жанрам
-extern std::mutex mutexGenre;                              // Мьютекс для защиты данных
+extern std::mutex mutexGenre;                              // Предотвращаем доступ к genreMap из разных потоков
 
 // Функция для определения категории оценки
 std::string getRatingCategory(double rating);
