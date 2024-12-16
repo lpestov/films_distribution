@@ -40,7 +40,7 @@ int main() {
         t.join();
     }
 
-    // Объединение локальных карт в глобальную карту с защитой мьютексом
+    // Объединение локальных карт в глобальную карту
     {
         std::lock_guard<std::mutex> lock(mutexGenre);
         for (const auto& localMap : localMaps) {

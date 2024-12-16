@@ -35,7 +35,7 @@ void processGenre(const std::string& genre) {
     {
         // Защита доступа к общей мапе жанров
         std::lock_guard<std::mutex> lock(mutexGenre);
-        auto it = genreMap.find(genre);
+        auto it = genreMap.find(genre); // Возвращает итератор на элемент карты, у которого ключ совпадает со значением genre
         if (it != genreMap.end()) {
             genreMovies = it->second; // Копирование фильмов одного жанра
         }
